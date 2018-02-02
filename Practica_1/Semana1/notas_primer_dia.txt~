@@ -1,0 +1,11 @@
+Para separar procesos, una vez hacemos el fork tenemos que guardar el retorno, de la forma:
+
+	a = fork();
+
+si a es 0, es un proceso hijo
+si es -1, ha dado error
+sino, es el padre
+
+enlaces:
+- http://man7.org/linux/man-pages/man2/getpid.2.html para getpid() y getppid()
+- http://pubs.opengroup.org/onlinepubs/000095399/basedefs/fcntl.h.html para todo lo de open(), read(), etc.
