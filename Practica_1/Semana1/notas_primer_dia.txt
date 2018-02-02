@@ -1,0 +1,7 @@
+Para separar procesos, una vez hacemos el fork tenemos que guardar el retorno, de la forma:
+
+	a = fork();
+
+si a es 0, es un proceso hijo
+si es -1, ha dado error
+sino, es el padre
