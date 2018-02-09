@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #define NUM_PROC 6
 
@@ -13,9 +14,8 @@ int main (void) {
 				printf("Error al emplear fork\n");
 				exit(EXIT_FAILURE);
 			} else if (pid == 0) {
-				printf("HIJO %d\n”, asdasd);
-			} else {
-				printf ("PADRE %d \n”, asdasd);
+				printf("HIJO %d\n", getpid());
+				printf ("PADRE %d \n", getppid());
 			}
 		}
 	}
