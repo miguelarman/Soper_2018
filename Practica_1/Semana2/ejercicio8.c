@@ -15,8 +15,8 @@ int main(int argc, char **argv){
         exit(EXIT_SUCCESS);
     }
     
-    strcpy(path, "/bin/");
     
+    strcpy(path, "/bin/");
     
     
     if (fork()) {  /* Es el padre */
