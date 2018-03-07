@@ -53,7 +53,7 @@ void calculaPrimos (int N) {
 /*Funcion Principal*/
 
 int main(int argc, char **argv){
-    int n, i, childpid, status;
+    int n, i, pid;
     clock_t start_t, end_t;
     double tiempoTotal;
     Estruct *dinamico;
@@ -64,7 +64,7 @@ int main(int argc, char **argv){
     
     n = atoi(argv[1]);
     
-    start_t = clock();
+    
     
     dinamico = (Estruct*) malloc (1*sizeof(Estruct));
     if (dinamico == NULL){
@@ -84,17 +84,29 @@ int main(int argc, char **argv){
         return -1;
     }
     
-    for (i = 1; i<=NPROCESOS; i++){
-        childpid = fork();
-        if (!childpid){
-            calculaPrimos (n);
-            printf("El proceso %d, con PID = %d ha calculado %d primos\n", i, getpid(), n);
-            fflush(stdout);
-            exit(EXIT_SUCCESS);
+    start_t = clock();
+    
+    for (i = 0; i < NPROCESOS; i++){
+        
+        if ((pid=fork()) < 0 ){
+            printf("Error haciendo fork\n");
+            exit(EXIT_FAILURE);
+        } else if (pid == 0){
+            break;
         }else{
-            waitpid(childpid, &status, 0);
+            continue;
         }
     }
+    if (pid != 0){
+        for (i=0; i<NPROCESOS; i++) wait(NULL);
+    }else{
+        calculaPrimos(n);
+        printf("El proceso con PID: %d ha calculado %d primos\n", getpid(), n);
+        fflush(stdout);
+        exit(EXIT_SUCCESS);
+    }
+    
+    
     
     end_t = clock();
     tiempoTotal = (double)(end_t - start_t) / CLOCKS_PER_SEC;
