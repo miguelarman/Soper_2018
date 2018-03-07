@@ -9,20 +9,21 @@
 #define LECTURA 0
 #define ESCRITURA 1
 
-#define BUFFERSIZE 128
+#define BUFFERSIZE 512
 #define SIZE 512
 
 
 
 int factorial (int n) {
-    if (n < 0) {
-        return -1;
-    }
-    if (n == 0) {
-        return 1;
-    }
+    if(n<0) return 0;
+    if (n =0) return 1;
     
-    return n * factorial(n);
+    int i = 0, fact=1;
+
+    for(i = 1; i<=n; i++){
+       fact = fact*i;
+   }
+   return fact;
 }
 
 
@@ -32,8 +33,8 @@ int main (int argc, char **argv) {
     
     int pipe_status;
     pid_t childpid1, childpid2, childpid3, childpid4;
-    char buffer[BUFFERSIZE];
-    char mensaje[SIZE];
+    char buffer1[BUFFERSIZE], buffer2[BUFFERSIZE], buffer3[BUFFERSIZE], buffer4[BUFFERSIZE];
+    char mensaje1[SIZE], mensaje2[SIZE], mensaje3[SIZE], mensaje4[SIZE];
     int status;
     int valor1, valor2, resultado;
     
@@ -139,19 +140,19 @@ int main (int argc, char **argv) {
         close(fdp_h1[ESCRITURA]);
         close(fdh1_p[LECTURA]);
         
-        read(fdp_h1[LECTURA], buffer, sizeof(buffer));
+        read(fdp_h1[LECTURA], buffer1, sizeof(buffer1));
         
-        if (buffer == NULL) {
+        if (buffer1 == NULL) {
             exit(EXIT_FAILURE);
         }
         
-        sscanf(buffer, "%d,%d", &valor1, &valor2);
+        sscanf(buffer1, "%d,%d", &valor1, &valor2);
         
         resultado = pow(valor1, valor2);
         
-        sprintf(mensaje, "Datos enviados a través de la tubería por el proceso PID=%d. Operando 1: %d. Operando 2: %d. Potencia: %d", getpid(), valor1, valor2, resultado);
+        sprintf(mensaje1, "Datos enviados a través de la tubería por el proceso PID=%d. Operando 1: %d. Operando 2: %d. Potencia: %d", getpid(), valor1, valor2, resultado);
         
-        write(fdh1_p[ESCRITURA], mensaje, sizeof(mensaje));
+        write(fdh1_p[ESCRITURA], mensaje1, sizeof(mensaje1));
         
         exit(EXIT_SUCCESS);
         
@@ -164,14 +165,14 @@ int main (int argc, char **argv) {
         
         /*Primera operacion padre-hijo*/
 
-        sprintf(mensaje, "%d,%d", atoi(argv[1]), atoi(argv[2]));
+        sprintf(mensaje1, "%d,%d", atoi(argv[1]), atoi(argv[2]));
         
         close(fdp_h1[LECTURA]);
         close(fdh1_p[ESCRITURA]);
         
-        write(fdp_h1[ESCRITURA], mensaje, sizeof(mensaje));
+        write(fdp_h1[ESCRITURA], mensaje1, sizeof(mensaje1));
         
-        read(fdh1_p[LECTURA], buffer, sizeof(buffer));
+        read(fdh1_p[LECTURA], buffer1, sizeof(buffer1));
         
         wait(&status);
         
@@ -179,40 +180,37 @@ int main (int argc, char **argv) {
             exit(EXIT_FAILURE);
         }
         
-        printf("%s\n", buffer);
+        printf("%s\n", buffer1);
         
     }
     
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     /*Crea otro hijo*/
     
-    childpid2 = fork();
+   childpid2 = fork();
     if (!childpid2) {
         
-        /*Segundo hijo: factorial*/
+        /*Segundo hijo: Factorial*/
+        
         
         close(fdp_h2[ESCRITURA]);
         close(fdh2_p[LECTURA]);
         
-        read(fdp_h2[LECTURA], buffer, sizeof(buffer));
+        read(fdp_h2[LECTURA], buffer2, sizeof(buffer2));
+       
+        if (buffer2 == NULL) {
+            exit(EXIT_FAILURE);
+        }
         
-        sscanf(buffer, "%d,%d", &valor1, &valor2);
+        sscanf(buffer2, "%d,%d", &valor1, &valor2);
         
-        resultado = factorial(valor1)/valor2;
+        resultado = (int) (factorial(valor1)/(int)valor2);
         
-        sprintf(mensaje, "Datos enviados a través de la tubería por el proceso PID=%d. Operando 1: %d. Operando 2: %d. Factorial: %d", getpid(), valor1, valor2, resultado);
+        sprintf(mensaje2, "Datos enviados a través de la tubería por el proceso PID=%d. Operando 1: %d. Operando 2: %d. Factorial: %d", getpid(), valor1, valor2, resultado);
         
-        write(fdh2_p[ESCRITURA], mensaje, sizeof(mensaje));
+        write(fdh2_p[ESCRITURA], mensaje2, sizeof(mensaje2));
         
         exit(EXIT_SUCCESS);
         
@@ -223,17 +221,16 @@ int main (int argc, char **argv) {
         }
         
         
-        
         /*Segunda operacion padre-hijo*/
 
-        sprintf(mensaje, "%d,%d", atoi(argv[1]), atoi(argv[2]));
-        
+        sprintf(mensaje2, "%d,%d", atoi(argv[1]), atoi(argv[2]));
+
         close(fdp_h2[LECTURA]);
         close(fdh2_p[ESCRITURA]);
         
-        write(fdp_h2[ESCRITURA], mensaje, sizeof(mensaje));
+        write(fdp_h2[ESCRITURA], mensaje2, sizeof(mensaje2));
         
-        read(fdh2_p[LECTURA], buffer, sizeof(buffer));
+        read(fdh2_p[LECTURA], buffer2, sizeof(buffer2));
         
         wait(&status);
         
@@ -241,20 +238,9 @@ int main (int argc, char **argv) {
             exit(EXIT_FAILURE);
         }
         
-        printf("%s\n", buffer);
+        printf("%s\n", buffer2);
+        
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -265,54 +251,55 @@ int main (int argc, char **argv) {
     childpid3 = fork();
     if (!childpid3) {
         
-        /*Tercer hijo: combinatoria*/
+        /*Tercer hijo: Combinatoria*/
         
-        sprintf(mensaje, "%d,%d", atoi(argv[1]), atoi(argv[2]));
         
         close(fdp_h3[ESCRITURA]);
         close(fdh3_p[LECTURA]);
         
-        read(fdp_h3[LECTURA], buffer, sizeof(buffer));
+        read(fdp_h3[LECTURA], buffer3, sizeof(buffer3));
         
-        if (buffer == NULL) {
+        if (buffer3 == NULL) {
             exit(EXIT_FAILURE);
         }
         
-        sscanf(buffer, "%d,%d", &valor1, &valor2);
+        sscanf(buffer3, "%d,%d", &valor1, &valor2);
         
-        resultado = factorial(valor1) / (factorial(valor2) * factorial(valor1 - valor2));
+        resultado = factorial(valor1) /(factorial(valor2)*factorial(valor1-valor2));
         
-        sprintf(mensaje, "Datos enviados a través de la tubería por el proceso PID=%d. Operando 1: %d. Operando 2: %d. Combinatoria: %d", getpid(), valor1, valor2, resultado);
         
-        write(fdh3_p[ESCRITURA], mensaje, sizeof(mensaje));
+        sprintf(mensaje3, "Datos enviados a través de la tubería por el proceso PID=%d. Operando 1: %d. Operando 2: %d. Combinatoria: %d", getpid(), valor1, valor2, resultado);
+       
+        write(fdh3_p[ESCRITURA], mensaje3, sizeof(mensaje3));
         
         exit(EXIT_SUCCESS);
-        
         
     } else {
         if (childpid3 == -1) {
             perror("Error en el fork");
             exit(EXIT_FAILURE);
         }
+        
+        
+        /*Tercera operacion padre-hijo*/
 
-        /*tercera operacion padre-hijo*/
-
+        sprintf(mensaje3, "%d,%d", atoi(argv[1]), atoi(argv[2]));
+       
+        
         close(fdp_h3[LECTURA]);
         close(fdh3_p[ESCRITURA]);
-
-        write(fdp_h3[ESCRITURA], mensaje, sizeof(mensaje));
-
-        read(fdh3_p[LECTURA], buffer, sizeof(buffer));
-
+        
+        write(fdp_h3[ESCRITURA], mensaje3, sizeof(mensaje3));
+        
+        read(fdh3_p[LECTURA], buffer3, sizeof(buffer3));
+        
         wait(&status);
-
+        
         if (status == EXIT_FAILURE) {
-           exit(EXIT_FAILURE);
+            exit(EXIT_FAILURE);
         }
-
-        printf("%s\n", buffer);
         
-        
+        printf("%s\n", buffer3);
         
     }
     
@@ -331,54 +318,54 @@ int main (int argc, char **argv) {
     childpid4 = fork();
     if (!childpid4) {
         
-        /*Cuarto hijo: valor absoluto*/
+        /*Cuarto hijo: Suma absolutos*/
         
-        sprintf(mensaje, "%d,%d", atoi(argv[1]), atoi(argv[2]));
         
         close(fdp_h4[ESCRITURA]);
         close(fdh4_p[LECTURA]);
         
-        read(fdp_h4[LECTURA], buffer, sizeof(buffer));
-        
-        if (buffer == NULL) {
+        read(fdp_h4[LECTURA], buffer4, sizeof(buffer4));
+       
+        if (buffer4 == NULL) {
             exit(EXIT_FAILURE);
         }
         
-        sscanf(buffer, "%d,%d", &valor1, &valor2);
+        sscanf(buffer4, "%d,%d", &valor1, &valor2);
         
-        resultado = (int) (abs(valor1) + abs(valor2));
+        resultado = abs(valor1) + abs(valor2);
         
-        sprintf(mensaje, "Datos enviados a través de la tubería por el proceso PID=%d. Operando 1: %d. Operando 2: %d. Suma_absolutos: %d", getpid(), valor1, valor2, resultado);
+        sprintf(mensaje4, "Datos enviados a través de la tubería por el proceso PID=%d. Operando 1: %d. Operando 2: %d. Suma_absolutos: %d", getpid(), valor1, valor2, resultado);
         
-        write(fdh4_p[ESCRITURA], mensaje, sizeof(mensaje));
+        write(fdh4_p[ESCRITURA], mensaje4, sizeof(mensaje4));
         
         exit(EXIT_SUCCESS);
-        
         
     } else {
         if (childpid4 == -1) {
             perror("Error en el fork");
             exit(EXIT_FAILURE);
         }
-
+        
+        
         /*Cuarta operacion padre-hijo*/
 
+        sprintf(mensaje4, "%d,%d", atoi(argv[1]), atoi(argv[2]));
+        
+        
         close(fdp_h4[LECTURA]);
         close(fdh4_p[ESCRITURA]);
-
-        write(fdp_h4[ESCRITURA], mensaje, sizeof(mensaje));
-
-        read(fdh4_p[LECTURA], buffer, sizeof(buffer));
-
+        
+        write(fdp_h4[ESCRITURA], mensaje4, sizeof(mensaje4));
+        
+        read(fdh4_p[LECTURA], buffer4, sizeof(buffer4));
+        
         wait(&status);
-
+        
         if (status == EXIT_FAILURE) {
-           exit(EXIT_FAILURE);
+            exit(EXIT_FAILURE);
         }
-
-        printf("%s\n", buffer);
         
-        
+        printf("%s\n", buffer4);
         
     }
     
