@@ -5,7 +5,9 @@
 ########################################################
 CC = gcc
 CFLAGS = -g -Wall -pedantic -ansi
-FILES = ejercicio4a ejercicio4b ejercicio5a ejercicio5b ejercicio6 ejercicio8 ejercicio9 ejercicio11 ejercicio12a ejercicio12b ejercicio13
+FILES = ejercicio4a ejercicio4b ejercicio5a ejercicio5b ejercicio6 ejercicio8 ejercicio9 ejercicio12a ejercicio12b ejercicio13
+# ejercicio11          --> Programas de aprendizaje, que también han necesitado
+#                          ser compilados
 ########################################################
 
 all: $(FILES) clear
@@ -32,16 +34,16 @@ ejercicio9:
 	$(CC) $(CFLAGS) ejercicio4a.c -o ejercicio4a
 	
 ejercicio11:
-	$(CC) $(CFLAGS) ejercicio4a.c -o ejercicio4a
+	$(CC) $(CFLAGS) ejercicio4a.c -o ejercicio4a -pthreads
 	
 ejercicio12a:
 	$(CC) $(CFLAGS) ejercicio4a.c -o ejercicio4a
 	
 ejercicio12b:
-	$(CC) $(CFLAGS) ejercicio4a.c -o ejercicio4a
+	$(CC) $(CFLAGS) ejercicio4a.c -o ejercicio4a -pthreads
 	
 ejercicio13:
-	$(CC) $(CFLAGS) ejercicio4a.c -o ejercicio4a
+	$(CC) $(CFLAGS) ejercicio4a.c -o ejercicio4a -pthreads
 	
 
 

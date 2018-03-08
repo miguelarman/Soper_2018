@@ -1,3 +1,7 @@
+/*Ejercicio de aprendizaje. Se usa solamente para estudiar
+el uso de los threads*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
