@@ -10,6 +10,11 @@
  
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
+
+
 #define NUM_PROC 6 /*!< Número de iteraciones del bucle creador de procesos*/
 
 int main (void) {

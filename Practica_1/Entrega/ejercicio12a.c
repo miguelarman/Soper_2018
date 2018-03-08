@@ -32,6 +32,14 @@ typedef struct _estructura{
 } estructura;
 
 
+/**
+ * @brief calcula los n primos numeros primos
+ *
+ * Esta funcion calcula los n primero numeros primos
+ * @param N numero de primos a calcular
+ * @return void
+ */
+void calcula_primos (int N);
 
 /**
  * @brief Función principal del programa
@@ -123,7 +131,7 @@ int main (int argc, char **argv) {
     end_t = clock();
     tiempoTotal = (double)(end_t - start_t) / CLOCKS_PER_SEC;
     
-    printf("El programa ha tardado %lf segundos en realizar las operaciones con N = %d\n", tiempoTotal, n);
+    printf("El programa ha tardado %f segundos en realizar las operaciones con N = %d\n", tiempoTotal, n);
     
     
     free(dinamico->cadena);

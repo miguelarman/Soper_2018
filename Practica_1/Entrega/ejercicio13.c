@@ -14,6 +14,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <pthread.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define BUFFER_SIZE 256    /*!< Tamanio maximo del buffer cadena_aux */
 #define ARRAY_SIZE 30      /*!< Tamanio maximo de los buffers valores*/
@@ -146,7 +148,7 @@ int main () {
     /*Lee la segunda matriz*/
     
     printf("\nIntroduzca matriz 2:\n");
-    fgets(cadena_aux, BUFFERSIZE, stdin);
+    fgets(cadena_aux, BUFFER_SIZE, stdin);
     
     if (cadena_aux == NULL) {
         printf("Error al leer la matriz 2");
@@ -316,7 +318,7 @@ void (*calcula_matriz (void *arg)) {
         }
         
         fflush(stdout);
-        usleep (1000000) ;
+        sleep (1) ;
     }
     
     pthread_exit(NULL);

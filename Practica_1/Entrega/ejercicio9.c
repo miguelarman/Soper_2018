@@ -60,19 +60,17 @@ int main (int argc, char **argv) {
     int status;
     int valor_1, valor_2, resultado;
     
-    if (argc < 3) {
-        return (EXIT_FAILURE);
-    }
     
-    
-    
-    
-    
-    /*Decaración de las 8 pipes necesarias*/
+    /*Declaración de las 8 pipes necesarias*/
     int fd_p_h1[2], fd_h1_p[2];
     int fd_p_h2[2], fd_h2_p[2];
     int fd_p_h3[2], fd_h3_p[2];
     int fd_p_h4[2], fd_h4_p[2];
+
+
+    if (argc < 3) {
+        return (EXIT_FAILURE);
+    }
     
     /******************************************/
     
@@ -404,15 +402,19 @@ int main (int argc, char **argv) {
 /*Funciones auxiliares*/
 
 int factorial (int n) {
+    int i;
+    int fact;
+
     if (n < 0) {
         return 0;
     }
     
-    if (n = 0) {
+    if (n == 0) {
         return 1;
     }
     
-    int i = 0, fact=1;
+    i = 0;
+    fact = 1;
 
     for (i = 1; i <= n; i++){
        fact = fact * i;

@@ -12,10 +12,12 @@
  * @date 8-3-2018
  */
  
-#include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <unistd.h>
 
 #define MAX_PATH 256 /*!< Tamaño máximo de la ruta*/
 
@@ -24,6 +26,7 @@ int main(int argc, char **argv){
     char **argumentospadre = NULL;
     char **argumentoshijo = NULL;
     char path[MAX_PATH];
+    int i;
     
     if (argc < 3) {
         exit(EXIT_SUCCESS);
@@ -33,7 +36,7 @@ int main(int argc, char **argv){
     
     if (fork()) {  /* Es el padre */
     
-        wait();
+        wait(NULL);
     
         if (strcmp(argv[1], "du") == 0) {
             strcpy(path, "/usr/bin/");
@@ -104,7 +107,7 @@ int main(int argc, char **argv){
             exit (EXIT_FAILURE);
         }
     
-        for (int i = 1; i < (argc - 1) ; i++){
+        for (i = 1; i < (argc - 1) ; i++){
             argumentospadre[i] = (char *)malloc((strlen(argv[i + 1]) + 1) * sizeof(char));
             if (argumentospadre[i] == NULL){
                 exit (EXIT_FAILURE);

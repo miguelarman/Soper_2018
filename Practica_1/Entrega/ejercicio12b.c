@@ -60,6 +60,7 @@ int main (int argc, char **argv) {
     int N;
     estructura *dinamico = NULL;
     pthread_t hilos[NUMERO_HILOS];
+    int i, j;
     
     
     /*Comprobacion de los parametros de entrada*/
@@ -99,14 +100,14 @@ int main (int argc, char **argv) {
     
     
     /*Creamos 100 hilos que ejecutan calcula_primos*/
-    for (int i = 0; i < NUMERO_HILOS; i++) {
+    for (i = 0; i < NUMERO_HILOS; i++) {
         pthread_create(&hilos[i], NULL , calcula_primos , (void *)(&N));
     }
     
     /*Se ejecutan los 100 hilos*/
     
     /*Juntamos los hilos*/
-    for (int j = 0; j < NUMERO_HILOS; j++) {
+    for (j = 0; j < NUMERO_HILOS; j++) {
         pthread_join(hilos[j], NULL);
     }
     
@@ -115,7 +116,7 @@ int main (int argc, char **argv) {
     end_t = clock();
     tiempo_total = (double)(end_t - start_t) / CLOCKS_PER_SEC;
     
-    printf("El programa ha tardado %lf segundos en realizar las operaciones con N = %d\n", tiempo_total, N);
+    printf("El programa ha tardado %f segundos en realizar las operaciones con N = %d\n", tiempo_total, N);
     
     if (dinamico != NULL) {
         free(dinamico->cadena);

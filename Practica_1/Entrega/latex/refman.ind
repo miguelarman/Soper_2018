@@ -1,0 +1,134 @@
+\begin{theindex}
+
+  \item {\+\_\+estructura}, \hyperpage{5}
+    \subitem {cadena}, \hyperpage{5}
+    \subitem {entero}, \hyperpage{5}
+
+  \indexspace
+
+  \item {A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}
+    \subitem {ejercicio13.\+c}, \hyperpage{13}
+
+  \indexspace
+
+  \item {B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}
+    \subitem {ejercicio13.\+c}, \hyperpage{13}
+    \subitem {ejercicio9.\+c}, \hyperpage{20}
+
+  \indexspace
+
+  \item {cadena}
+    \subitem {\+\_\+estructura}, \hyperpage{5}
+  \item {calcula\+\_\+matriz}
+    \subitem {ejercicio13.\+c}, \hyperpage{13}
+  \item {calcula\+\_\+primos}
+    \subitem {ejercicio12a.\+c}, \hyperpage{8}
+    \subitem {ejercicio12b.\+c}, \hyperpage{11}
+
+  \indexspace
+
+  \item {dim}
+    \subitem {param}, \hyperpage{6}
+
+  \indexspace
+
+  \item {E\+S\+C\+R\+I\+T\+U\+RA}
+    \subitem {ejercicio9.\+c}, \hyperpage{21}
+  \item {ejercicio12a.\+c}, \hyperpage{7}
+    \subitem {calcula\+\_\+primos}, \hyperpage{8}
+    \subitem {estructura}, \hyperpage{8}
+    \subitem {main}, \hyperpage{9}
+    \subitem {N\+U\+M\+E\+R\+O\+\_\+\+P\+R\+O\+C\+E\+S\+OS}, 
+		\hyperpage{8}
+  \item {ejercicio12b.\+c}, \hyperpage{9}
+    \subitem {calcula\+\_\+primos}, \hyperpage{11}
+    \subitem {estructura}, \hyperpage{10}
+    \subitem {main}, \hyperpage{11}
+    \subitem {N\+U\+M\+E\+R\+O\+\_\+\+H\+I\+L\+OS}, \hyperpage{10}
+  \item {ejercicio13.\+c}, \hyperpage{12}
+    \subitem {A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}, \hyperpage{13}
+    \subitem {B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}, \hyperpage{13}
+    \subitem {calcula\+\_\+matriz}, \hyperpage{13}
+    \subitem {main}, \hyperpage{14}
+    \subitem {Param}, \hyperpage{13}
+  \item {ejercicio4a.\+c}, \hyperpage{14}
+    \subitem {N\+U\+M\+\_\+\+P\+R\+OC}, \hyperpage{15}
+  \item {ejercicio4b.\+c}, \hyperpage{15}
+    \subitem {N\+U\+M\+\_\+\+P\+R\+OC}, \hyperpage{15}
+  \item {ejercicio5a.\+c}, \hyperpage{16}
+    \subitem {N\+U\+M\+\_\+\+P\+R\+OC}, \hyperpage{16}
+  \item {ejercicio5b.\+c}, \hyperpage{17}
+    \subitem {N\+U\+M\+\_\+\+P\+R\+OC}, \hyperpage{17}
+  \item {ejercicio6.\+c}, \hyperpage{18}
+    \subitem {M\+A\+X\+\_\+\+C\+AD}, \hyperpage{18}
+  \item {ejercicio8.\+c}, \hyperpage{19}
+    \subitem {M\+A\+X\+\_\+\+P\+A\+TH}, \hyperpage{19}
+  \item {ejercicio9.\+c}, \hyperpage{20}
+    \subitem {B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}, \hyperpage{20}
+    \subitem {E\+S\+C\+R\+I\+T\+U\+RA}, \hyperpage{21}
+    \subitem {factorial}, \hyperpage{21}
+    \subitem {L\+E\+C\+T\+U\+RA}, \hyperpage{21}
+    \subitem {M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE}, \hyperpage{21}
+    \subitem {main}, \hyperpage{21}
+  \item {entero}
+    \subitem {\+\_\+estructura}, \hyperpage{5}
+  \item {estructura}
+    \subitem {ejercicio12a.\+c}, \hyperpage{8}
+    \subitem {ejercicio12b.\+c}, \hyperpage{10}
+
+  \indexspace
+
+  \item {factorial}
+    \subitem {ejercicio9.\+c}, \hyperpage{21}
+
+  \indexspace
+
+  \item {id}
+    \subitem {param}, \hyperpage{6}
+
+  \indexspace
+
+  \item {L\+E\+C\+T\+U\+RA}
+    \subitem {ejercicio9.\+c}, \hyperpage{21}
+
+  \indexspace
+
+  \item {M\+A\+X\+\_\+\+C\+AD}
+    \subitem {ejercicio6.\+c}, \hyperpage{18}
+  \item {M\+A\+X\+\_\+\+P\+A\+TH}
+    \subitem {ejercicio8.\+c}, \hyperpage{19}
+  \item {M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE}
+    \subitem {ejercicio9.\+c}, \hyperpage{21}
+  \item {main}
+    \subitem {ejercicio12a.\+c}, \hyperpage{9}
+    \subitem {ejercicio12b.\+c}, \hyperpage{11}
+    \subitem {ejercicio13.\+c}, \hyperpage{14}
+    \subitem {ejercicio9.\+c}, \hyperpage{21}
+  \item {matriz}
+    \subitem {param}, \hyperpage{6}
+  \item {mult}
+    \subitem {param}, \hyperpage{6}
+
+  \indexspace
+
+  \item {N\+U\+M\+\_\+\+P\+R\+OC}
+    \subitem {ejercicio4a.\+c}, \hyperpage{15}
+    \subitem {ejercicio4b.\+c}, \hyperpage{15}
+    \subitem {ejercicio5a.\+c}, \hyperpage{16}
+    \subitem {ejercicio5b.\+c}, \hyperpage{17}
+  \item {N\+U\+M\+E\+R\+O\+\_\+\+H\+I\+L\+OS}
+    \subitem {ejercicio12b.\+c}, \hyperpage{10}
+  \item {N\+U\+M\+E\+R\+O\+\_\+\+P\+R\+O\+C\+E\+S\+OS}
+    \subitem {ejercicio12a.\+c}, \hyperpage{8}
+
+  \indexspace
+
+  \item {Param}
+    \subitem {ejercicio13.\+c}, \hyperpage{13}
+  \item {param}, \hyperpage{6}
+    \subitem {dim}, \hyperpage{6}
+    \subitem {id}, \hyperpage{6}
+    \subitem {matriz}, \hyperpage{6}
+    \subitem {mult}, \hyperpage{6}
+
+\end{theindex}

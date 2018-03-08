@@ -1,0 +1,111 @@
+\hypertarget{ejercicio9_8c}{}\section{ejercicio9.\+c File Reference}
+\label{ejercicio9_8c}\index{ejercicio9.\+c@{ejercicio9.\+c}}
+
+
+Ejercicio para la comunicacion entre procesos mediante tuberias.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_a0f47050799b9308fe388baf6478e6fc9}{L\+E\+C\+T\+U\+RA}}~0
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_a44ef5333dbf032bbf9fbd2b381f7e6c3}{E\+S\+C\+R\+I\+T\+U\+RA}}~1
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_a6b20d41d6252e9871430c242cb1a56e7}{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}~512
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_a81554af70e8eee1b1495b9330d93dcb4}{M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE}}~512
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ejercicio9_8c_ae1b37c26bb8e5744f5747d6cd6505356}{factorial}} (int n)
+\begin{DoxyCompactList}\small\item\em calcula el factorial de un numero \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio9_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio para la comunicacion entre procesos mediante tuberias. 
+
+En este fichero hacemos uso de las pipes para implementar la comunicacion entre un proceso padre y cuatro procesos hijos, a los cuales les manda dos enteros, y estos devuelven el resultado de una operacion con ellos
+
+\begin{DoxyAuthor}{Author}
+Miguel Arconada Manteca y José Manuel Chacón Aguilera 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+8-\/3-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ejercicio9_8c_a6b20d41d6252e9871430c242cb1a56e7}\label{ejercicio9_8c_a6b20d41d6252e9871430c242cb1a56e7}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~512}
+
+Tamanio maximo de los buffers \mbox{\Hypertarget{ejercicio9_8c_a44ef5333dbf032bbf9fbd2b381f7e6c3}\label{ejercicio9_8c_a44ef5333dbf032bbf9fbd2b381f7e6c3}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!E\+S\+C\+R\+I\+T\+U\+RA@{E\+S\+C\+R\+I\+T\+U\+RA}}
+\index{E\+S\+C\+R\+I\+T\+U\+RA@{E\+S\+C\+R\+I\+T\+U\+RA}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{E\+S\+C\+R\+I\+T\+U\+RA}{ESCRITURA}}
+{\footnotesize\ttfamily \#define E\+S\+C\+R\+I\+T\+U\+RA~1}
+
+Macro que define la zona de escritura de la pipe \mbox{\Hypertarget{ejercicio9_8c_a0f47050799b9308fe388baf6478e6fc9}\label{ejercicio9_8c_a0f47050799b9308fe388baf6478e6fc9}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!L\+E\+C\+T\+U\+RA@{L\+E\+C\+T\+U\+RA}}
+\index{L\+E\+C\+T\+U\+RA@{L\+E\+C\+T\+U\+RA}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{L\+E\+C\+T\+U\+RA}{LECTURA}}
+{\footnotesize\ttfamily \#define L\+E\+C\+T\+U\+RA~0}
+
+Macro que define la zona de lectura de la pipe \mbox{\Hypertarget{ejercicio9_8c_a81554af70e8eee1b1495b9330d93dcb4}\label{ejercicio9_8c_a81554af70e8eee1b1495b9330d93dcb4}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE@{M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE}}
+\index{M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE@{M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE}{MENSAJE\_SIZE}}
+{\footnotesize\ttfamily \#define M\+E\+N\+S\+A\+J\+E\+\_\+\+S\+I\+ZE~512}
+
+Tamanio maximo de los mensajes 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ejercicio9_8c_ae1b37c26bb8e5744f5747d6cd6505356}\label{ejercicio9_8c_ae1b37c26bb8e5744f5747d6cd6505356}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!factorial@{factorial}}
+\index{factorial@{factorial}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{factorial()}{factorial()}}
+{\footnotesize\ttfamily int factorial (\begin{DoxyParamCaption}\item[{int}]{n }\end{DoxyParamCaption})}
+
+
+
+calcula el factorial de un numero 
+
+factorial calcula el factorial de un numero pasado como argumento. Se calcula de forma recursiva, devolviendo el numero multiplicado por el factorial del anterior, y con la condicion de parada de que factorial(1) = 1 
+\begin{DoxyParams}{Parameters}
+{\em arg} & estructura del tipo Param que contiene la matriz, el escalar, la dimension y un identificador del hilo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio9_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{ejercicio9_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!main@{main}}
+\index{main@{main}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa crea cuatro procesos hijos que se comunican con el padre, e intercambian mensajes con numeros y el resultado de una operacion entre ellos diferente para cada hijo 
+\begin{DoxyParams}{Parameters}
+{\em argc} & y argv \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}
