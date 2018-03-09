@@ -38,9 +38,9 @@ int main(int argc, char **argv){
     
         wait(NULL);
     
-        if (strcmp(argv[1], "du") == 0) {
-            strcpy(path, "/usr/bin/");
-        }
+        if (strcmp(argv[1], "du") == 0) { /*Alteramos la path si es el programa*/
+            strcpy(path, "/usr/bin/");    /*gu, puesto que está en una carpeta*/
+        }                                 /*diferente*/
         
         
         if (strcmp(argv[argc - 1], "-l") == 0) {

@@ -152,16 +152,24 @@ void calcula_primos (int N) {
     int cantidad;
     int iterador;
     int i;
-    
-    cantidad = 0;   /*Cuenta cuantos primos se han hayado hasta el momento*/
-    
-    while (cantidad < N) {
+    int esPrimo;
         
-        for (i = 2; i < sqrt(iterador); i++) {
+    cantidad = 0;   /*Cuenta cuantos primos se han hayado hasta el momento*/
+    iterador = 2;
+        
+    while (cantidad < N) {
+        esPrimo = 1;
+        
+        for (i = 2; i <= sqrt(iterador); i++) {
             if (iterador % i == 0) {
-                cantidad++;
+                esPrimo = 0;
+                
+                break;
             }
-            break;
+        }
+        
+        if (esPrimo == 1){
+            cantidad++;
         }
         
         iterador++;

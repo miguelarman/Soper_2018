@@ -21,7 +21,7 @@ int main (void) {
     int pid;
     int i;
     for (i = 0; i <= NUM_PROC; i++){
-        if (i % 2 == 0) {
+        if (i % 2 != 0) {
             if ((pid=fork()) < 0 ){
                 printf("Error haciendo fork\n");
                 exit(EXIT_FAILURE);
@@ -34,7 +34,12 @@ int main (void) {
         }
     }
     
+    for (i = 0; i <= NUM_PROC; i++){
+        if (i % 2 != 0) {
+            wait (NULL);
+        }
+    }
+    
     wait(NULL);
-    sleep(30);
     exit(EXIT_SUCCESS);
 }

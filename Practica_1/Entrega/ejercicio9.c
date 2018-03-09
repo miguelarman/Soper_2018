@@ -69,6 +69,7 @@ int main (int argc, char **argv) {
 
 
     if (argc < 3) {
+        printf("Parametros insuficientes");
         return (EXIT_FAILURE);
     }
     
