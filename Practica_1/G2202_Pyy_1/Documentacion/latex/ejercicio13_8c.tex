@@ -1,0 +1,118 @@
+\hypertarget{ejercicio13_8c}{}\section{Referencia del Archivo ejercicio13.\+c}
+\label{ejercicio13_8c}\index{ejercicio13.\+c@{ejercicio13.\+c}}
+
+
+Ejercicio sobre paso de parámetros en funciones.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+\subsection*{Clases}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structparam}{param}}
+\begin{DoxyCompactList}\small\item\em Estructura de parámetros de un hilo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio13_8c_a6b20d41d6252e9871430c242cb1a56e7}{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}~256
+\item 
+\#define \mbox{\hyperlink{ejercicio13_8c_a7ec751f49d6391028a94f1419374c2fa}{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}}~30
+\end{DoxyCompactItemize}
+\subsection*{typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef struct \mbox{\hyperlink{structparam}{param}} \mbox{\hyperlink{ejercicio13_8c_accbaceac5fd1c647a17f4024f3bef2a8}{Param}}
+\begin{DoxyCompactList}\small\item\em Estructura de parámetros de un hilo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{ejercicio13_8c_a745c6f5f79dff189528803cff6a720bd}{calcula\+\_\+matriz}} (void $\ast$arg)
+\begin{DoxyCompactList}\small\item\em multiplica una matriz por un escalar \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio13_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio sobre paso de parámetros en funciones. 
+
+Este fichero contiene nuestra solución al ejercicio 13 enunciado en el pdf de la práctica
+
+\begin{DoxyAuthor}{Autor}
+Miguel Arconada Manteca y José Manuel Chacón Aguilera 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+8-\/3-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{ejercicio13_8c_a7ec751f49d6391028a94f1419374c2fa}\label{ejercicio13_8c_a7ec751f49d6391028a94f1419374c2fa}} 
+\index{ejercicio13.\+c@{ejercicio13.\+c}!A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}}
+\index{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE@{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}!ejercicio13.\+c@{ejercicio13.\+c}}
+\subsubsection{\texorpdfstring{A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE}{ARRAY\_SIZE}}
+{\footnotesize\ttfamily \#define A\+R\+R\+A\+Y\+\_\+\+S\+I\+ZE~30}
+
+Tamanio maximo de los buffers valores \mbox{\Hypertarget{ejercicio13_8c_a6b20d41d6252e9871430c242cb1a56e7}\label{ejercicio13_8c_a6b20d41d6252e9871430c242cb1a56e7}} 
+\index{ejercicio13.\+c@{ejercicio13.\+c}!B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}}
+\index{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE@{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}!ejercicio13.\+c@{ejercicio13.\+c}}
+\subsubsection{\texorpdfstring{B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE}{BUFFER\_SIZE}}
+{\footnotesize\ttfamily \#define B\+U\+F\+F\+E\+R\+\_\+\+S\+I\+ZE~256}
+
+Tamanio maximo del buffer cadena\+\_\+aux 
+
+\subsection{Documentación de los \textquotesingle{}typedefs\textquotesingle{}}
+\mbox{\Hypertarget{ejercicio13_8c_accbaceac5fd1c647a17f4024f3bef2a8}\label{ejercicio13_8c_accbaceac5fd1c647a17f4024f3bef2a8}} 
+\index{ejercicio13.\+c@{ejercicio13.\+c}!Param@{Param}}
+\index{Param@{Param}!ejercicio13.\+c@{ejercicio13.\+c}}
+\subsubsection{\texorpdfstring{Param}{Param}}
+{\footnotesize\ttfamily typedef struct \mbox{\hyperlink{structparam}{param}}  \mbox{\hyperlink{ejercicio13_8c_accbaceac5fd1c647a17f4024f3bef2a8}{Param}}}
+
+
+
+Estructura de parámetros de un hilo. 
+
+Esta estructura almacena la información necesaria para los hilos en este ejercicio 
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{ejercicio13_8c_a745c6f5f79dff189528803cff6a720bd}\label{ejercicio13_8c_a745c6f5f79dff189528803cff6a720bd}} 
+\index{ejercicio13.\+c@{ejercicio13.\+c}!calcula\+\_\+matriz@{calcula\+\_\+matriz}}
+\index{calcula\+\_\+matriz@{calcula\+\_\+matriz}!ejercicio13.\+c@{ejercicio13.\+c}}
+\subsubsection{\texorpdfstring{calcula\+\_\+matriz()}{calcula\_matriz()}}
+{\footnotesize\ttfamily void $\ast$ calcula\+\_\+matriz (\begin{DoxyParamCaption}\item[{void $\ast$}]{arg }\end{DoxyParamCaption})}
+
+
+
+multiplica una matriz por un escalar 
+
+calcula\+\_\+matriz multiplica una matriz por un escalar. Está almacenada en forma de puntero a función para ser ejecutada por varios threads simultáneamente. 
+\begin{DoxyParams}{Parámetros}
+{\em arg} & estructura del tipo Param que contiene la matriz, el escalar, la dimension y un identificador del hilo \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio13_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{ejercicio13_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{ejercicio13.\+c@{ejercicio13.\+c}!main@{main}}
+\index{main@{main}!ejercicio13.\+c@{ejercicio13.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa pide por consola una dimensión, dos multiplicadores y dos matrices, y lanza dos hilos que multiplican cada matriz por los escalares, y que van imprimiendo cada línea según la calculan 
+\begin{DoxyParams}{Parámetros}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}

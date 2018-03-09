@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Primera práctica de Sistemas Operativos: Referencia del Archivo ejercicio13.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Primera práctica de Sistemas Operativos
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Clases</a> &#124;
+<a href="#define-members">defines</a> &#124;
+<a href="#typedef-members">typedefs</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo ejercicio13.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Ejercicio sobre paso de parámetros en funciones.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;pthread.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Clases</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structparam.html">param</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura de parámetros de un hilo.  <a href="structparam.html#details">Más...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a6b20d41d6252e9871430c242cb1a56e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio13_8c.html#a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</a>&#160;&#160;&#160;256</td></tr>
+<tr class="separator:a6b20d41d6252e9871430c242cb1a56e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ec751f49d6391028a94f1419374c2fa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio13_8c.html#a7ec751f49d6391028a94f1419374c2fa">ARRAY_SIZE</a>&#160;&#160;&#160;30</td></tr>
+<tr class="separator:a7ec751f49d6391028a94f1419374c2fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
+typedefs</h2></td></tr>
+<tr class="memitem:accbaceac5fd1c647a17f4024f3bef2a8"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structparam.html">param</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio13_8c.html#accbaceac5fd1c647a17f4024f3bef2a8">Param</a></td></tr>
+<tr class="memdesc:accbaceac5fd1c647a17f4024f3bef2a8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Estructura de parámetros de un hilo.  <a href="#accbaceac5fd1c647a17f4024f3bef2a8">Más...</a><br /></td></tr>
+<tr class="separator:accbaceac5fd1c647a17f4024f3bef2a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a745c6f5f79dff189528803cff6a720bd"><td class="memItemLeft" align="right" valign="top">void *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio13_8c.html#a745c6f5f79dff189528803cff6a720bd">calcula_matriz</a> (void *arg)</td></tr>
+<tr class="memdesc:a745c6f5f79dff189528803cff6a720bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">multiplica una matriz por un escalar  <a href="#a745c6f5f79dff189528803cff6a720bd">Más...</a><br /></td></tr>
+<tr class="separator:a745c6f5f79dff189528803cff6a720bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio13_8c.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función principal del programa.  <a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">Más...</a><br /></td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Ejercicio sobre paso de parámetros en funciones. </p>
+<p>Este fichero contiene nuestra solución al ejercicio 13 enunciado en el pdf de la práctica</p>
+<dl class="section author"><dt>Autor</dt><dd>Miguel Arconada Manteca y José Manuel Chacón Aguilera </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>8-3-2018 </dd></dl>
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="a7ec751f49d6391028a94f1419374c2fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ec751f49d6391028a94f1419374c2fa">&#9670;&nbsp;</a></span>ARRAY_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ARRAY_SIZE&#160;&#160;&#160;30</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tamanio maximo de los buffers valores </p>
+
+</div>
+</div>
+<a id="a6b20d41d6252e9871430c242cb1a56e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b20d41d6252e9871430c242cb1a56e7">&#9670;&nbsp;</a></span>BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUFFER_SIZE&#160;&#160;&#160;256</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tamanio maximo del buffer cadena_aux </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de los 'typedefs'</h2>
+<a id="accbaceac5fd1c647a17f4024f3bef2a8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accbaceac5fd1c647a17f4024f3bef2a8">&#9670;&nbsp;</a></span>Param</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef struct <a class="el" href="structparam.html">param</a>  <a class="el" href="ejercicio13_8c.html#accbaceac5fd1c647a17f4024f3bef2a8">Param</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Estructura de parámetros de un hilo. </p>
+<p>Esta estructura almacena la información necesaria para los hilos en este ejercicio </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="a745c6f5f79dff189528803cff6a720bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a745c6f5f79dff189528803cff6a720bd">&#9670;&nbsp;</a></span>calcula_matriz()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void * calcula_matriz </td>
+          <td>(</td>
+          <td class="paramtype">void *&#160;</td>
+          <td class="paramname"><em>arg</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>multiplica una matriz por un escalar </p>
+<p>calcula_matriz multiplica una matriz por un escalar. Está almacenada en forma de puntero a función para ser ejecutada por varios threads simultáneamente. </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg</td><td>estructura del tipo Param que contiene la matriz, el escalar, la dimension y un identificador del hilo </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función principal del programa. </p>
+<p>Este programa pide por consola una dimensión, dos multiplicadores y dos matrices, y lanza dos hilos que multiplican cada matriz por los escalares, y que van imprimiendo cada línea según la calculan </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">void</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>0 si todo se ejecuta correctamente, y -1 en cualquier otro caso </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

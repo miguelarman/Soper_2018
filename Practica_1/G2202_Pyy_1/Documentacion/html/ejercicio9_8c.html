@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Primera práctica de Sistemas Operativos: Referencia del Archivo ejercicio9.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Primera práctica de Sistemas Operativos
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">defines</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo ejercicio9.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Ejercicio para la comunicacion entre procesos mediante tuberias.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;math.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a0f47050799b9308fe388baf6478e6fc9"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio9_8c.html#a0f47050799b9308fe388baf6478e6fc9">LECTURA</a>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:a0f47050799b9308fe388baf6478e6fc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44ef5333dbf032bbf9fbd2b381f7e6c3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio9_8c.html#a44ef5333dbf032bbf9fbd2b381f7e6c3">ESCRITURA</a>&#160;&#160;&#160;1</td></tr>
+<tr class="separator:a44ef5333dbf032bbf9fbd2b381f7e6c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b20d41d6252e9871430c242cb1a56e7"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio9_8c.html#a6b20d41d6252e9871430c242cb1a56e7">BUFFER_SIZE</a>&#160;&#160;&#160;512</td></tr>
+<tr class="separator:a6b20d41d6252e9871430c242cb1a56e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81554af70e8eee1b1495b9330d93dcb4"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio9_8c.html#a81554af70e8eee1b1495b9330d93dcb4">MENSAJE_SIZE</a>&#160;&#160;&#160;512</td></tr>
+<tr class="separator:a81554af70e8eee1b1495b9330d93dcb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:ae1b37c26bb8e5744f5747d6cd6505356"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio9_8c.html#ae1b37c26bb8e5744f5747d6cd6505356">factorial</a> (int n)</td></tr>
+<tr class="memdesc:ae1b37c26bb8e5744f5747d6cd6505356"><td class="mdescLeft">&#160;</td><td class="mdescRight">calcula el factorial de un numero  <a href="#ae1b37c26bb8e5744f5747d6cd6505356">Más...</a><br /></td></tr>
+<tr class="separator:ae1b37c26bb8e5744f5747d6cd6505356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio9_8c.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
+<tr class="memdesc:a3c04138a5bfe5d72780bb7e82a18e627"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función principal del programa.  <a href="#a3c04138a5bfe5d72780bb7e82a18e627">Más...</a><br /></td></tr>
+<tr class="separator:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Ejercicio para la comunicacion entre procesos mediante tuberias. </p>
+<p>En este fichero hacemos uso de las pipes para implementar la comunicacion entre un proceso padre y cuatro procesos hijos, a los cuales les manda dos enteros, y estos devuelven el resultado de una operacion con ellos</p>
+<dl class="section author"><dt>Autor</dt><dd>Miguel Arconada Manteca y José Manuel Chacón Aguilera </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>8-3-2018 </dd></dl>
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="a6b20d41d6252e9871430c242cb1a56e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b20d41d6252e9871430c242cb1a56e7">&#9670;&nbsp;</a></span>BUFFER_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUFFER_SIZE&#160;&#160;&#160;512</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tamanio maximo de los buffers </p>
+
+</div>
+</div>
+<a id="a44ef5333dbf032bbf9fbd2b381f7e6c3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44ef5333dbf032bbf9fbd2b381f7e6c3">&#9670;&nbsp;</a></span>ESCRITURA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define ESCRITURA&#160;&#160;&#160;1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Macro que define la zona de escritura de la pipe </p>
+
+</div>
+</div>
+<a id="a0f47050799b9308fe388baf6478e6fc9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0f47050799b9308fe388baf6478e6fc9">&#9670;&nbsp;</a></span>LECTURA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define LECTURA&#160;&#160;&#160;0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Macro que define la zona de lectura de la pipe </p>
+
+</div>
+</div>
+<a id="a81554af70e8eee1b1495b9330d93dcb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81554af70e8eee1b1495b9330d93dcb4">&#9670;&nbsp;</a></span>MENSAJE_SIZE</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MENSAJE_SIZE&#160;&#160;&#160;512</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Tamanio maximo de los mensajes </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="ae1b37c26bb8e5744f5747d6cd6505356"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae1b37c26bb8e5744f5747d6cd6505356">&#9670;&nbsp;</a></span>factorial()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int factorial </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>n</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calcula el factorial de un numero </p>
+<p>factorial calcula el factorial de un numero pasado como argumento. Se calcula de forma recursiva, devolviendo el numero multiplicado por el factorial del anterior, y con la condicion de parada de que factorial(1) = 1 </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">arg</td><td>estructura del tipo Param que contiene la matriz, el escalar, la dimension y un identificador del hilo </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char **&#160;</td>
+          <td class="paramname"><em>argv</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función principal del programa. </p>
+<p>Este programa crea cuatro procesos hijos que se comunican con el padre, e intercambian mensajes con numeros y el resultado de una operacion entre ellos diferente para cada hijo </p><dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>y argv </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>0 si todo se ejecuta correctamente, y -1 en cualquier otro caso </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>
