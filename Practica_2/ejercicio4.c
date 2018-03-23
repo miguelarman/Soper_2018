@@ -31,6 +31,11 @@ int main (int argc, char **argv) {
         exit(EXIT_FAILURE);
     }
     
+    
+    
+    
+    
+    
     n_proc = atoi (argv[1]);
     
     total_creados = 0;
