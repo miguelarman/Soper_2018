@@ -5,8 +5,8 @@
 ########################################################
 CC = gcc
 CFLAGS = -g -Wall -pedantic
-FILES = ejercicio2 ejercicio4
-# ---          --> Programas de aprendizaje, que también han necesitado
+FILES = ejercicio2 ejercicio4 ejercicio6a ejercicio6b
+# ejercicio7          --> Programas de aprendizaje, que también han necesitado
 #                          ser compilados
 ########################################################
 
@@ -19,9 +19,21 @@ ejercicio2:
 ejercicio4:
 	$(CC) $(CFLAGS) ejercicio4.c -o ejercicio4
 	
+ejercicio6a:
+	$(CC) $(CFLAGS) ejercicio6a.c -o ejercicio6a
+
+ejercicio6b:
+	$(CC) $(CFLAGS) ejercicio6b.c -o ejercicio6b
+	
 
 
 
+
+
+# Ejercicios de aprendizaje
+
+ejercicio7:
+	$(CC) $(CFLAGS) ejercicio7.c -o ejercicio7
 
 
 clear:
@@ -55,3 +67,22 @@ ejercicio4_test_val:
 	@echo Ejecutando ejercicio4 con Valgrind
 	@valgrind --leak-check=full ./ejercicio4
 	
+
+# Ejecuciones de testing del ejercicio 6a
+ejercicio6a_test:
+	@echo Ejecutando ejercicio6a
+	@./ejercicio6a
+
+ejercicio6a_test_val:
+	@echo Ejecutando ejercicio6a con Valgrind
+	@valgrind --leak-check=full ./ejercicio6a
+
+
+# Ejecuciones de testing del ejercicio 6b
+ejercicio6b_test:
+	@echo Ejecutando ejercicio6b
+	@./ejercicio6b
+
+ejercicio6b_test_val:
+	@echo Ejecutando ejercicio6b con Valgrind
+	@valgrind --leak-check=full ./ejercicio6b
