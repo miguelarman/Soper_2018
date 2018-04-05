@@ -1,0 +1,1 @@
+int aleat_num(int inf, int sup);

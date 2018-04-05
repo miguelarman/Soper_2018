@@ -51,7 +51,7 @@ int Crear_Semaforo(key_t key, int size, int *semid);
  * Salida:
  *    int: OK si todo fue correcto, ERROR en caso de error.
 ***************************************************************/
-int Down_Semaforo(int id, int num_sem, intundo);
+int Down_Semaforo(int id, int num_sem, int undo);
 
 
 /***************************************************************

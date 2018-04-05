@@ -5,9 +5,12 @@
 ########################################################
 CC = gcc
 CFLAGS = -g -Wall -pedantic
-FILES = ejercicio2 ejercicio4 ejercicio6a ejercicio6b
+FILES = ejercicio2 ejercicio4 ejercicio6a ejercicio6b ejercicio9 ejercicio9hijos
 # ejercicio7          --> Programas de aprendizaje, que también han necesitado
 #                          ser compilados
+########################################################
+OBJECTSEJERCICIO9 = semaforos.o aleat_num.o ejercicio9.o
+OBJECTSEJERCICIO9HIJOS = semaforos.o aleat_num.o ejercicio9hijos.o
 ########################################################
 
 all: $(FILES) clear
@@ -25,9 +28,25 @@ ejercicio6a:
 ejercicio6b:
 	$(CC) $(CFLAGS) ejercicio6b.c -o ejercicio6b
 	
+ejercicio9: $(OBJECTSEJERCICIO9)
+	$(CC) $(CFLAGS) -o ejercicio9 $(OBJECTSEJERCICIO9) -lpthread
+
+ejercicio9.o: semaforos.h aleat_num.h ejercicio9.c
+	$(CC) $(CFLAGS) -c ejercicio9.c
+	
+ejercicio9hijos: $(OBJECTSEJERCICIO9HIJOS)
+	$(CC) $(CFLAGS) -o ejercicio9hijos $(OBJECTSEJERCICIO9HIJOS) -lpthread
+
+ejercicio9hijos.o: semaforos.h aleat_num.h ejercicio9hijos.c
+	$(CC) $(CFLAGS) -c ejercicio9hijos.c
+	
 
 
+semaforos.o: semaforos.c semaforos.h
+	$(CC) $(CFLAGS) -c semaforos.c
 
+aleat_num.o: aleat_num.c aleat_num.h
+	$(CC) $(CFLAGS) -c aleat_num.c
 
 
 # Ejercicios de aprendizaje
