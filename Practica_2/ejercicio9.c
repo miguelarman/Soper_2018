@@ -1,3 +1,16 @@
+/**
+ * @brief Ejercicio 9 de la Práctica
+ * 
+ * En este ejercicio creamos una serie de procesos hijos,
+ * que realizan cálculos simulando una caja de supermercado,
+ * y que mandan señales al proceso padre cuando exceden los 1000
+ * euros o cuando terminan. Se implementa el uso de semáforos
+ * 
+ * @file ejercicio9.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 6-4-2018
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -9,21 +22,64 @@
 #include "semaforos.h"
 #include "aleat_num.h"
 
-#define N_CAJAS 5
-#define TAM_PATH 256
-#define MAX_TAM 256
-#define N_OPERACIONES 7
-#define FICHERO_SALDO_TOTAL "files/saldoTotal.txt"
-#define TAMANIO_ARGV_HIJOS 128
-#define KEY 15
+#define N_CAJAS 5 /*!< Numero de cajas*/
+#define TAM_PATH 256 /*!< Maximo tamaño de las path de ficheros*/
+#define N_OPERACIONES 50 /*!< Numero de operaciones a realizar por los cajeros*/
+#define FICHERO_SALDO_TOTAL "files/saldoTotal.txt" /*!< Path del fichero con el saldo total*/
+#define TAMANIO_ARGV_HIJOS 128 /*!< Tamaño máximo de los argumentos que se pasan a los hijos*/
+#define KEY 15 /*!< Key precompartida por los procesos. Al utilizar exec no podemos usar IPC_PRIVATE*/
 
+
+/**
+ * @brief manejador de la señal SIGRTMIN+1
+ *
+ * Esta funcion es ejecutada cuando el padre recibe
+ * la señal SIGRTMIN+1. Esto ocurre cuando un proceso
+ * tiene acumulado más de 1000. En ese momento, como
+ * el padre no puede saber quién le ha mandado la señal,
+ * recorre la lista de ficheros de saldos hasta que encuentra
+ * uno con excedentes, y lo actualiza
+ * 
+ * @param senal Código de la señal recibida
+ * @return void
+ */
 void manejador_usr1 (int senal);
+
+/**
+ * @brief manejador de la señal SIGRTMIN
+ *
+ * Esta funcion es ejecutada cuando el padre recibe
+ * la señal SIGRTMIN. Esto ocurre cuando un proceso
+ * ha finalizado su ejecución, tras haber leído todas
+ * las operaciones. Como tampoco podemos saber qué proceso 
+ * la ha lanzado, el padre espera hasta que terminan todos
+ * los procesos, y recorre los ficheros actualizando el saldo
+ * 
+ * @param senal Código de la señal recibida
+ * @return void
+ */
 void manejador_usr2 (int senal);
 
-sigset_t set, oset;
+/*Variables globales. Deben ser globales, puesto que se
+utilizan en más de una función, y si no, no podrían ser modificadas*/
 
-int num_procesos_terminados;
+sigset_t set, oset; /*!< Máscaras de bloqueo y desbloqueo de señales */
+int num_procesos_terminados; /*!< Numero de procesos terminados */
 
+
+/**
+ * @brief Función principal del programa
+ *
+ * Este programa al iniciarse escribe en N_CAJAS ficheros
+ * un número de operaciones aleatorias. Después, crea 5
+ * procesos hijos, que ejecutan el programa ejercicio9hijos.
+ * Entonces se pone a la espera de las señales SIGRTMIN y
+ * SIGRTMIN+1, con las cuales actualiza el saldo total del
+ * supermercado
+ * 
+ * @return 0 si todo se ejecuta correctamente, y -1 en cualquier
+ * otro caso
+ */
 int main () {
     FILE *pf;
     char aux[TAM_PATH];
@@ -31,13 +87,13 @@ int main () {
     int v_aleat;
     pid_t child_pid;
     char *argv_hijos_id, *argv_hijos_num_operaciones;
-    char fichero_saldo[MAX_TAM];
+    char fichero_saldo[TAM_PATH];
     int saldo, saldo_total;
     FILE *pf_saldo, *pf_saldo_total;
     int semid;
     unsigned short *array;
     int retorno_semaforos;
-    /*int num_procesos_terminados;*/
+
 
     /*El padre genera N ficheros*/
     for (i = 1; i <= N_CAJAS; i++){
@@ -148,6 +204,7 @@ int main () {
             
             sprintf(argv_hijos_num_operaciones, "%d", N_OPERACIONES);
             
+            /*Ejecutamos el codigo de otro fichero para mejor legibilidad del código*/
             execlp("./ejercicio9hijos", "ejercicio9hijos", argv_hijos_id, argv_hijos_num_operaciones, NULL);
             
             perror("Error en el execlp");
@@ -252,9 +309,11 @@ int main () {
     
 }
 
+/*Funciones auxiliares*/
+
 void manejador_usr1 (int senal) {
     
-    char fichero_saldo[MAX_TAM];
+    char fichero_saldo[TAM_PATH];
     int saldo, saldo_total;
     int i;
     FILE *pf_saldo, *pf_saldo_total;

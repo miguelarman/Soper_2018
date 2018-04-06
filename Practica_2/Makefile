@@ -6,7 +6,7 @@
 CC = gcc
 CFLAGS = -g -Wall -pedantic
 FILES = ejercicio2 ejercicio4 ejercicio6a ejercicio6b ejercicio9 ejercicio9hijos
-# ejercicio7          --> Programas de aprendizaje, que también han necesitado
+# ejercicio3 ejercicio5 ejercicio7          --> Programas de aprendizaje, que también han necesitado
 #                          ser compilados
 ########################################################
 OBJECTSEJERCICIO9 = semaforos.o aleat_num.o ejercicio9.o

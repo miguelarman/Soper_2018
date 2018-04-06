@@ -1,3 +1,13 @@
+/**
+ * @brief Ejercicio 7 de la Práctica
+ * 
+ * Este ejercicio es de aprendizaje
+ * 
+ * @file ejercicio4.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 6-4-2018
+ */
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>

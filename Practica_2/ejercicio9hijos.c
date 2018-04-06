@@ -1,3 +1,17 @@
+/**
+ * @brief Ejercicio 9 de la Práctica (bis)
+ * 
+ * Este programa es ejecutado por los procesos hijos
+ * creados en el ejercicio9. Su ejecución consiste en
+ * leer una serie de operaciones de un fichero, y mandar
+ * señales al proceso padre, bien cuando exceden un saldo
+ * máximo, o cuando han terminado de leer todas las señales
+ * 
+ * @file ejercicio9hijos.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 6-4-2018
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -8,13 +22,24 @@
 #include "semaforos.h"
 #include "aleat_num.h"
 
-#define SEGUNDOS(X) (X) * 1000000
-#define MAX_TAM 256
-#define KEY 15
-#define N_CAJAS 5
+#define SEGUNDOS(X) (X) * 1000000 /*!< Macro para tranformar segundos a microsegundos*/
+#define MAX_TAM 256 /*!< Máximo tamaño de las paths*/
+#define KEY 15 /*!< Key precompartida de los semáforos*/
+#define N_CAJAS 5 /*!< Número de cajas*/
 
 
-
+/**
+ * @brief Función principal del programa
+ *
+ * Este programa lee operaciones de un fichero, y va actualizando
+ * otro fichero donde guarda su saldo. Cuando excede los 1000
+ * euros de saldo manda una señal a su padre para que le retire
+ * el excedente, y cuando termina, avisa también al padre, para
+ * que retire lo que quede de dinero
+ * 
+ * @return 0 si todo se ejecuta correctamente, y -1 en cualquier
+ * otro caso
+ */
 int main (int argc, char ** argv) {
     char fichero_operaciones[MAX_TAM], fichero_saldo[MAX_TAM];
     int id;

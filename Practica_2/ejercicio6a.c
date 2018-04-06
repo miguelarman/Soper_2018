@@ -1,3 +1,16 @@
+/**
+ * @brief Ejercicio 6a de la Práctica
+ * 
+ * En este ejercicio modificamos un código dado,
+ * para poner en práctica el uso de alarmas, así
+ * como máscaras de bloqueo, y sus diferencias
+ * en los bucles
+ * 
+ * @file ejercicio6a.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 6-4-2018
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -5,11 +18,20 @@
 #include <signal.h>
 #include <time.h>
 
-#define NUM_PROC 5
+#define NUM_PROC 5 /*!< Número de procesos a crear*/
+#define SEGUNDOS 40 /*!< Número de segundos para la alarma*/
 
-#define SEGUNDOS 40
-
-
+/**
+ * @brief Función principal del programa
+ *
+ * Este programa crea 5 procesos hijos, que tras ser creado,
+ * establecen una alarma. Entonces entran en un bucle,
+ * y bloquean la recepcion de señales hasta haber imprimido.
+ * Por lo tanto, realizan la impresión completa
+ * 
+ * @return 0 si todo se ejecuta correctamente, y -1 en cualquier
+ * otro caso
+ */
 int main (void) {
     int pid, counter;
     sigset_t set, oset;

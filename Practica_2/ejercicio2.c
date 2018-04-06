@@ -1,3 +1,14 @@
+/**
+ * @brief Ejercicio 2 de la Práctica
+ * 
+ * En este ejercicio vemos cómo crear hijos,
+ * y hacerlos dormir por un número de segundos
+ * 
+ * @file ejercicio2.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 6-4-2018
+ */
+ 
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
@@ -5,9 +16,21 @@
 #include <sys/wait.h>
 #include <sys/types.h>
 
-#define NUM_HIJOS 4
-#define SEGUNDOS(X) (X) * 1000000
+#define NUM_HIJOS 4 /*!< Número de hijos a crear*/
+#define SEGUNDOS(X) (X) * 1000000 /*!< Macro para tranformar segundos a microsegundos*/
 
+
+/**
+ * @brief Función principal del programa
+ *
+ * Este programa crea 4 hijos, que imprimirán un mensaje,
+ * y dormirán durante 30 segundos. Tras esta espera, volverán
+ * a imprimir un mensaje. Mientras tanto, el padre mandrá
+ * señal de terminar a los hijos tras cinco segundos
+ *
+ * @return 0 si todo se ejecuta correctamente, y -1 en cualquier
+ * otro caso
+ */
 int main (){
     pid_t child_pid;
     int i;
@@ -39,6 +62,8 @@ int main (){
         }
         
     }
+    
+    
     if (child_pid != 0){
         /*Ejecución del padre fuera del bucle*/
         for (i = 0; i< NUM_HIJOS; i++){

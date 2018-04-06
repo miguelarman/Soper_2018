@@ -1,3 +1,13 @@
+/**
+ * @brief Ejercicio 5 de la Práctica
+ * 
+ * Este ejercicio es de aprendizaje
+ * 
+ * @file ejercicio4.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 6-4-2018
+ */
+
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>

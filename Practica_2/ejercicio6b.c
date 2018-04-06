@@ -1,3 +1,17 @@
+/**
+ * @brief Ejercicio 6b de la Práctica
+ * 
+ * En este ejercicio modificamos un código dado,
+ * para poner en práctica el uso de alarmas, así
+ * como máscaras de bloqueo, y sus diferencias
+ * en los bucles, en conjunción con el ejercicio
+ * 6b
+ * 
+ * @file ejercicio6b.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 6-4-2018
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -5,12 +19,33 @@
 #include <signal.h>
 #include <time.h>
 
-#define NUM_PROC 5
-#define SEGUNDOS 40
+#define NUM_PROC 5 /*!< Número de procesos a crear*/
+#define SEGUNDOS 40 /*!< Número de segundos para la alarma*/
 
-
+/**
+ * @brief manejador de la señal SIGTERM
+ *
+ * Esta funcion es ejecutada cuando el padre recibe
+ * la señal SIGTERM. Cuando la recibe, imprime un
+ * mensaje y termina su ejecución
+ * 
+ * @param senal Código de la señal recibida
+ * @return void
+ */
 void manejador (int senal);
 
+
+/**
+ * @brief Función principal del programa
+ *
+ * Este programa crea 5 procesos hijos, que tras ser creado,
+ * establecen una alarma. Entonces entran en un bucle,
+ * pero no bloquean las señales, como hacía el ejercicio6a.c
+ * Por lo tanto, se pueden acaban en medio de una impresión
+ * 
+ * @return 0 si todo se ejecuta correctamente, y -1 en cualquier
+ * otro caso
+ */
 int main (void) {
     int pid, counter;
     int retorno_senial;
@@ -53,7 +88,7 @@ int main (void) {
     return 0;
 }
 
-
+/*Funciones auxiliares*/
 
 void manejador (int senal) {
     printf("Soy <%d> y he recibido la señal SIGTERM\n", getpid());
