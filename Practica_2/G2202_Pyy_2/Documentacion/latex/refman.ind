@@ -1,0 +1,116 @@
+\begin{theindex}
+
+  \item {aleat\+\_\+num}
+    \subitem {aleat\+\_\+num.\+h}, \hyperpage{7}
+  \item {aleat\+\_\+num.\+h}, \hyperpage{7}
+    \subitem {aleat\+\_\+num}, \hyperpage{7}
+
+  \indexspace
+
+  \item {ejercicio2.\+c}, \hyperpage{8}
+    \subitem {main}, \hyperpage{9}
+    \subitem {N\+U\+M\+\_\+\+H\+I\+J\+OS}, \hyperpage{8}
+    \subitem {S\+E\+G\+U\+N\+D\+OS}, \hyperpage{9}
+  \item {ejercicio4.\+c}, \hyperpage{9}
+    \subitem {main}, \hyperpage{10}
+    \subitem {manejador}, \hyperpage{11}
+    \subitem {S\+E\+G\+U\+N\+D\+OS}, \hyperpage{10}
+  \item {ejercicio6a.\+c}, \hyperpage{11}
+    \subitem {main}, \hyperpage{12}
+    \subitem {N\+U\+M\+\_\+\+P\+R\+OC}, \hyperpage{12}
+    \subitem {S\+E\+G\+U\+N\+D\+OS}, \hyperpage{12}
+  \item {ejercicio6b.\+c}, \hyperpage{13}
+    \subitem {main}, \hyperpage{14}
+    \subitem {manejador}, \hyperpage{14}
+    \subitem {N\+U\+M\+\_\+\+P\+R\+OC}, \hyperpage{14}
+    \subitem {S\+E\+G\+U\+N\+D\+OS}, \hyperpage{14}
+  \item {ejercicio9.\+c}, \hyperpage{15}
+    \subitem {F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL}, 
+		\hyperpage{16}
+    \subitem {K\+EY}, \hyperpage{16}
+    \subitem {main}, \hyperpage{17}
+    \subitem {manejador\+\_\+usr1}, \hyperpage{17}
+    \subitem {manejador\+\_\+usr2}, \hyperpage{18}
+    \subitem {N\+\_\+\+C\+A\+J\+AS}, \hyperpage{16}
+    \subitem {N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES}, \hyperpage{16}
+    \subitem {num\+\_\+procesos\+\_\+terminados}, \hyperpage{18}
+    \subitem {oset}, \hyperpage{18}
+    \subitem {T\+A\+M\+\_\+\+P\+A\+TH}, \hyperpage{16}
+    \subitem {T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS}, 
+		\hyperpage{17}
+  \item {ejercicio9hijos.\+c}, \hyperpage{18}
+    \subitem {K\+EY}, \hyperpage{19}
+    \subitem {M\+A\+X\+\_\+\+T\+AM}, \hyperpage{19}
+    \subitem {main}, \hyperpage{20}
+    \subitem {N\+\_\+\+C\+A\+J\+AS}, \hyperpage{19}
+    \subitem {S\+E\+G\+U\+N\+D\+OS}, \hyperpage{19}
+
+  \indexspace
+
+  \item {F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL}
+    \subitem {ejercicio9.\+c}, \hyperpage{16}
+
+  \indexspace
+
+  \item {K\+EY}
+    \subitem {ejercicio9.\+c}, \hyperpage{16}
+    \subitem {ejercicio9hijos.\+c}, \hyperpage{19}
+
+  \indexspace
+
+  \item {M\+A\+X\+\_\+\+T\+AM}
+    \subitem {ejercicio9hijos.\+c}, \hyperpage{19}
+  \item {main}
+    \subitem {ejercicio2.\+c}, \hyperpage{9}
+    \subitem {ejercicio4.\+c}, \hyperpage{10}
+    \subitem {ejercicio6a.\+c}, \hyperpage{12}
+    \subitem {ejercicio6b.\+c}, \hyperpage{14}
+    \subitem {ejercicio9.\+c}, \hyperpage{17}
+    \subitem {ejercicio9hijos.\+c}, \hyperpage{20}
+  \item {manejador}
+    \subitem {ejercicio4.\+c}, \hyperpage{11}
+    \subitem {ejercicio6b.\+c}, \hyperpage{14}
+  \item {manejador\+\_\+usr1}
+    \subitem {ejercicio9.\+c}, \hyperpage{17}
+  \item {manejador\+\_\+usr2}
+    \subitem {ejercicio9.\+c}, \hyperpage{18}
+
+  \indexspace
+
+  \item {N\+\_\+\+C\+A\+J\+AS}
+    \subitem {ejercicio9.\+c}, \hyperpage{16}
+    \subitem {ejercicio9hijos.\+c}, \hyperpage{19}
+  \item {N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES}
+    \subitem {ejercicio9.\+c}, \hyperpage{16}
+  \item {N\+U\+M\+\_\+\+H\+I\+J\+OS}
+    \subitem {ejercicio2.\+c}, \hyperpage{8}
+  \item {N\+U\+M\+\_\+\+P\+R\+OC}
+    \subitem {ejercicio6a.\+c}, \hyperpage{12}
+    \subitem {ejercicio6b.\+c}, \hyperpage{14}
+  \item {num\+\_\+procesos\+\_\+terminados}
+    \subitem {ejercicio9.\+c}, \hyperpage{18}
+
+  \indexspace
+
+  \item {oset}
+    \subitem {ejercicio9.\+c}, \hyperpage{18}
+
+  \indexspace
+
+  \item {S\+E\+G\+U\+N\+D\+OS}
+    \subitem {ejercicio2.\+c}, \hyperpage{9}
+    \subitem {ejercicio4.\+c}, \hyperpage{10}
+    \subitem {ejercicio6a.\+c}, \hyperpage{12}
+    \subitem {ejercicio6b.\+c}, \hyperpage{14}
+    \subitem {ejercicio9hijos.\+c}, \hyperpage{19}
+  \item {semaforos.\+h}, \hyperpage{20}
+  \item {semun}, \hyperpage{5}
+
+  \indexspace
+
+  \item {T\+A\+M\+\_\+\+P\+A\+TH}
+    \subitem {ejercicio9.\+c}, \hyperpage{16}
+  \item {T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS}
+    \subitem {ejercicio9.\+c}, \hyperpage{17}
+
+\end{theindex}

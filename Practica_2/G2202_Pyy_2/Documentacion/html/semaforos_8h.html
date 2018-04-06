@@ -1,0 +1,126 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Segunda práctica de Sistemas Operativos: Referencia del Archivo semaforos.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Segunda práctica de Sistemas Operativos
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">defines</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo semaforos.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Fichero proporcionado por los docentes.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &lt;sys/ipc.h&gt;</code><br />
+<code>#include &lt;sys/sem.h&gt;</code><br />
+<code>#include &lt;sys/types.h&gt;</code><br />
+</div>
+<p><a href="semaforos_8h_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:aba51915c87d64af47fb1cc59348961c9"><td class="memItemLeft" align="right" valign="top"><a id="aba51915c87d64af47fb1cc59348961c9"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>OK</b>&#160;&#160;&#160;0</td></tr>
+<tr class="separator:aba51915c87d64af47fb1cc59348961c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8fe83ac76edc595f6b98cd4a4127aed5"><td class="memItemLeft" align="right" valign="top"><a id="a8fe83ac76edc595f6b98cd4a4127aed5"></a>
+#define&#160;</td><td class="memItemRight" valign="bottom"><b>ERROR</b>&#160;&#160;&#160;-1</td></tr>
+<tr class="separator:a8fe83ac76edc595f6b98cd4a4127aed5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:a4af104b0ed37e6ae0289a1059bc6e990"><td class="memItemLeft" align="right" valign="top"><a id="a4af104b0ed37e6ae0289a1059bc6e990"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Inicializar_Semaforo</b> (int semid, unsigned short *array)</td></tr>
+<tr class="separator:a4af104b0ed37e6ae0289a1059bc6e990"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a731339337960a681efa435a10f12c312"><td class="memItemLeft" align="right" valign="top"><a id="a731339337960a681efa435a10f12c312"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Borrar_Semaforo</b> (int semid)</td></tr>
+<tr class="separator:a731339337960a681efa435a10f12c312"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16b16dd895b5f4cbe48f1ac8977e8b35"><td class="memItemLeft" align="right" valign="top"><a id="a16b16dd895b5f4cbe48f1ac8977e8b35"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Crear_Semaforo</b> (key_t key, int size, int *semid)</td></tr>
+<tr class="separator:a16b16dd895b5f4cbe48f1ac8977e8b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a883244cd3b83c42cda23687da1b63369"><td class="memItemLeft" align="right" valign="top"><a id="a883244cd3b83c42cda23687da1b63369"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Down_Semaforo</b> (int id, int num_sem, int undo)</td></tr>
+<tr class="separator:a883244cd3b83c42cda23687da1b63369"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab375ebfc38acbdced46e062a689d5fad"><td class="memItemLeft" align="right" valign="top"><a id="ab375ebfc38acbdced46e062a689d5fad"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>DownMultiple_Semaforo</b> (int id, int size, int undo, int *active)</td></tr>
+<tr class="separator:ab375ebfc38acbdced46e062a689d5fad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d5e735aecee4f493898b3d4ebab1a10"><td class="memItemLeft" align="right" valign="top"><a id="a2d5e735aecee4f493898b3d4ebab1a10"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Up_Semaforo</b> (int id, int num_sem, int undo)</td></tr>
+<tr class="separator:a2d5e735aecee4f493898b3d4ebab1a10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a943759695f018d64a94b8a2c49308092"><td class="memItemLeft" align="right" valign="top"><a id="a943759695f018d64a94b8a2c49308092"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>UpMultiple_Semaforo</b> (int id, int size, int undo, int *active)</td></tr>
+<tr class="separator:a943759695f018d64a94b8a2c49308092"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Fichero proporcionado por los docentes. </p>
+<p>En este fichero se definen las cabeceras de las funciones necesarias para utilizar semáforos</p>
+<dl class="section author"><dt>Autor</dt><dd>José Manuel Chacón Aguilera y Miguel Arconada Manteca </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>6-4-2018 </dd></dl>
+</div></div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

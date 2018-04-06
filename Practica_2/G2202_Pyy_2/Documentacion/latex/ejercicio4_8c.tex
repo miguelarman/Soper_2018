@@ -1,0 +1,92 @@
+\hypertarget{ejercicio4_8c}{}\section{Referencia del Archivo ejercicio4.\+c}
+\label{ejercicio4_8c}\index{ejercicio4.\+c@{ejercicio4.\+c}}
+
+
+Ejercicio 4 de la Práctica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio4_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}{S\+E\+G\+U\+N\+D\+OS}}(X)~(X) $\ast$ 1000000
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ejercicio4_8c_aa619f3cfea8c787a7896463b46616822}{manejador}} (int senal)
+\begin{DoxyCompactList}\small\item\em manejador de la señal S\+I\+G\+U\+S\+R1 \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio4_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio 4 de la Práctica. 
+
+En este ejercicio vemos cómo crear una serie de procesos hijos, que tras un tiempo piden al padre ser relevados mediante el uso de señales
+
+\begin{DoxyAuthor}{Autor}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+6-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{ejercicio4_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}\label{ejercicio4_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}} 
+\index{ejercicio4.\+c@{ejercicio4.\+c}!S\+E\+G\+U\+N\+D\+OS@{S\+E\+G\+U\+N\+D\+OS}}
+\index{S\+E\+G\+U\+N\+D\+OS@{S\+E\+G\+U\+N\+D\+OS}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection{\texorpdfstring{S\+E\+G\+U\+N\+D\+OS}{SEGUNDOS}}
+{\footnotesize\ttfamily \#define S\+E\+G\+U\+N\+D\+OS(\begin{DoxyParamCaption}\item[{}]{X }\end{DoxyParamCaption})~(X) $\ast$ 1000000}
+
+Macro para tranformar segundos a microsegundos 
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{ejercicio4_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{ejercicio4_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{ejercicio4.\+c@{ejercicio4.\+c}!main@{main}}
+\index{main@{main}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa crea un hijo, que realiza un trabajo (imprimir por pantalla y esperar) 10 veces. Tras esto, manda una señal al padre pidiendo relevo. El padre entonces mata a este proceso y crea otro igual, hasta un máximo de N. Entonces finaliza
+
+
+\begin{DoxyParams}{Parámetros}
+{\em argc} & numero de parametros de entrada \\
+\hline
+{\em argv} & array de cada parametro. El segundo es el número máximo de procesos a crear \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio4_8c_aa619f3cfea8c787a7896463b46616822}\label{ejercicio4_8c_aa619f3cfea8c787a7896463b46616822}} 
+\index{ejercicio4.\+c@{ejercicio4.\+c}!manejador@{manejador}}
+\index{manejador@{manejador}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection{\texorpdfstring{manejador()}{manejador()}}
+{\footnotesize\ttfamily void manejador (\begin{DoxyParamCaption}\item[{int}]{senal }\end{DoxyParamCaption})}
+
+
+
+manejador de la señal S\+I\+G\+U\+S\+R1 
+
+Esta funcion es ejecutada cuando el padre recibe la señal S\+I\+G\+U\+S\+R1. Es una función vacía, puesto lo que nos interesa es simplemente esperar a dicha señal
+
+
+\begin{DoxyParams}{Parámetros}
+{\em senal} & Código de la señal recibida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}

@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.14"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Segunda práctica de Sistemas Operativos: Referencia del Archivo ejercicio6b.c</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Segunda práctica de Sistemas Operativos
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.8.14 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Buscar');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','Buscar');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+</div><!-- top -->
+<div class="header">
+  <div class="summary">
+<a href="#define-members">defines</a> &#124;
+<a href="#func-members">Funciones</a>  </div>
+  <div class="headertitle">
+<div class="title">Referencia del Archivo ejercicio6b.c</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>Ejercicio 6b de la Práctica.  
+<a href="#details">Más...</a></p>
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;stdlib.h&gt;</code><br />
+<code>#include &lt;unistd.h&gt;</code><br />
+<code>#include &lt;sys/wait.h&gt;</code><br />
+<code>#include &lt;signal.h&gt;</code><br />
+<code>#include &lt;time.h&gt;</code><br />
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:acee2369f62e4a096d243dec3cd7d0b00"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio6b_8c.html#acee2369f62e4a096d243dec3cd7d0b00">NUM_PROC</a>&#160;&#160;&#160;5</td></tr>
+<tr class="separator:acee2369f62e4a096d243dec3cd7d0b00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53600094c12347b4b9cae071db04251a"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio6b_8c.html#a53600094c12347b4b9cae071db04251a">SEGUNDOS</a>&#160;&#160;&#160;40</td></tr>
+<tr class="separator:a53600094c12347b4b9cae071db04251a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:aa619f3cfea8c787a7896463b46616822"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio6b_8c.html#aa619f3cfea8c787a7896463b46616822">manejador</a> (int senal)</td></tr>
+<tr class="memdesc:aa619f3cfea8c787a7896463b46616822"><td class="mdescLeft">&#160;</td><td class="mdescRight">manejador de la señal SIGTERM  <a href="#aa619f3cfea8c787a7896463b46616822">Más...</a><br /></td></tr>
+<tr class="separator:aa619f3cfea8c787a7896463b46616822"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a840291bc02cba5474a4cb46a9b9566fe"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="ejercicio6b_8c.html#a840291bc02cba5474a4cb46a9b9566fe">main</a> (void)</td></tr>
+<tr class="memdesc:a840291bc02cba5474a4cb46a9b9566fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función principal del programa.  <a href="#a840291bc02cba5474a4cb46a9b9566fe">Más...</a><br /></td></tr>
+<tr class="separator:a840291bc02cba5474a4cb46a9b9566fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Descripción detallada</h2>
+<div class="textblock"><p>Ejercicio 6b de la Práctica. </p>
+<p>En este ejercicio modificamos un código dado, para poner en práctica el uso de alarmas, así como máscaras de bloqueo, y sus diferencias en los bucles, en conjunción con el ejercicio 6b</p>
+<dl class="section author"><dt>Autor</dt><dd>José Manuel Chacón Aguilera y Miguel Arconada Manteca </dd></dl>
+<dl class="section date"><dt>Fecha</dt><dd>6-4-2018 </dd></dl>
+</div><h2 class="groupheader">Documentación de los 'defines'</h2>
+<a id="acee2369f62e4a096d243dec3cd7d0b00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acee2369f62e4a096d243dec3cd7d0b00">&#9670;&nbsp;</a></span>NUM_PROC</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define NUM_PROC&#160;&#160;&#160;5</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Número de procesos a crear </p>
+
+</div>
+</div>
+<a id="a53600094c12347b4b9cae071db04251a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a53600094c12347b4b9cae071db04251a">&#9670;&nbsp;</a></span>SEGUNDOS</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SEGUNDOS&#160;&#160;&#160;40</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Número de segundos para la alarma </p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de las funciones</h2>
+<a id="a840291bc02cba5474a4cb46a9b9566fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840291bc02cba5474a4cb46a9b9566fe">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función principal del programa. </p>
+<p>Este programa crea 5 procesos hijos, que tras ser creado, establecen una alarma. Entonces entran en un bucle, pero no bloquean las señales, como hacía el <a class="el" href="ejercicio6a_8c.html" title="Ejercicio 6a de la Práctica. ">ejercicio6a.c</a> Por lo tanto, se pueden acaban en medio de una impresión</p>
+<dl class="section return"><dt>Devuelve</dt><dd>0 si todo se ejecuta correctamente, y -1 en cualquier otro caso </dd></dl>
+
+</div>
+</div>
+<a id="aa619f3cfea8c787a7896463b46616822"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa619f3cfea8c787a7896463b46616822">&#9670;&nbsp;</a></span>manejador()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void manejador </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>senal</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>manejador de la señal SIGTERM </p>
+<p>Esta funcion es ejecutada cuando el padre recibe la señal SIGTERM. Cuando la recibe, imprime un mensaje y termina su ejecución</p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">senal</td><td>Código de la señal recibida </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Devuelve</dt><dd>void </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
+<!-- start footer part -->
+<hr class="footer"/><address class="footer"><small>
+Generado por &#160;<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="doxygen.png" alt="doxygen"/>
+</a> 1.8.14
+</small></address>
+</body>
+</html>

@@ -1,0 +1,71 @@
+\hypertarget{ejercicio6a_8c}{}\section{Referencia del Archivo ejercicio6a.\+c}
+\label{ejercicio6a_8c}\index{ejercicio6a.\+c@{ejercicio6a.\+c}}
+
+
+Ejercicio 6a de la Práctica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio6a_8c_acee2369f62e4a096d243dec3cd7d0b00}{N\+U\+M\+\_\+\+P\+R\+OC}}~5
+\item 
+\#define \mbox{\hyperlink{ejercicio6a_8c_a53600094c12347b4b9cae071db04251a}{S\+E\+G\+U\+N\+D\+OS}}~40
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ejercicio6a_8c_a840291bc02cba5474a4cb46a9b9566fe}{main}} (void)
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio 6a de la Práctica. 
+
+En este ejercicio modificamos un código dado, para poner en práctica el uso de alarmas, así como máscaras de bloqueo, y sus diferencias en los bucles
+
+\begin{DoxyAuthor}{Autor}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+6-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{ejercicio6a_8c_acee2369f62e4a096d243dec3cd7d0b00}\label{ejercicio6a_8c_acee2369f62e4a096d243dec3cd7d0b00}} 
+\index{ejercicio6a.\+c@{ejercicio6a.\+c}!N\+U\+M\+\_\+\+P\+R\+OC@{N\+U\+M\+\_\+\+P\+R\+OC}}
+\index{N\+U\+M\+\_\+\+P\+R\+OC@{N\+U\+M\+\_\+\+P\+R\+OC}!ejercicio6a.\+c@{ejercicio6a.\+c}}
+\subsubsection{\texorpdfstring{N\+U\+M\+\_\+\+P\+R\+OC}{NUM\_PROC}}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+P\+R\+OC~5}
+
+Número de procesos a crear \mbox{\Hypertarget{ejercicio6a_8c_a53600094c12347b4b9cae071db04251a}\label{ejercicio6a_8c_a53600094c12347b4b9cae071db04251a}} 
+\index{ejercicio6a.\+c@{ejercicio6a.\+c}!S\+E\+G\+U\+N\+D\+OS@{S\+E\+G\+U\+N\+D\+OS}}
+\index{S\+E\+G\+U\+N\+D\+OS@{S\+E\+G\+U\+N\+D\+OS}!ejercicio6a.\+c@{ejercicio6a.\+c}}
+\subsubsection{\texorpdfstring{S\+E\+G\+U\+N\+D\+OS}{SEGUNDOS}}
+{\footnotesize\ttfamily \#define S\+E\+G\+U\+N\+D\+OS~40}
+
+Número de segundos para la alarma 
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{ejercicio6a_8c_a840291bc02cba5474a4cb46a9b9566fe}\label{ejercicio6a_8c_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{ejercicio6a.\+c@{ejercicio6a.\+c}!main@{main}}
+\index{main@{main}!ejercicio6a.\+c@{ejercicio6a.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa crea 5 procesos hijos, que tras ser creado, establecen una alarma. Entonces entran en un bucle, y bloquean la recepcion de señales hasta haber imprimido. Por lo tanto, realizan la impresión completa
+
+\begin{DoxyReturn}{Devuelve}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}

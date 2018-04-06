@@ -1,0 +1,89 @@
+\hypertarget{ejercicio9hijos_8c}{}\section{Referencia del Archivo ejercicio9hijos.\+c}
+\label{ejercicio9hijos_8c}\index{ejercicio9hijos.\+c@{ejercicio9hijos.\+c}}
+
+
+Ejercicio 9 de la Práctica (bis)  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}semaforos.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}aleat\+\_\+num.\+h\char`\"{}}\newline
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio9hijos_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}{S\+E\+G\+U\+N\+D\+OS}}(X)~(X) $\ast$ 1000000
+\item 
+\#define \mbox{\hyperlink{ejercicio9hijos_8c_a22f04193987fe8741199b66fb25e9d91}{M\+A\+X\+\_\+\+T\+AM}}~256
+\item 
+\#define \mbox{\hyperlink{ejercicio9hijos_8c_a8ae9d53f33f46cfcfcb9736e6351452a}{K\+EY}}~15
+\item 
+\#define \mbox{\hyperlink{ejercicio9hijos_8c_a699eef0f4b1a5b984fd6535f6e477ca0}{N\+\_\+\+C\+A\+J\+AS}}~5
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ejercicio9hijos_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio 9 de la Práctica (bis) 
+
+Este programa es ejecutado por los procesos hijos creados en el ejercicio9. Su ejecución consiste en leer una serie de operaciones de un fichero, y mandar señales al proceso padre, bien cuando exceden un saldo máximo, o cuando han terminado de leer todas las señales
+
+\begin{DoxyAuthor}{Autor}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+6-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{ejercicio9hijos_8c_a8ae9d53f33f46cfcfcb9736e6351452a}\label{ejercicio9hijos_8c_a8ae9d53f33f46cfcfcb9736e6351452a}} 
+\index{ejercicio9hijos.\+c@{ejercicio9hijos.\+c}!K\+EY@{K\+EY}}
+\index{K\+EY@{K\+EY}!ejercicio9hijos.\+c@{ejercicio9hijos.\+c}}
+\subsubsection{\texorpdfstring{K\+EY}{KEY}}
+{\footnotesize\ttfamily \#define K\+EY~15}
+
+Key precompartida de los semáforos \mbox{\Hypertarget{ejercicio9hijos_8c_a22f04193987fe8741199b66fb25e9d91}\label{ejercicio9hijos_8c_a22f04193987fe8741199b66fb25e9d91}} 
+\index{ejercicio9hijos.\+c@{ejercicio9hijos.\+c}!M\+A\+X\+\_\+\+T\+AM@{M\+A\+X\+\_\+\+T\+AM}}
+\index{M\+A\+X\+\_\+\+T\+AM@{M\+A\+X\+\_\+\+T\+AM}!ejercicio9hijos.\+c@{ejercicio9hijos.\+c}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+T\+AM}{MAX\_TAM}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+T\+AM~256}
+
+Máximo tamaño de las paths \mbox{\Hypertarget{ejercicio9hijos_8c_a699eef0f4b1a5b984fd6535f6e477ca0}\label{ejercicio9hijos_8c_a699eef0f4b1a5b984fd6535f6e477ca0}} 
+\index{ejercicio9hijos.\+c@{ejercicio9hijos.\+c}!N\+\_\+\+C\+A\+J\+AS@{N\+\_\+\+C\+A\+J\+AS}}
+\index{N\+\_\+\+C\+A\+J\+AS@{N\+\_\+\+C\+A\+J\+AS}!ejercicio9hijos.\+c@{ejercicio9hijos.\+c}}
+\subsubsection{\texorpdfstring{N\+\_\+\+C\+A\+J\+AS}{N\_CAJAS}}
+{\footnotesize\ttfamily \#define N\+\_\+\+C\+A\+J\+AS~5}
+
+Número de cajas \mbox{\Hypertarget{ejercicio9hijos_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}\label{ejercicio9hijos_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}} 
+\index{ejercicio9hijos.\+c@{ejercicio9hijos.\+c}!S\+E\+G\+U\+N\+D\+OS@{S\+E\+G\+U\+N\+D\+OS}}
+\index{S\+E\+G\+U\+N\+D\+OS@{S\+E\+G\+U\+N\+D\+OS}!ejercicio9hijos.\+c@{ejercicio9hijos.\+c}}
+\subsubsection{\texorpdfstring{S\+E\+G\+U\+N\+D\+OS}{SEGUNDOS}}
+{\footnotesize\ttfamily \#define S\+E\+G\+U\+N\+D\+OS(\begin{DoxyParamCaption}\item[{}]{X }\end{DoxyParamCaption})~(X) $\ast$ 1000000}
+
+Macro para tranformar segundos a microsegundos 
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{ejercicio9hijos_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{ejercicio9hijos_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{ejercicio9hijos.\+c@{ejercicio9hijos.\+c}!main@{main}}
+\index{main@{main}!ejercicio9hijos.\+c@{ejercicio9hijos.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa lee operaciones de un fichero, y va actualizando otro fichero donde guarda su saldo. Cuando excede los 1000 euros de saldo manda una señal a su padre para que le retire el excedente, y cuando termina, avisa también al padre, para que retire lo que quede de dinero
+
+\begin{DoxyReturn}{Devuelve}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}

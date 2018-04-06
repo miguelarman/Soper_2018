@@ -1,0 +1,71 @@
+\hypertarget{ejercicio2_8c}{}\section{Referencia del Archivo ejercicio2.\+c}
+\label{ejercicio2_8c}\index{ejercicio2.\+c@{ejercicio2.\+c}}
+
+
+Ejercicio 2 de la Práctica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio2_8c_a9dd395f2e0046c1513c84dfcfb9e54da}{N\+U\+M\+\_\+\+H\+I\+J\+OS}}~4
+\item 
+\#define \mbox{\hyperlink{ejercicio2_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}{S\+E\+G\+U\+N\+D\+OS}}(X)~(X) $\ast$ 1000000
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{ejercicio2_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio 2 de la Práctica. 
+
+En este ejercicio vemos cómo crear hijos, y hacerlos dormir por un número de segundos
+
+\begin{DoxyAuthor}{Autor}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+6-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{ejercicio2_8c_a9dd395f2e0046c1513c84dfcfb9e54da}\label{ejercicio2_8c_a9dd395f2e0046c1513c84dfcfb9e54da}} 
+\index{ejercicio2.\+c@{ejercicio2.\+c}!N\+U\+M\+\_\+\+H\+I\+J\+OS@{N\+U\+M\+\_\+\+H\+I\+J\+OS}}
+\index{N\+U\+M\+\_\+\+H\+I\+J\+OS@{N\+U\+M\+\_\+\+H\+I\+J\+OS}!ejercicio2.\+c@{ejercicio2.\+c}}
+\subsubsection{\texorpdfstring{N\+U\+M\+\_\+\+H\+I\+J\+OS}{NUM\_HIJOS}}
+{\footnotesize\ttfamily \#define N\+U\+M\+\_\+\+H\+I\+J\+OS~4}
+
+Número de hijos a crear \mbox{\Hypertarget{ejercicio2_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}\label{ejercicio2_8c_aab4b06439c9f4eb24f6d31202e3cdb7c}} 
+\index{ejercicio2.\+c@{ejercicio2.\+c}!S\+E\+G\+U\+N\+D\+OS@{S\+E\+G\+U\+N\+D\+OS}}
+\index{S\+E\+G\+U\+N\+D\+OS@{S\+E\+G\+U\+N\+D\+OS}!ejercicio2.\+c@{ejercicio2.\+c}}
+\subsubsection{\texorpdfstring{S\+E\+G\+U\+N\+D\+OS}{SEGUNDOS}}
+{\footnotesize\ttfamily \#define S\+E\+G\+U\+N\+D\+OS(\begin{DoxyParamCaption}\item[{}]{X }\end{DoxyParamCaption})~(X) $\ast$ 1000000}
+
+Macro para tranformar segundos a microsegundos 
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{ejercicio2_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{ejercicio2_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{ejercicio2.\+c@{ejercicio2.\+c}!main@{main}}
+\index{main@{main}!ejercicio2.\+c@{ejercicio2.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa crea 4 hijos, que imprimirán un mensaje, y dormirán durante 30 segundos. Tras esta espera, volverán a imprimir un mensaje. Mientras tanto, el padre mandrá señal de terminar a los hijos tras cinco segundos
+
+\begin{DoxyReturn}{Devuelve}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}

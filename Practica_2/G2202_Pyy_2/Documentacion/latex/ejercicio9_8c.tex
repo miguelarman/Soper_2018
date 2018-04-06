@@ -1,0 +1,176 @@
+\hypertarget{ejercicio9_8c}{}\section{Referencia del Archivo ejercicio9.\+c}
+\label{ejercicio9_8c}\index{ejercicio9.\+c@{ejercicio9.\+c}}
+
+
+Ejercicio 9 de la Práctica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}semaforos.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}aleat\+\_\+num.\+h\char`\"{}}\newline
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_a699eef0f4b1a5b984fd6535f6e477ca0}{N\+\_\+\+C\+A\+J\+AS}}~5
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_ae3dd95f54e7825e43b5b544aa1130274}{T\+A\+M\+\_\+\+P\+A\+TH}}~256
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_aa1375ad0a0b107258144b696e83178b8}{N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES}}~50
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_aca688f5d9d42980ff57a5675535e9225}{F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL}}~\char`\"{}files/saldo\+Total.\+txt\char`\"{}
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_ae299a394c67af9a1d4dd998ceb7bc8fd}{T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS}}~128
+\item 
+\#define \mbox{\hyperlink{ejercicio9_8c_a8ae9d53f33f46cfcfcb9736e6351452a}{K\+EY}}~15
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ejercicio9_8c_a6a6dfaab619e34083cacb406eedd452a}{manejador\+\_\+usr1}} (int senal)
+\begin{DoxyCompactList}\small\item\em manejador de la señal S\+I\+G\+R\+T\+M\+I\+N+1 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ejercicio9_8c_a81abaeff0f3dc4834c7b2007ff1eb85c}{manejador\+\_\+usr2}} (int senal)
+\begin{DoxyCompactList}\small\item\em manejador de la señal S\+I\+G\+R\+T\+M\+IN \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio9_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ejercicio9_8c_a296f9909150821993adc95b4228f91ba}\label{ejercicio9_8c_a296f9909150821993adc95b4228f91ba}} 
+sigset\+\_\+t {\bfseries set}
+\item 
+sigset\+\_\+t \mbox{\hyperlink{ejercicio9_8c_afbc2cbe34b6c6136e7a933faec748f78}{oset}}
+\item 
+int \mbox{\hyperlink{ejercicio9_8c_a75f0f696d5c258ee4dad0856ed01005b}{num\+\_\+procesos\+\_\+terminados}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Ejercicio 9 de la Práctica. 
+
+En este ejercicio creamos una serie de procesos hijos, que realizan cálculos simulando una caja de supermercado, y que mandan señales al proceso padre cuando exceden los 1000 euros o cuando terminan. Se implementa el uso de semáforos
+
+\begin{DoxyAuthor}{Autor}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+6-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Documentación de los \textquotesingle{}defines\textquotesingle{}}
+\mbox{\Hypertarget{ejercicio9_8c_aca688f5d9d42980ff57a5675535e9225}\label{ejercicio9_8c_aca688f5d9d42980ff57a5675535e9225}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL@{F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL}}
+\index{F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL@{F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL}{FICHERO\_SALDO\_TOTAL}}
+{\footnotesize\ttfamily \#define F\+I\+C\+H\+E\+R\+O\+\_\+\+S\+A\+L\+D\+O\+\_\+\+T\+O\+T\+AL~\char`\"{}files/saldo\+Total.\+txt\char`\"{}}
+
+Path del fichero con el saldo total \mbox{\Hypertarget{ejercicio9_8c_a8ae9d53f33f46cfcfcb9736e6351452a}\label{ejercicio9_8c_a8ae9d53f33f46cfcfcb9736e6351452a}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!K\+EY@{K\+EY}}
+\index{K\+EY@{K\+EY}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{K\+EY}{KEY}}
+{\footnotesize\ttfamily \#define K\+EY~15}
+
+Key precompartida por los procesos. Al utilizar exec no podemos usar I\+P\+C\+\_\+\+P\+R\+I\+V\+A\+TE \mbox{\Hypertarget{ejercicio9_8c_a699eef0f4b1a5b984fd6535f6e477ca0}\label{ejercicio9_8c_a699eef0f4b1a5b984fd6535f6e477ca0}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!N\+\_\+\+C\+A\+J\+AS@{N\+\_\+\+C\+A\+J\+AS}}
+\index{N\+\_\+\+C\+A\+J\+AS@{N\+\_\+\+C\+A\+J\+AS}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{N\+\_\+\+C\+A\+J\+AS}{N\_CAJAS}}
+{\footnotesize\ttfamily \#define N\+\_\+\+C\+A\+J\+AS~5}
+
+Numero de cajas \mbox{\Hypertarget{ejercicio9_8c_aa1375ad0a0b107258144b696e83178b8}\label{ejercicio9_8c_aa1375ad0a0b107258144b696e83178b8}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES@{N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES}}
+\index{N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES@{N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES}{N\_OPERACIONES}}
+{\footnotesize\ttfamily \#define N\+\_\+\+O\+P\+E\+R\+A\+C\+I\+O\+N\+ES~50}
+
+Numero de operaciones a realizar por los cajeros \mbox{\Hypertarget{ejercicio9_8c_ae3dd95f54e7825e43b5b544aa1130274}\label{ejercicio9_8c_ae3dd95f54e7825e43b5b544aa1130274}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!T\+A\+M\+\_\+\+P\+A\+TH@{T\+A\+M\+\_\+\+P\+A\+TH}}
+\index{T\+A\+M\+\_\+\+P\+A\+TH@{T\+A\+M\+\_\+\+P\+A\+TH}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{T\+A\+M\+\_\+\+P\+A\+TH}{TAM\_PATH}}
+{\footnotesize\ttfamily \#define T\+A\+M\+\_\+\+P\+A\+TH~256}
+
+Maximo tamaño de las path de ficheros \mbox{\Hypertarget{ejercicio9_8c_ae299a394c67af9a1d4dd998ceb7bc8fd}\label{ejercicio9_8c_ae299a394c67af9a1d4dd998ceb7bc8fd}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS@{T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS}}
+\index{T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS@{T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS}{TAMANIO\_ARGV\_HIJOS}}
+{\footnotesize\ttfamily \#define T\+A\+M\+A\+N\+I\+O\+\_\+\+A\+R\+G\+V\+\_\+\+H\+I\+J\+OS~128}
+
+Tamaño máximo de los argumentos que se pasan a los hijos 
+
+\subsection{Documentación de las funciones}
+\mbox{\Hypertarget{ejercicio9_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{ejercicio9_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!main@{main}}
+\index{main@{main}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa al iniciarse escribe en N\+\_\+\+C\+A\+J\+AS ficheros un número de operaciones aleatorias. Después, crea 5 procesos hijos, que ejecutan el programa ejercicio9hijos. Entonces se pone a la espera de las señales S\+I\+G\+R\+T\+M\+IN y S\+I\+G\+R\+T\+M\+I\+N+1, con las cuales actualiza el saldo total del supermercado
+
+\begin{DoxyReturn}{Devuelve}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio9_8c_a6a6dfaab619e34083cacb406eedd452a}\label{ejercicio9_8c_a6a6dfaab619e34083cacb406eedd452a}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!manejador\+\_\+usr1@{manejador\+\_\+usr1}}
+\index{manejador\+\_\+usr1@{manejador\+\_\+usr1}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{manejador\+\_\+usr1()}{manejador\_usr1()}}
+{\footnotesize\ttfamily void manejador\+\_\+usr1 (\begin{DoxyParamCaption}\item[{int}]{senal }\end{DoxyParamCaption})}
+
+
+
+manejador de la señal S\+I\+G\+R\+T\+M\+I\+N+1 
+
+Esta funcion es ejecutada cuando el padre recibe la señal S\+I\+G\+R\+T\+M\+I\+N+1. Esto ocurre cuando un proceso tiene acumulado más de 1000. En ese momento, como el padre no puede saber quién le ha mandado la señal, recorre la lista de ficheros de saldos hasta que encuentra uno con excedentes, y lo actualiza
+
+
+\begin{DoxyParams}{Parámetros}
+{\em senal} & Código de la señal recibida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio9_8c_a81abaeff0f3dc4834c7b2007ff1eb85c}\label{ejercicio9_8c_a81abaeff0f3dc4834c7b2007ff1eb85c}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!manejador\+\_\+usr2@{manejador\+\_\+usr2}}
+\index{manejador\+\_\+usr2@{manejador\+\_\+usr2}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{manejador\+\_\+usr2()}{manejador\_usr2()}}
+{\footnotesize\ttfamily void manejador\+\_\+usr2 (\begin{DoxyParamCaption}\item[{int}]{senal }\end{DoxyParamCaption})}
+
+
+
+manejador de la señal S\+I\+G\+R\+T\+M\+IN 
+
+Esta funcion es ejecutada cuando el padre recibe la señal S\+I\+G\+R\+T\+M\+IN. Esto ocurre cuando un proceso ha finalizado su ejecución, tras haber leído todas las operaciones. Como tampoco podemos saber qué proceso la ha lanzado, el padre espera hasta que terminan todos los procesos, y recorre los ficheros actualizando el saldo
+
+
+\begin{DoxyParams}{Parámetros}
+{\em senal} & Código de la señal recibida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Devuelve}
+void 
+\end{DoxyReturn}
+
+
+\subsection{Documentación de las variables}
+\mbox{\Hypertarget{ejercicio9_8c_a75f0f696d5c258ee4dad0856ed01005b}\label{ejercicio9_8c_a75f0f696d5c258ee4dad0856ed01005b}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!num\+\_\+procesos\+\_\+terminados@{num\+\_\+procesos\+\_\+terminados}}
+\index{num\+\_\+procesos\+\_\+terminados@{num\+\_\+procesos\+\_\+terminados}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{num\+\_\+procesos\+\_\+terminados}{num\_procesos\_terminados}}
+{\footnotesize\ttfamily int num\+\_\+procesos\+\_\+terminados}
+
+Numero de procesos terminados \mbox{\Hypertarget{ejercicio9_8c_afbc2cbe34b6c6136e7a933faec748f78}\label{ejercicio9_8c_afbc2cbe34b6c6136e7a933faec748f78}} 
+\index{ejercicio9.\+c@{ejercicio9.\+c}!oset@{oset}}
+\index{oset@{oset}!ejercicio9.\+c@{ejercicio9.\+c}}
+\subsubsection{\texorpdfstring{oset}{oset}}
+{\footnotesize\ttfamily sigset\+\_\+t oset}
+
+Máscaras de bloqueo y desbloqueo de señales 

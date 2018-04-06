@@ -1,0 +1,56 @@
+\hypertarget{semaforos_8h}{}\section{Referencia del Archivo semaforos.\+h}
+\label{semaforos_8h}\index{semaforos.\+h@{semaforos.\+h}}
+
+
+Fichero proporcionado por los docentes.  
+
+
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+{\ttfamily \#include $<$sys/sem.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+\subsection*{defines}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{semaforos_8h_aba51915c87d64af47fb1cc59348961c9}\label{semaforos_8h_aba51915c87d64af47fb1cc59348961c9}} 
+\#define {\bfseries OK}~0
+\item 
+\mbox{\Hypertarget{semaforos_8h_a8fe83ac76edc595f6b98cd4a4127aed5}\label{semaforos_8h_a8fe83ac76edc595f6b98cd4a4127aed5}} 
+\#define {\bfseries E\+R\+R\+OR}~-\/1
+\end{DoxyCompactItemize}
+\subsection*{Funciones}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{semaforos_8h_a4af104b0ed37e6ae0289a1059bc6e990}\label{semaforos_8h_a4af104b0ed37e6ae0289a1059bc6e990}} 
+int {\bfseries Inicializar\+\_\+\+Semaforo} (int semid, unsigned short $\ast$array)
+\item 
+\mbox{\Hypertarget{semaforos_8h_a731339337960a681efa435a10f12c312}\label{semaforos_8h_a731339337960a681efa435a10f12c312}} 
+int {\bfseries Borrar\+\_\+\+Semaforo} (int semid)
+\item 
+\mbox{\Hypertarget{semaforos_8h_a16b16dd895b5f4cbe48f1ac8977e8b35}\label{semaforos_8h_a16b16dd895b5f4cbe48f1ac8977e8b35}} 
+int {\bfseries Crear\+\_\+\+Semaforo} (key\+\_\+t key, int size, int $\ast$semid)
+\item 
+\mbox{\Hypertarget{semaforos_8h_a883244cd3b83c42cda23687da1b63369}\label{semaforos_8h_a883244cd3b83c42cda23687da1b63369}} 
+int {\bfseries Down\+\_\+\+Semaforo} (int id, int num\+\_\+sem, int undo)
+\item 
+\mbox{\Hypertarget{semaforos_8h_ab375ebfc38acbdced46e062a689d5fad}\label{semaforos_8h_ab375ebfc38acbdced46e062a689d5fad}} 
+int {\bfseries Down\+Multiple\+\_\+\+Semaforo} (int id, int size, int undo, int $\ast$active)
+\item 
+\mbox{\Hypertarget{semaforos_8h_a2d5e735aecee4f493898b3d4ebab1a10}\label{semaforos_8h_a2d5e735aecee4f493898b3d4ebab1a10}} 
+int {\bfseries Up\+\_\+\+Semaforo} (int id, int num\+\_\+sem, int undo)
+\item 
+\mbox{\Hypertarget{semaforos_8h_a943759695f018d64a94b8a2c49308092}\label{semaforos_8h_a943759695f018d64a94b8a2c49308092}} 
+int {\bfseries Up\+Multiple\+\_\+\+Semaforo} (int id, int size, int undo, int $\ast$active)
+\end{DoxyCompactItemize}
+
+
+\subsection{Descripción detallada}
+Fichero proporcionado por los docentes. 
+
+En este fichero se definen las cabeceras de las funciones necesarias para utilizar semáforos
+
+\begin{DoxyAuthor}{Autor}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Fecha}
+6-\/4-\/2018 
+\end{DoxyDate}
