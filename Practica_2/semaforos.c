@@ -80,7 +80,7 @@ int Crear_Semaforo(key_t key, int size, int *semid) {
     sem_id = semget(key, size, IPC_CREAT | IPC_EXCL | SHM_R | SHM_W);
     
     if((sem_id == -1) && (errno == EEXIST)){
-        sem_id=semget(key, size, SHM_R|SHM_W);
+        sem_id=semget(key, size, SHM_R | SHM_W);
         
         *semid = sem_id;
         return 1;
@@ -129,7 +129,7 @@ int Down_Semaforo(int id, int num_sem, int undo) {
     
     retorno = semop (id, &sem_oper, 1);
     
-    if (retorno != 0) {
+    if (retorno == -1) {
         return ERROR;
     }
     

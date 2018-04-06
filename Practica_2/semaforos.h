@@ -2,6 +2,9 @@
 #include <sys/sem.h>
 #include <sys/types.h>
 
+#define OK 0
+#define ERROR -1
+
 
 /***************************************************************
  * Nombre:

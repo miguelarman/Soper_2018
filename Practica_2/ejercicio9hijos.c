@@ -10,6 +10,9 @@
 
 #define SEGUNDOS(X) (X) * 1000000
 #define MAX_TAM 256
+#define KEY 15
+#define N_CAJAS 5
+
 
 
 int main (int argc, char ** argv) {
@@ -22,6 +25,8 @@ int main (int argc, char ** argv) {
     int i;
     int saldo;
     int retorno_senial;
+    int semid;
+    int retorno_semaforos;
     
     if (argc < 3) {
         printf("Error en los argumentos de un hijo. Debe especificar el id y el numero de operaciones");
@@ -36,43 +41,78 @@ int main (int argc, char ** argv) {
     sprintf(fichero_operaciones, "files/clientesCaja%d.txt", id);
     if (fichero_operaciones == NULL) {
         perror ("Error al crear la path al fichero de operaciones de algun hijo");
+        kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
     }
     
     sprintf(fichero_saldo, "files/saldoCaja%d.txt", id);
-    if (fichero_operaciones == NULL) {
+    if (fichero_saldo == NULL) {
         perror ("Error al crear la path al fichero de saldo de algun hijo");
+        kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
+    }
+    
+    /*Obtiene los semaforos creados por el padre*/
+    
+    retorno_semaforos = Crear_Semaforo(KEY, N_CAJAS, &semid);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al obtener los semaforos creados en el hijo");
+        kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
+    } else if (retorno_semaforos != 1) {
+        perror("Los semaforos creados no se han obtenido en los hijos");
+        kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
     }
     
     /*Pone su saldo inicial a cero*/
     saldo = 0;
     
+    retorno_semaforos = Down_Semaforo(semid, id - 1, SEM_UNDO);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al hacer down en los semaforos en el hijo");
+        kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
+    }
+    
     pf_saldo = fopen(fichero_saldo, "w");
     if (pf_saldo == NULL) {
         printf("No se pudo abrir el fichero %s", fichero_saldo);
+        kill(padre_id, SIGRTMIN);
         exit(EXIT_FAILURE);
     }
     fwrite(&saldo, sizeof(int), 1, pf_saldo);
     fclose(pf_saldo);
         
-        
+    retorno_semaforos = Up_Semaforo(semid, id - 1, SEM_UNDO);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al hacer u pen los semaforos en el hijo");
+        kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
+    }
+    
+    
+    pf_operaciones = fopen(fichero_operaciones, "r");
+    if (pf_operaciones == NULL) {
+        printf("No se pudo abrir el fichero %s", fichero_operaciones);
+        kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
+    }
+    
     
     for (i = 0; i < numero_operaciones; i++) {
-        /*DEBUGGING*/
-        /*printf("\n Soy la caja %d y voy a hacer la iteracion %d", id, i);
-        fflush(stdout);*/
-        /*DEBUGGING*/
         
         /*Lee una operación*/
-        pf_operaciones = fopen(fichero_operaciones, "r");
+        /*pf_operaciones = fopen(fichero_operaciones, "r");
         if (pf_operaciones == NULL) {
             printf("No se pudo abrir el fichero %s", fichero_operaciones);
             exit(EXIT_FAILURE);
-        }
+        }*/
         
-        fseek(pf_operaciones, i * (sizeof(int) + sizeof(char)), SEEK_SET); /*Salta un entero y un salto de línea*/
+        /*fseek(pf_operaciones, i * (sizeof(int) + sizeof(char)), SEEK_SET);*/ /*Salta un entero y un salto de línea*/
         fread(&cantidad, sizeof(int), 1, pf_operaciones);
         
-        fclose(pf_operaciones);
+        /*fclose(pf_operaciones);*/
     
         /*Espera aleatoria*/
         
@@ -80,10 +120,18 @@ int main (int argc, char ** argv) {
         
         /*Lee el saldo*/
         
+        retorno_semaforos = Down_Semaforo(semid, id - 1, SEM_UNDO);
+        if (retorno_semaforos == ERROR) {
+            perror("Error al hacer down en los semaforos en el hijo");
+            kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
+        }
+        
         pf_saldo = fopen(fichero_saldo, "r");
         if (pf_saldo == NULL) {
             printf("No se pudo abrir el fichero %s", fichero_saldo);
-            exit(EXIT_FAILURE);
+            kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
         }
         fread(&saldo, sizeof(int), 1, pf_saldo);
         fclose(pf_saldo);
@@ -95,7 +143,8 @@ int main (int argc, char ** argv) {
         pf_saldo = fopen(fichero_saldo, "w");
         if (pf_saldo == NULL) {
             printf("No se pudo abrir el fichero %s", fichero_saldo);
-            exit(EXIT_FAILURE);
+            kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
         }
         fwrite(&saldo, sizeof(int), 1, pf_saldo);
         fclose(pf_saldo);
@@ -103,28 +152,38 @@ int main (int argc, char ** argv) {
         /*Comprueba si tiene mas de 1000 euros*/
         
         if (saldo >= 1000) {
-            /*Manda señal SIGUSR1 al padre para que retire el dinero*/
+            /*Manda señal SIGRTMIN+1 al padre para que retire el dinero*/
             
-            retorno_senial = kill(padre_id, SIGUSR1);
+            retorno_senial = kill(padre_id, SIGRTMIN+1);
             if (retorno_senial == -1) {
-                perror("Error al mandar señal SIGUSR1 al padre");
+                perror("Error al mandar señal SIGRTMIN+1 al padre");
                 
-                exit(EXIT_FAILURE);
+                kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
             }
         }
+        
+        retorno_semaforos = Up_Semaforo(semid, id - 1, SEM_UNDO);
+        if (retorno_semaforos == ERROR) {
+            perror("Error al hacer up en los semaforos en el hijo");
+            kill(padre_id, SIGRTMIN);
+        exit(EXIT_FAILURE);
+        }
     }
+    
+    fclose(pf_operaciones);
     
     
     /*Avisa al padre de que ha terminado con la señal SIGUSR2*/
     
     /*DEBUGGING*/
-    printf("\nSoy la caja %d y he voy a avisar a mi padre de que he temrinado", id);
+    printf("\nSoy la caja %d y voy a avisar a mi padre de que he terminado", id);
     fflush(stdout);
     /*DEBUGGING*/
     
-    retorno_senial = kill(padre_id, SIGALRM);
+    retorno_senial = kill(padre_id, SIGRTMIN);
     if (retorno_senial == -1) {
-        perror("Error al mandar señal SIGUSR2 al padre");
+        perror("Error al mandar señal SIGRTMIN al padre");
         
         exit(EXIT_FAILURE);
     }
