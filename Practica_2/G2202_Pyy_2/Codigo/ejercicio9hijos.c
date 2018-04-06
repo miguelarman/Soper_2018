@@ -91,7 +91,6 @@ int main (int argc, char ** argv) {
     }
     
     /*Pone su saldo inicial a cero*/
-    saldo = 0;
     
     retorno_semaforos = Down_Semaforo(semid, id - 1, SEM_UNDO);
     if (retorno_semaforos == ERROR) {
@@ -106,6 +105,7 @@ int main (int argc, char ** argv) {
         kill(padre_id, SIGRTMIN);
         exit(EXIT_FAILURE);
     }
+    saldo = 0;
     fwrite(&saldo, sizeof(int), 1, pf_saldo);
     fclose(pf_saldo);
         
@@ -128,17 +128,9 @@ int main (int argc, char ** argv) {
     for (i = 0; i < numero_operaciones; i++) {
         
         /*Lee una operación*/
-        /*pf_operaciones = fopen(fichero_operaciones, "r");
-        if (pf_operaciones == NULL) {
-            printf("No se pudo abrir el fichero %s", fichero_operaciones);
-            exit(EXIT_FAILURE);
-        }*/
         
-        /*fseek(pf_operaciones, i * (sizeof(int) + sizeof(char)), SEEK_SET);*/ /*Salta un entero y un salto de línea*/
         fread(&cantidad, sizeof(int), 1, pf_operaciones);
         
-        /*fclose(pf_operaciones);*/
-    
         /*Espera aleatoria*/
         
         usleep(SEGUNDOS(aleat_num(1, 5)));
@@ -156,7 +148,7 @@ int main (int argc, char ** argv) {
         if (pf_saldo == NULL) {
             printf("No se pudo abrir el fichero %s", fichero_saldo);
             kill(padre_id, SIGRTMIN);
-        exit(EXIT_FAILURE);
+            exit(EXIT_FAILURE);
         }
         fread(&saldo, sizeof(int), 1, pf_saldo);
         fclose(pf_saldo);
@@ -184,7 +176,7 @@ int main (int argc, char ** argv) {
                 perror("Error al mandar señal SIGRTMIN+1 al padre");
                 
                 kill(padre_id, SIGRTMIN);
-        exit(EXIT_FAILURE);
+                exit(EXIT_FAILURE);
             }
         }
         
@@ -200,11 +192,6 @@ int main (int argc, char ** argv) {
     
     
     /*Avisa al padre de que ha terminado con la señal SIGUSR2*/
-    
-    /*DEBUGGING*/
-    printf("\nSoy la caja %d y voy a avisar a mi padre de que he terminado", id);
-    fflush(stdout);
-    /*DEBUGGING*/
     
     retorno_senial = kill(padre_id, SIGRTMIN);
     if (retorno_senial == -1) {

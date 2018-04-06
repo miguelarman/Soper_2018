@@ -111,7 +111,7 @@ int main () {
         
         for (j = 0; j < N_OPERACIONES; j++){
             v_aleat = aleat_num(0, 300);
-            fwrite(&v_aleat, sizeof(int), i, pf);
+            fwrite(&v_aleat, sizeof(int), 1, pf);
         }
         
         fclose(pf);
@@ -233,10 +233,6 @@ int main () {
         sigprocmask(SIG_UNBLOCK, &set,&oset);
     }
     
-    /*DEBUGGING*/
-    printf("\nSoy el padre y he terminado %d procesos", num_procesos_terminados);
-    /*DEBUGGING*/
-    
     /*Han acabado todas las cajas. Se retira el dinero*/
     
     while(wait(NULL) > 0);
@@ -244,10 +240,6 @@ int main () {
     pf_saldo_total = fopen(FICHERO_SALDO_TOTAL, "r");
     fread(&saldo_total, sizeof(int), 1, pf_saldo_total);
     fclose(pf_saldo_total);
-    
-    /*DEBUGGING*/
-    printf("\nSaldo total antes de la ronda final: %d", saldo_total);
-    /*DEBUGGING*/
     
     for (i = 1; i <= N_CAJAS; i++) {
         /*Crea la path*/
@@ -267,10 +259,6 @@ int main () {
         }
         fread(&saldo, sizeof(int), 1, pf_saldo);
         fclose(pf_saldo);
-        
-        /*DEBUGGING*/
-        printf("\nSaldo a anadir en la ronda final: %d", saldo);
-        /*DEBUGGING*/
         
         /*Actualiza el nuevo saldo total*/
         
@@ -295,15 +283,22 @@ int main () {
     fwrite(&saldo_total, sizeof(int), 1, pf_saldo_total);
     fclose(pf_saldo_total);
     
-    /*DEBUGGING*/
-    printf("\nSaldo total: %d", saldo_total);
-    /*DEBUGGING*/
+    /*Guardamos elsaldo total en un fichero legible para comprobar que funciona correctamente*/
+    pf = fopen("files/legible/saldoTotalEj9Legible", "w");
+    if (pf == NULL) {
+        perror("Error al guardar el saldo total");
+        exit(EXIT_FAILURE);
+    }
+    fprintf(pf, "El saldo total conseguido en el ejercicio 9 ha sido de %d", saldo_total);
+    fclose(pf);
     
     retorno_semaforos = Borrar_Semaforo(semid);
     if (retorno_semaforos == ERROR) {
         perror("Error al borrar los semaforos");
         exit(EXIT_FAILURE);
     }
+    
+    printf("\n\nEjecucion terminada\n\n");
     
     exit(EXIT_SUCCESS);
     
@@ -348,7 +343,7 @@ void manejador_usr1 (int senal) {
         
         /*Lee el saldo*/
         
-        retorno_semaforos = Down_Semaforo(semid, i, SEM_UNDO);
+        retorno_semaforos = Down_Semaforo(semid, i - 1, SEM_UNDO);
         if (retorno_semaforos == ERROR) {
             perror("Error al hacer down en los semaforos");
             exit(EXIT_FAILURE);
@@ -392,7 +387,8 @@ void manejador_usr1 (int senal) {
             fclose(pf_saldo_total);
             
             /*Ha encontrado una caja a la que sacar dinero*/
-            retorno_semaforos = Up_Semaforo(semid, i, SEM_UNDO);
+    
+            retorno_semaforos = Up_Semaforo(semid, i - 1, SEM_UNDO);
             if (retorno_semaforos == ERROR) {
                 perror("Error al hacer up en los semaforos");
                 exit(EXIT_FAILURE);
@@ -400,7 +396,7 @@ void manejador_usr1 (int senal) {
             return;
         }
         
-        retorno_semaforos = Up_Semaforo(semid, i, SEM_UNDO);
+        retorno_semaforos = Up_Semaforo(semid, i - 1, SEM_UNDO);
         if (retorno_semaforos == ERROR) {
             perror("Error al hacer up en los semaforos");
             exit(EXIT_FAILURE);

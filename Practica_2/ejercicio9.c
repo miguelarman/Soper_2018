@@ -348,9 +348,9 @@ void manejador_usr1 (int senal) {
         
         /*Lee el saldo*/
         
-        retorno_semaforos = Down_Semaforo(semid, i, SEM_UNDO);
+        retorno_semaforos = Down_Semaforo(semid, i - 1, SEM_UNDO);
         if (retorno_semaforos == ERROR) {
-            perror("Error al hacer down en los semaforos");
+            perror("Error al hacer down");
             exit(EXIT_FAILURE);
         }
         
@@ -392,7 +392,7 @@ void manejador_usr1 (int senal) {
             fclose(pf_saldo_total);
             
             /*Ha encontrado una caja a la que sacar dinero*/
-            retorno_semaforos = Up_Semaforo(semid, i, SEM_UNDO);
+            retorno_semaforos = Up_Semaforo(semid, i - 1, SEM_UNDO);
             if (retorno_semaforos == ERROR) {
                 perror("Error al hacer up en los semaforos");
                 exit(EXIT_FAILURE);
@@ -400,7 +400,7 @@ void manejador_usr1 (int senal) {
             return;
         }
         
-        retorno_semaforos = Up_Semaforo(semid, i, SEM_UNDO);
+        retorno_semaforos = Up_Semaforo(semid, i - 1, SEM_UNDO);
         if (retorno_semaforos == ERROR) {
             perror("Error al hacer up en los semaforos");
             exit(EXIT_FAILURE);
