@@ -24,7 +24,7 @@
 
 #define N_CAJAS 5 /*!< Numero de cajas*/
 #define TAM_PATH 256 /*!< Maximo tamaño de las path de ficheros*/
-#define N_OPERACIONES 50 /*!< Numero de operaciones a realizar por los cajeros*/
+#define N_OPERACIONES 5 /*!< Numero de operaciones a realizar por los cajeros*/
 #define FICHERO_SALDO_TOTAL "files/saldoTotal.txt" /*!< Path del fichero con el saldo total*/
 #define TAMANIO_ARGV_HIJOS 128 /*!< Tamaño máximo de los argumentos que se pasan a los hijos*/
 #define KEY 15 /*!< Key precompartida por los procesos. Al utilizar exec no podemos usar IPC_PRIVATE*/
