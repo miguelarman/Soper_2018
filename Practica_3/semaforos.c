@@ -123,12 +123,19 @@ int Down_Semaforo(int id, int num_sem, int undo) {
     struct sembuf sem_oper;
     int retorno;
     
+    /*DEBUGGINGerrno = 0;*/
+    
     sem_oper.sem_op = -1; /* Disminuir en 1 el valor del semáforo */
     sem_oper.sem_flg = undo;
     sem_oper.sem_num = num_sem; /* Actuamos sobre el semáforo num_sem de la lista */
     
     retorno = semop (id, &sem_oper, 1);
     
+    /*if (errno == EINTR) {
+        errno = 0;
+        return Down_Semaforo(id, num_sem, undo);
+    }*/
+
     if (retorno == -1) {
         return ERROR;
     }

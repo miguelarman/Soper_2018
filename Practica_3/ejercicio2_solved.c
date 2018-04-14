@@ -43,14 +43,16 @@ int main(int argc, char **argv){
     int n_proc;
     int i, j;
     int shmid;
+    int semid;
     int numero_procesos_hijo_terminados;
     int key;
-    int retorno_shmctl, retorno_shmdt;
+    int retorno_semaforos, retorno_shmctl, retorno_shmdt;
     Informacion *info;
     sigset_t set, oset;/*, set_usr1, set_completo;*/
     pid_t child_pid;
     Informacion **datos;
-
+    unsigned short unos[2];
+    
     if (argc < 2){
         printf("Not enough parameters, %d", argc);
         fflush(stdout);
@@ -69,10 +71,28 @@ int main(int argc, char **argv){
     
     numero_procesos_hijo_terminados = 0;
     
+    /* Crea los semaforos */
+    retorno_semaforos = Crear_Semaforo(key, 2, &semid);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al crear los semaforos");
+        exit(EXIT_FAILURE);
+    } else if (retorno_semaforos != 0) {
+        perror("No se han creado los semaforos en el padre");
+    }
+    
+    /* Inicializa los semaforos a 1 */
+    unos[0] = 1;
+    unos[1] = 1;
+    retorno_semaforos = Inicializar_Semaforo(semid, unos);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al inicializar los semaforos");
+        exit(EXIT_FAILURE);
+    }
+    
     /* Crea la memoria compartida */
     shmid = reservashm(sizeof(Informacion*), key);
     if (shmid == -1) {
-        perror("Error al crear la memoria compartida");
+        perror("Error al conseguir la memoria compartida en el hijo");
         exit(EXIT_FAILURE);
     }
     
@@ -180,6 +200,12 @@ int main(int argc, char **argv){
         
 
         /*Imprime la informacion*/
+        /* Hace down del semaforo de la memoria compartida*/
+        retorno_semaforos = Down_Semaforo(semid, SEMAFORO_SHM, SEM_UNDO);
+        if (retorno_semaforos == ERROR) {
+            perror("Error al hacer down en los semaforos en el padre");
+            exit(EXIT_FAILURE);
+        }
         
         strcpy(datos[numero_procesos_hijo_terminados]->nombre, info->nombre);
         datos[numero_procesos_hijo_terminados]->id = info->id;
@@ -188,6 +214,20 @@ int main(int argc, char **argv){
         /*DEBUGGING*//*printf("\nnombre %s id %d", datos[numero_procesos_hijo_terminados]->nombre, datos[numero_procesos_hijo_terminados]->id);fflush(stdout);*/
         
         numero_procesos_hijo_terminados++;
+        
+        /*up de los dos semaforos*/
+        /* Hace up del semaforo de la memoria compartida*/
+        retorno_semaforos = Up_Semaforo(semid, SEMAFORO_SHM, SEM_UNDO);
+        if (retorno_semaforos == ERROR) {
+            perror("Error al hacer down en los semaforos en el padre");
+            exit(EXIT_FAILURE);
+        }
+        /* Hace up del semaforo de la entrada*/
+        retorno_semaforos = Up_Semaforo(semid, SEMAFORO_ENTRADA, SEM_UNDO);
+        if (retorno_semaforos == ERROR) {
+            perror("Error al hacer down en los semaforos en el padre");
+            exit(EXIT_FAILURE);
+        }
         
         if (numero_procesos_hijo_terminados == n_proc){
             break;
@@ -225,6 +265,14 @@ int main(int argc, char **argv){
         perror("Error al borrar la memoria en el padre");
         exit(EXIT_FAILURE);
     }
+    
+    /* Eliminamos los semaforos */
+    retorno_semaforos = Borrar_Semaforo(semid);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al borrar los semaforos en el padre");
+        exit(EXIT_FAILURE);
+    }
+        
         
     exit(EXIT_SUCCESS);
 }
@@ -249,7 +297,8 @@ int reservashm(int size, int key) {
 void ejecucionHijo(int key){
     Informacion *info;
     int shmid_hijo;
-    int retorno_shmdt;
+    int semid;
+    int retorno_semaforos, retorno_shmdt;
     sigset_t set, oset;
     
     /* Bloquea las senales */
@@ -276,6 +325,16 @@ void ejecucionHijo(int key){
     }
     info = shmat (shmid_hijo, (char *)0, 0);
     
+    /* Consigue los semaforos */
+    retorno_semaforos = Crear_Semaforo(key, 2, &semid);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al obtener los semaforos creados en el hijo");
+        exit(EXIT_FAILURE);
+    } else if (retorno_semaforos != 1) {
+        perror("Los semaforos creados no se han obtenido en los hijos");
+        exit(EXIT_FAILURE);
+    }
+    
     /* Duerme durante un tiempo aleatorio */
     sleep(aleat_num(MIN_WAIT, MAX_WAIT));
     
@@ -283,11 +342,31 @@ void ejecucionHijo(int key){
     /* Pide el nombre del usuario*/
     /*****************************/
     
+    /* 1- Hace down del semaforo de la entrada*/
+    retorno_semaforos = Down_Semaforo(semid, SEMAFORO_ENTRADA, SEM_UNDO);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al hacer down en los semaforos en el hijo");
+        exit(EXIT_FAILURE);
+    }
+    
     /* 2- Pregunta por terminal */
     printf("\nIntroduzca el nombre del cliente: ");
     fflush(stdout);
+    /* Hace down del semaforo de la memoria compartida*/
+    retorno_semaforos = Down_Semaforo(semid, SEMAFORO_SHM, SEM_UNDO);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al hacer down en los semaforos en el hijo");
+        exit(EXIT_FAILURE);
+    }
     fgets(info->nombre, TAMANIO_NOMBRE, stdin);
     info->id++;
+    
+    /* 3- Hace up del semaforo de la memoria compartida*/
+    retorno_semaforos = Up_Semaforo(semid, SEMAFORO_SHM, SEM_UNDO);
+    if (retorno_semaforos == ERROR) {
+        perror("Error al hacer down en los semaforos en el hijo");
+        exit(EXIT_FAILURE);
+    }
     
     /*Manda la senal al padre*/
     kill(getppid(), SIGUSR1);
