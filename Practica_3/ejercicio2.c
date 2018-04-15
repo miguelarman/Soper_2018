@@ -52,7 +52,7 @@ int main(int argc, char **argv){
     Informacion **datos;
 
     if (argc < 2){
-        printf("Not enough parameters, %d", argc);
+        printf("Not enough parameters, %d\n", argc);
         fflush(stdout);
         exit(EXIT_FAILURE);
     }
@@ -150,14 +150,14 @@ int main(int argc, char **argv){
     /* Crea una estructura para almacenar los datos que va a recibir */
     datos = (Informacion **)malloc(n_proc * sizeof(Informacion *));
     if (datos == NULL) {
-        printf("Error al inicializar la estructura");
+        perror("Error al inicializar la estructura");
         while(wait(NULL) > 0);
         exit(EXIT_FAILURE);
     }
     for (i = 0; i < n_proc; i++) {
         datos[i] = (Informacion *)malloc(sizeof(Informacion));
         if (datos[i] == NULL) {
-            printf("Error al inicializar la estructura");
+            perror("Error al inicializar la estructura");
             while(wait(NULL) > 0);
             for (j = 0; j < i; j++) {
                 free(datos[i]);
@@ -184,8 +184,8 @@ int main(int argc, char **argv){
         strcpy(datos[numero_procesos_hijo_terminados]->nombre, info->nombre);
         datos[numero_procesos_hijo_terminados]->id = info->id;
         
-        /*DEBUGGING*//*printf("\nnombre %s id %d", info->nombre, info->id);fflush(stdout);*/
-        /*DEBUGGING*//*printf("\nnombre %s id %d", datos[numero_procesos_hijo_terminados]->nombre, datos[numero_procesos_hijo_terminados]->id);fflush(stdout);*/
+        /*DEBUGGING*//*printf("nombre %s id %d\n", info->nombre, info->id);fflush(stdout);*/
+        /*DEBUGGING*//*printf("nombre %s id %d\n", datos[numero_procesos_hijo_terminados]->nombre, datos[numero_procesos_hijo_terminados]->id);fflush(stdout);*/
         
         numero_procesos_hijo_terminados++;
         
@@ -202,7 +202,7 @@ int main(int argc, char **argv){
     
     /* Imprime todos los datos */
     for (i = 0; i< n_proc; i++) {
-        printf("\nNombre de usuario: %sIdentificador: %d", datos[i]->nombre, datos[i]->id);
+        printf("Nombre de usuario: %sIdentificador: %d\n", datos[i]->nombre, datos[i]->id);
         fflush(stdout);
         
         /* Liberamos los datos de ese usuario */
@@ -284,7 +284,7 @@ void ejecucionHijo(int key){
     /*****************************/
     
     /* 2- Pregunta por terminal */
-    printf("\nIntroduzca el nombre del cliente: ");
+    printf("Introduzca el nombre del cliente: ");
     fflush(stdout);
     fgets(info->nombre, TAMANIO_NOMBRE, stdin);
     info->id++;

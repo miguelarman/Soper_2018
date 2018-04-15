@@ -5,13 +5,15 @@
 ########################################################
 CC = gcc
 CFLAGS = -g -Wall -pedantic
-FILES = ejercicio2 ejercicio2_solved ejercicio3
+FILES = ejercicio2 ejercicio2_solved ejercicio3 ejercicio4 cadena_montaje
 #           --> Programas de aprendizaje, que también han necesitado
 #                          ser compilados
 ########################################################
-OBJECTSEJERCICIO2 = semaforos.o aleat_num.o ejercicio2.o
+OBJECTSEJERCICIO2 = aleat_num.o ejercicio2.o
 OBJECTSEJERCICIO2_SOLVED = semaforos.o aleat_num.o ejercicio2_solved.o
 OBJECTSEJERCICIO3 = semaforos.o aleat_num.o ejercicio3.o
+OBJECTSEJERCICIO4 = aleat_num.o ejercicio4.o
+OBJECTSCADENA_MONTAJE = aleat_num.o cadena_montaje.o
 ########################################################
 
 all: $(FILES) clear
@@ -20,22 +22,37 @@ all: $(FILES) clear
 ejercicio2: $(OBJECTSEJERCICIO2)
 	$(CC) $(CFLAGS) -o ejercicio2 $(OBJECTSEJERCICIO2) -lpthread
 
-ejercicio2.o: semaforos.h ejercicio2.c
+ejercicio2.o: aleat_num.h ejercicio2.c
 	$(CC) $(CFLAGS) -c ejercicio2.c
 	
 	
 ejercicio2_solved: $(OBJECTSEJERCICIO2_SOLVED)
 	$(CC) $(CFLAGS) -o ejercicio2_solved $(OBJECTSEJERCICIO2_SOLVED) -lpthread
 
-ejercicio2_solved.o: semaforos.h ejercicio2_solved.c
+ejercicio2_solved.o: semaforos.h aleat_num.h ejercicio2_solved.c
 	$(CC) $(CFLAGS) -c ejercicio2_solved.c
 
 
 ejercicio3: $(OBJECTSEJERCICIO3)
 	$(CC) $(CFLAGS) -o ejercicio3 $(OBJECTSEJERCICIO3) -lpthread
 
-ejercicio3.o: semaforos.h ejercicio3.c
+ejercicio3.o: semaforos.h aleat_num.h ejercicio3.c
 	$(CC) $(CFLAGS) -c ejercicio3.c
+
+
+
+ejercicio4: $(OBJECTSEJERCICIO4)
+	$(CC) $(CFLAGS) -o ejercicio4 $(OBJECTSEJERCICIO4) -lpthread
+
+ejercicio4.o: aleat_num.h ejercicio4.c
+	$(CC) $(CFLAGS) -c ejercicio4.c
+	
+
+cadena_montaje: $(OBJECTSCADENA_MONTAJE)
+	$(CC) $(CFLAGS) -o cadena_montaje $(OBJECTSCADENA_MONTAJE) -lpthread
+
+cadena_montaje.o: aleat_num.h cadena_montaje.c
+	$(CC) $(CFLAGS) -c cadena_montaje.c
 	
 
 
@@ -46,10 +63,8 @@ aleat_num.o: aleat_num.c aleat_num.h
 	$(CC) $(CFLAGS) -c aleat_num.c
 
 
-# Ejercicios de aprendizaje
 
-#ejercicio7:
-#	$(CC) $(CFLAGS) ejercicio7.c -o ejercicio7
+
 
 
 clear:
@@ -82,21 +97,62 @@ ejercicio2_solved_test:
 ejercicio2_solved_test_val:
 	@echo Ejecutando ejercicio2_solved con Valgrind
 	@valgrind --leak-check=full ./ejercicio2_solved 2
-	
+
+
+
+# Ejecuciones de testing del ejercicio 3
+ejercicio3_test:
+	@echo Ejecutando ejercicio3
+	@./ejercicio3
+
+ejercicio3_test_val:
+	@echo Ejecutando ejercicio3 con Valgrind
+	@valgrind --leak-check=full ./ejercicio3
+
+
+
+# Ejecuciones de testing del ejercicio 4
+ejercicio4_test:
+	@echo Ejecutando ejercicio4
+	@./ejercicio4
+
+ejercicio4_test_val:
+	@echo Ejecutando ejercicio4 con Valgrind
+	@valgrind --leak-check=full ./ejercicio4
+
+
+# Ejecuciones de testing del ejercicio cadena de montaje
+cadena_montaje_test:
+	@echo Ejecutando cadena_montaje
+	@./cadena_montaje files/cadena_montaje/entrada.txt files/cadena_montaje/salida.txt
+
+cadena_montaje_test_val:
+	@echo Ejecutando cadena_montaje con Valgrind
+	@valgrind --leak-check=full ./cadena_montaje files/cadena_montaje/entrada.txt files/cadena_montaje/salida.txt
 
 
 # Ejecucion de todos los ejercicios
 run:
 	@echo ">>>>>>Ejecutando ejercicio2"
 	./ejercicio2 2
-	@echo ">>>>>>"
-	@echo "\n\n\n"
 	@echo ">>>>>>Ejecutando ejercicio2_solved"
 	./ejercicio2_solved 2
+	@echo ">>>>>>Ejecutando ejercicio3"
+	./ejercicio3
+	@echo ">>>>>>Ejecutando ejercicio4"
+	./ejercicio4
+	@echo ">>>>>>Ejecutando cadena_montaje"
+	./cadena_montaje files/cadena_montaje/entrada.txt files/cadena_montaje/salida.txt
 
 
 runv:
-	@echo ">>>>>>Ejecutando ejercicio2"
+	@echo ">>>>>>Ejecutando ejercicio2 con valgrind"
 	valgrind --leak-check=full ./ejercicio2 2
-	@echo ">>>>>>Ejecutando ejercicio2_solved"
+	@echo ">>>>>>Ejecutando ejercicio2_solved con valgrind"
 	valgrind --leak-check=full ./ejercicio2_solved 2
+	@echo ">>>>>>Ejecutando ejercicio3 con valgrind"
+	valgrind --leak-check=full ./ejercicio3
+	@echo ">>>>>>Ejecutando ejercicio4 con valgrind"
+	valgrind --leak-check=full ./ejercicio4
+	@echo ">>>>>>Ejecutando cadena_montaje con valgrind"
+	valgrind --leak-check=full ./cadena_montaje files/cadena_montaje/entrada.txt files/cadena_montaje/salida.txt
