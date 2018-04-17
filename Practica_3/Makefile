@@ -124,12 +124,12 @@ ejercicio4_test_val:
 # Ejecuciones de testing del ejercicio cadena de montaje
 cadena_montaje_test:
 	@echo Ejecutando cadena_montaje
-	@rm files/cadena_montaje/entrada.txt
-	@rm files/cadena_montaje/salida.txt
+	@rm files/cadena_montaje/*.txt
 	@./cadena_montaje "files/cadena_montaje/entrada.txt" "files/cadena_montaje/salida.txt"
 
 cadena_montaje_test_val:
 	@echo Ejecutando cadena_montaje con Valgrind
+	@rm files/cadena_montaje/*.txt
 	@valgrind --leak-check=full ./cadena_montaje "files/cadena_montaje/entrada.txt" "files/cadena_montaje/salida.txt"
 
 
@@ -144,7 +144,8 @@ run:
 	@echo ">>>>>>Ejecutando ejercicio4"
 	./ejercicio4
 	@echo ">>>>>>Ejecutando cadena_montaje"
-	./cadena_montaje files/cadena_montaje/entrada.txt files/cadena_montaje/salida.txt
+	@rm files/cadena_montaje/*.txt
+	./cadena_montaje "files/cadena_montaje/entrada.txt" "files/cadena_montaje/salida.txt"
 
 
 runv:
@@ -157,4 +158,5 @@ runv:
 	@echo ">>>>>>Ejecutando ejercicio4 con valgrind"
 	valgrind --leak-check=full ./ejercicio4
 	@echo ">>>>>>Ejecutando cadena_montaje con valgrind"
-	valgrind --leak-check=full ./cadena_montaje files/cadena_montaje/entrada.txt files/cadena_montaje/salida.txt
+	@rm files/cadena_montaje/*.txt
+	valgrind --leak-check=full ./cadena_montaje "files/cadena_montaje/entrada.txt" "files/cadena_montaje/salida.txt"

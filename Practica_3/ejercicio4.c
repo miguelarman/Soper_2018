@@ -6,6 +6,11 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <pthread.h>
+#include <sys/mman.h>
+#include <fcntl.h>
+#include <sys/ipc.h>
+#include <signal.h>
+#include <string.h>
 
 #include "aleat_num.h"
 
@@ -14,33 +19,23 @@
 
 
 /* Funciones privadas */
-void primer_hijo();
-void segundo_hijo();
+void *primer_hilo();
+void *segundo_hilo();
+void *mmap(void *addr, size_t len, int prot, int flags, int fildes, off_t off);
 
-
-
-int main() {
-    pid_t child_pid_1, child_pid_2;
+int main(){
+    pthread_t h1;
+    pthread_t h2;
     
-    /* Crea el primer hijo */
-    if ((child_pid_1 = fork()) == -1) {
-        perror("Error al hacer el primer fork");
-    } else if (child_pid_1 == 0) {
-        primer_hijo();
-    }
+    /*Primer Hilo*/
+    pthread_create(&h1, NULL, primer_hilo, NULL);
+    pthread_join(h1, NULL);
+    pthread_cancel(h1);
     
-    /* Espera a que termine el primer hijo */
-    wait(NULL);
-    
-    /* Crea el segundo hijo */
-    if ((child_pid_2 = fork()) == -1) {
-        perror("Error al hacer el segundo fork");
-    } else if (child_pid_2 == 0) {
-        segundo_hijo();
-    }
-    
-    /* Espera a que termine el segundo hijo */
-    wait(NULL);
+    /*Segundo Hilo*/
+    pthread_create(&h2, NULL, segundo_hilo, NULL);
+    pthread_join(h2, NULL);
+    pthread_cancel(h2);
     
     exit(EXIT_SUCCESS);
 }
@@ -50,14 +45,11 @@ int main() {
 /******************************************************************************/
 
 
-void primer_hijo() {
+void *primer_hilo() {
     int cantidad;
     int i;
     int numero;
     FILE *pf;
-    char coma;
-    
-    coma = ',';
     
     
     /* Abre el fichero para escribir los numeros */
@@ -72,38 +64,48 @@ void primer_hijo() {
     for (i = 0; i < cantidad; i++) {
         numero = aleat_num(100, 1000);
         
-        /* Escribe el numero en el fichero */
-        /*DEBUGGING*//*printf("%d\n", numero);fflush(stdout);*/
+        fprintf(pf, "%d", numero);
+        fprintf(pf, ",");
         
-        fwrite(&numero, sizeof(int), 1, pf);
-        fwrite(&coma, sizeof(char), 1, pf);
     }
     
     
     /* Cierra el fichero */
     fclose(pf);
-    
-    exit(EXIT_SUCCESS);
+    pthread_exit(NULL);
 }
 
-void segundo_hijo() {
+void *segundo_hilo() {
+    char *ruta;
+    int i, id, debbug;
+    struct stat buf;
+    /*Conseguimos el fichero en memoria compartida*/
+    id = open(FILENAME, O_RDWR);
+    fstat(id, &buf);
     
+    ruta = (char*) mmap(NULL, buf.st_size, PROT_READ | PROT_WRITE, MAP_SHARED, id, 0);
+    if (ruta == MAP_FAILED){
+        close(id);
+        perror("Error al hacer el mapeo de memoria");
+        exit(EXIT_FAILURE);
+    }
     
+    /*Ahora cambiamos las comas por espacios recoriendo el fichero caractera a caracter*/
+    for (i = 0; i < strlen(ruta); i++){
+        if (ruta[i] == ","){
+            ruta[i] = " ";
+        }
+    }
+    printf("Estos son los datos leidos y modificados: %s\n", ruta);
     
+    /*Eliminamos el Mapeo*/
+    debbug = munmap(ruta, buf.st_size);
+    if (debbug == -1){
+        close(id);
+        perror("Error al hacer munmap");
+        exit(EXIT_FAILURE);
+    }
     
-    
-    
-    exit(EXIT_SUCCESS);
+    close(id);
+    pthread_exit(NULL);
 }
-/*
-int main1(){
-    pthread_t h1;
-    pthread_t h2;
-    
-    pthread_create(&h1, NULL, primer_hijo, NULL);
-    pthread_create(&h2, NULL, segundo_hijo, NULL);
-    
-    pthread_join(h1, NULL);
-    pthread_join(h2, NULL);
-}
-*/

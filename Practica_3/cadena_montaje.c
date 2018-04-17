@@ -1,3 +1,16 @@
+/**
+ * @brief Ejercicio 5 de la Práctica
+ * 
+ * En este ejercicio creamos una serie de procesos hijos,
+ * que realizan la labor de diferentes partes de una cadena
+ * de montajes, en la que reciben mensajes del anterior, lo
+ * modifican y mandan este resultado al siguiente
+ * 
+ * @file cadena_montaje.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 17-4-2018
+ */
+ 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -18,29 +31,126 @@
 
 
 
-#define TAMANO_MENSAJE 2048
-#define OK 0
-#define ERROR 1
-#define KEY 1300
-#define FILEKEY "/bin/bash"
+#define TAMANO_MENSAJE 2048 /*!< Tamañoo del mensaje */
+#define OK 0 /*!< Macro para representar ningún fallo */
+#define ERROR 1 /*!< Macro devuelta si se encuentra algún error */
+#define KEY 1300 /*!< Key utilizada por ftok */
+#define FILEKEY "/bin/bash" /*!< Filekey utilizada por ftok*/
 
-enum Tipo_Mensaje {PROCESO_AB = 1, PROCESO_BC = 2};
 
+/**
+ * @brief Enumeracion utilizada para diferenciar los tipos de mensajes en la cola
+ */
+enum Tipo_Mensaje {
+    PROCESO_AB = 1, /*!< Mensajes enviados por el proceso A al B */
+    PROCESO_BC = 2 /*!< Mensajes enviados por el proceso B al C */
+};
+
+/**
+ * @brief Estructura que almacena los datos de los mensajes que van a ser enviados a la cola
+ */
 typedef struct msgbuf {
-    long mtype; /* Id del tipo de mensaje */
-    char mtext[TAMANO_MENSAJE];
+    long mtype; /*!< Identificador del tipo de mensaje */
+    char mtext[TAMANO_MENSAJE]; /*!< Texto del mensaje a ser enviado */
 } Mensaje;
 
 /* Funciones privadas */
+
+/**
+ * @brief Función que inicializa el fichero que contiene los datos
+ * a ser modificados por los procesos
+ *
+ * Esta función es llamada al principio de la ejecucion,
+ * y prepara un fichero de datos con una cadena prolongada
+ * de caracteres, que van a ser leidos por los procesos en
+ * bloques de 2 kilobytes
+ * 
+ * @param fichero_entrada Path del fichero
+ * @return void
+ */
 void inicializa_fichero_entrada(char *fichero_entrada);
+
+/**
+ * @brief Función que lee el numero de mensajes pendientes en la cola
+ *
+ * Esta función llama a las funcion msgctl, que devuelve mucha
+ * mucha informacion de la cola de mensajes, y devuelve simplemetne
+ * el numero de mensajes pendientes
+ * 
+ * @param msqid Identificador de la cola de mensajes
+ * @param cantidad Entero donde guardar la cantidad
+ * @return OK si la función se ejecuta de forma satisfactoria y ERROR si no
+ */
 int numero_mensajes_pendientes(int msqid, int *cantidad);
+
+/**
+ * @brief Función de la ejecución del proceso A
+ *
+ * Esta función engloba toda la ejecución del proceso A. Este
+ * lee de un fichero bloques de 2 kilobytes de caracteres,
+ * y los manda mediante mensajes al proceso B
+ * 
+ * @param fichero_entrada Path del fichero del que leer los datos
+ * @param msqid Identificador de la cola de mensajes
+ * @param child_pid_2 PID del proceso B, necesario para mandarle una señal cuando acaba
+ * @return void
+ */
 void proceso_A(char *fichero_entrada, int msqid, int child_pid_2);
+
+/**
+ * @brief Función de la ejecución del proceso b
+ *
+ * Esta función engloba toda la ejecución del proceso B. Este lee los
+ * mensajes que le manda el proceso A, modificada cada caracter por el
+ * siguiente en el alfabeto, y manda este texto al proceso C
+ * 
+ * @param msqid Identificador de la cola de mensajes
+ * @return void
+ */
 void proceso_B(int msqid);
+
+/**
+ * @brief Función de la ejecución del proceso C
+ *
+ * Esta función engloba toda la ejecución del proceso C. Este recibe mensajes
+ * del proceso B con bloques de texto, y los vuelva a un fichero de texto
+ * 
+ * @param fichero_salida Path del fichero al que escribir los datos
+ * @param msqid Identificador de la cola de mensajes
+ * @return void
+ */
 void proceso_C(char *fichero_salida, int msqid);
+
+/**
+ * @brief Manejador de la señal para el proceso B
+ *
+ * Esta función se ejecuta cuando el proceso A manda la señal
+ * de que ha acabado al proceso B. Después, se modifica una
+ * flag global
+ * 
+ * @param senal Identificador de la señal recibida
+ * @return void
+ */
 void manejador(int senal);
 
-int proceso_1_terminado;
 
+/* Variables globales */
+
+int proceso_1_terminado; /*!< Flag global que indica si el proceso A ha terminado */
+
+
+
+
+/* Funcion principal del programa */
+/**
+ * @brief Función principal del programa
+ *
+ * Este programa coordina la ejecución de tres procesos hijos
+ * que ejecutan partes consecutivas de una cadena de montaje
+ * 
+ * @return 0 si todo se ejecuta correctamente, y -1 en cualquier
+ * otro caso
+ */
 int main (int argc, char **argv) {
     
     pid_t child_pid_1, child_pid_2, child_pid_3;
@@ -69,8 +179,6 @@ int main (int argc, char **argv) {
         perror("Error al obtener identificador para cola mensajes");
         exit(EXIT_FAILURE);
     }
-    
-    /* DEBUGGING *//*printf("msqid: %d\n", msqid); fflush(stdout);*/
     
     /* Inicializa el fichero de entrada */
     inicializa_fichero_entrada(argv[1]);
@@ -218,13 +326,6 @@ void proceso_A(char *fichero_entrada, int msqid, int child_pid_2) {
             /* Libera la estructura del mensaje*/
             free(mensaje);
             
-            /* Libera la cola de mensajes */
-            /*retorno_msgctl = msgctl(msqid, IPC_RMID, (struct msqid_ds *)NULL);
-            if (retorno_msgctl != 0) {
-                perror("Error al liberar la cola de mensajes");
-                exit(EXIT_FAILURE);
-            }*/
-            
             exit(EXIT_FAILURE);
         }
     }
@@ -235,13 +336,6 @@ void proceso_A(char *fichero_entrada, int msqid, int child_pid_2) {
     
     /* Libera la memoria de la estructura del mensaje */
     free(mensaje);
-    
-    /* Libera la cola de mensajes */
-    /*retorno_msgctl = msgctl(msqid, IPC_RMID, (struct msqid_ds *)NULL);
-    if (retorno_msgctl != 0) {
-        perror("Error al liberar la cola de mensajes");
-        exit(EXIT_FAILURE);
-    }*/
     
     kill(child_pid_2, SIGUSR1);
     
@@ -272,6 +366,7 @@ void proceso_B(int msqid) {
     do {
         
         /* Lee un mensaje del tipo PROCESO_AB */
+        memset(mensaje, 0, TAMANO_MENSAJE); /* Inicializamos la string con \0*/
         retorno_recepcion = msgrcv(msqid,  (struct Mensaje *)mensaje, sizeof(Mensaje) - sizeof(long), PROCESO_AB, IPC_NOWAIT);
         if (proceso_1_terminado == 1 && errno == ENOMSG) {
             errno = 0;
@@ -287,21 +382,12 @@ void proceso_B(int msqid) {
             /* Libera la estructura del mensaje*/
             free(mensaje);
             
-            /* Libera la cola de mensajes */
-            /*retorno_msgctl = msgctl(msqid, IPC_RMID, (struct msqid_ds *)NULL);
-            if (retorno_msgctl != 0) {
-                perror("Error al liberar la cola de mensajes");
-                exit(EXIT_FAILURE);
-            }*/
-            
             exit(EXIT_FAILURE);
         }
         
         /* Modifica el texto del mensaje */
         
-        /*DEBUGGING*//*printf("\n\ntexto antes: %s", mensaje->mtext);fflush(stdout);*/
-        
-        for (i = 0; i < strlen(mensaje->mtext); i++) {
+        for (i = 0; i < TAMANO_MENSAJE; i++) {
             
             if (mensaje->mtext[i] > 'z' || mensaje->mtext[i] < 'a') {
                 /* Ha terminado de leerlo */
@@ -312,7 +398,6 @@ void proceso_B(int msqid) {
                 mensaje->mtext[i]++;
             }
         }
-        /*DEBUGGING*//*printf("\n\ntexto despues: %s", mensaje->mtext);fflush(stdout);*/
         
         /* Manda un mensaje del tipo PROCESO_BC */
         mensaje->mtype = PROCESO_BC;
@@ -322,13 +407,6 @@ void proceso_B(int msqid) {
             
             /* Libera la estructura del mensaje*/
             free(mensaje);
-            
-            /* Libera la cola de mensajes */
-            /*retorno_msgctl = msgctl(msqid, IPC_RMID, (struct msqid_ds *)NULL);
-            if (retorno_msgctl != 0) {
-                perror("Error al liberar la cola de mensajes");
-                exit(EXIT_FAILURE);
-            }*/
             
             exit(EXIT_FAILURE);
         }
@@ -343,13 +421,6 @@ void proceso_B(int msqid) {
 
     /* Libera la memoria de la estructura del mensaje */
     free(mensaje);
-    
-    /* Libera la cola de mensajes */
-    /*retorno_msgctl = msgctl(msqid, IPC_RMID, (struct msqid_ds *)NULL);
-    if (retorno_msgctl != 0) {
-        perror("Error al liberar la cola de mensajes");
-        exit(EXIT_FAILURE);
-    }*/
     
     exit(EXIT_SUCCESS);
 
@@ -378,13 +449,6 @@ void proceso_C(char *fichero_salida, int msqid) {
         /* Libera la estructura del mensaje*/
         free(mensaje);
         
-        /* Libera la cola de mensajes */
-        /*retorno_msgctl = msgctl(msqid, IPC_RMID, (struct msqid_ds *)NULL);
-        if (retorno_msgctl != 0) {
-            perror("Error al liberar la cola de mensajes");
-            exit(EXIT_FAILURE);
-        }*/
-        
         exit(EXIT_FAILURE);
     }
     
@@ -400,21 +464,12 @@ void proceso_C(char *fichero_salida, int msqid) {
             /* Libera la estructura del mensaje*/
             free(mensaje);
             
-            /* Libera la cola de mensajes */
-            /*retorno_msgctl = msgctl(msqid, IPC_RMID, (struct msqid_ds *)NULL);
-            if (retorno_msgctl != 0) {
-                perror("Error al liberar la cola de mensajes");
-                exit(EXIT_FAILURE);
-            }*/
-            
             exit(EXIT_FAILURE);
         }
         
         
         /* Vuelca en el fichero de salida los datos*/
         fwrite(&(mensaje->mtext), TAMANO_MENSAJE, 1, pf);
-        
-        
         
         /* Lee el numero de mensajes en la cola */
         retorno = numero_mensajes_pendientes(msqid, &cantidad);
@@ -428,13 +483,6 @@ void proceso_C(char *fichero_salida, int msqid) {
 
     /* Libera la memoria de la estructura del mensaje */
     free(mensaje);
-    
-    /* Libera la cola de mensajes */
-    /*retorno_msgctl = msgctl(msqid, IPC_RMID, (struct msqid_ds *)NULL);
-    if (retorno_msgctl != 0) {
-        perror("Error al liberar la cola de mensajes");
-        exit(EXIT_FAILURE);
-    }*/
     
     exit(EXIT_SUCCESS);
 }
