@@ -45,7 +45,7 @@ ejercicio4: $(OBJECTSEJERCICIO4)
 	$(CC) $(CFLAGS) -o ejercicio4 $(OBJECTSEJERCICIO4) -lpthread
 
 ejercicio4.o: aleat_num.h ejercicio4.c
-	$(CC) $(CFLAGS) -c ejercicio4.c
+	$(CC) $(CFLAGS) -c ejercicio4.c -lpthread
 	
 
 cadena_montaje: $(OBJECTSCADENA_MONTAJE)
@@ -73,6 +73,11 @@ clear:
 clean:
 	rm -rf *.o $(FILES)
 
+doxyfile:
+	doxygen -g
+	
+doxygen:
+	doxygen Doxyfile
 
 
 
