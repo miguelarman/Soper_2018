@@ -1,10 +1,12 @@
 /**
  * @brief Ejercicio 4 de la Práctica
  * 
- * descripcion del fichero descripcion del fichero
- * descripcion del fichero descripcion del fichero
- * descripcion del fichero descripcion del fichero
- * descripcion del fichero descripcion del fichero
+ * En este ejercicio se nos pide trabajar
+ * con la funcion de C mmap que es útil para
+ * mapear memoria y acceder desde otros 
+ * procesos a la misma. Un hilo se comunica 
+ * en este ejercicio con otro hilo mediante
+ * el uso de dicha función.
  * 
  * @file ejercicio4.c
  * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca

@@ -1,10 +1,16 @@
 /**
  * @brief Ejercicio 3 de la Práctica
  * 
- * descripcion del fichero descripcion del fichero
- * descripcion del fichero descripcion del fichero
- * descripcion del fichero descripcion del fichero
- * descripcion del fichero descripcion del fichero
+ * En este ejercicio se nos pide implementar
+ * el algoritmo de sincronización de 
+ * procesos "Productor-Consumidor"
+ * Un proceso es el encargado de producir
+ * cierto recurso mientras el otro proceso lo
+ * consume, todo esto de forma correctamente 
+ * sincronizada para aseguranrnos de que se
+ * respeta la exclusión  mutua en las zonas 
+ * cŕiticas y asegurandones tambien de que no se
+ * produce ningun tipo de interbloqueo.
  * 
  * @file ejercicio3.c
  * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca

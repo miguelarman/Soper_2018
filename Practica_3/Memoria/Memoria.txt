@@ -2,4 +2,12 @@ Memoria Practica 3 SOPER
 
 Ejercicio2
 
-En este ejercicio se nos pide
+
+
+Ejercicio3
+
+En este ejercicio implementamos el algoritmo para la sincronización de procesos "Productor-Cosumidor", el cual es útil cuando un proceso "produce" cierto recurso, información... etc. y otro proceso desea "consumirlo", too esto de forma sincronizada y asegurandonos de que va a haber exclusión mutua de la zona crítica "El almacén" y también de que no se va a producir ningún interbloqueo para lo cual necesitamos hacer un buen uso de los elementos software y del Sistema Operativo. Este algoritmo esta implementado en las trasparencias de Teoría, con lo cual el esfuerzo más significativo en la realización de este ejercicio ha sido el traducir este psudocódigo a C, ya que el manejo de semáforos en este lenguaje no es muy intuitivo. Al ser un ejercicio de importante embergadura "Hablando de extensión de Código" siempre esto supone un esfuerzo extra a la hora de que todo compile y ejecute de forma adecuada ya que puede haber muchos fallos y la depuración de ejercicios largos conlleva largos periodos de tiempo. En conclusión ha sido un ejercicio muy completo y didáctico para comprender como llevar la implementación de los algoritmos dados en la teoría a la práctica. Lo cual nos hace dar un gran salto hacia la verdadera implementación y comprensión de dichos algortimos.
+
+Ejercicio4
+
+En este ejercicio se nos introduce la noción de mapeo de memoria, el cual es llevado a cabo por la funcion de C mmap. En este ejercicio se nos pide que un hilo cree un fichero de texto en el cual escribe números al azar, la "gracia" de este ejercicio es implementar el código necesario para que un segundo hilo con la función mmap sea capaz de acceder a la imformación creada por el primer hilo y sea capaz de modificarla e incluso imprimirla por pantalla. No ha sido un ejercicio difícil porque en si no había mucho código que escribir, la dificultad de este ejercicio reside en hacer un buen uso de la función mmap (que es bastante compleja) para ello ha sido necesaria una lectura atenta tanto de la imformacion que se nos da en el enunciado de la práctica como del propio manual de la función (invocado con "man mmap"). No ha dado problemas a la hora de hacer depuración ya que no tenia una extensión muy grande como es el caaso de otros ejercicio desarrollados tanto en esta práctica como en prácticas anteriores.
