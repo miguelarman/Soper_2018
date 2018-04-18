@@ -31,7 +31,7 @@
 
 
 
-#define TAMANO_MENSAJE 2048 /*!< Tamañoo del mensaje */
+#define TAMANO_MENSAJE 2048 /*!< Tamanoo del mensaje */
 #define OK 0 /*!< Macro para representar ningún fallo */
 #define ERROR 1 /*!< Macro devuelta si se encuentra algún error */
 #define KEY 1300 /*!< Key utilizada por ftok */
@@ -92,7 +92,7 @@ int numero_mensajes_pendientes(int msqid, int *cantidad);
  * 
  * @param fichero_entrada Path del fichero del que leer los datos
  * @param msqid Identificador de la cola de mensajes
- * @param child_pid_2 PID del proceso B, necesario para mandarle una señal cuando acaba
+ * @param child_pid_2 PID del proceso B, necesario para mandarle una senal cuando acaba
  * @return void
  */
 void proceso_A(char *fichero_entrada, int msqid, int child_pid_2);
@@ -122,13 +122,13 @@ void proceso_B(int msqid);
 void proceso_C(char *fichero_salida, int msqid);
 
 /**
- * @brief Manejador de la señal para el proceso B
+ * @brief Manejador de la senal para el proceso B
  *
- * Esta función se ejecuta cuando el proceso A manda la señal
+ * Esta función se ejecuta cuando el proceso A manda la senal
  * de que ha acabado al proceso B. Después, se modifica una
  * flag global
  * 
- * @param senal Identificador de la señal recibida
+ * @param senal Identificador de la senal recibida
  * @return void
  */
 void manejador(int senal);

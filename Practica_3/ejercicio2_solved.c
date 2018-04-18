@@ -1,3 +1,17 @@
+/**
+ * @brief Ejercicio 2_solved de la Práctica
+ * 
+ * En este ejercicio creamos una serie de procesos que, 
+ * mediante memoria compartida y la terminal preguntan
+ * al usuario una serie de nombres, y guardan la informacion
+ * de los usuarios. Anadimos el uso de semáforos para regular
+ * y sincronizar los procesos
+ * 
+ * @file ejercicio2_solved.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 17-4-2018
+ */
+
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -14,9 +28,9 @@
 #include "aleat_num.h"
 
 #define MAX_WAIT 10 /*!< Máxima espera de los procesos (en segundos) */
-#define MIN_WAIT 1 /*!< Míima espera de los procesos (en segundos) */
+#define MIN_WAIT 1 /*!< Mínima espera de los procesos (en segundos) */
 #define KEY 1300 /*!< Key para ftok */
-#define TAMANIO_NOMBRE 80 /*!< Tamaño del campo del nombre en memoria compartida */
+#define TAMANIO_NOMBRE 80 /*!< Tamano del campo del nombre en memoria compartida */
 #define SEMAFORO_ENTRADA 0 /*!< Identificador del semaforo de la entrada por pantalla */
 #define SEMAFORO_SHM 1 /*!< Identificador del semaforo de memoria compartida */
 #define FILEKEY "/bin/bash" /*!< Filekey para ftok */
@@ -33,16 +47,17 @@ typedef struct info{
 } Informacion;
 
 
+
 /* Funciones privadas*/
 
 /**
- * @brief Manejador de la señal
+ * @brief Manejador de la senal
  *
- * Esta función es llamada cuando se recibe la señal 
+ * Esta función es llamada cuando se recibe la senal 
  * SIGUSR1, y simplemente permite, mediante la llamada a pause(),
- * esperar a que reciba la señal, puesto que está vacía
+ * esperar a que reciba la senal, puesto que está vacía
  * 
- * @param senal Señal recibida
+ * @param senal Senal recibida
  * @return void
  */
 void manejador(int senal);
@@ -54,7 +69,7 @@ void manejador(int senal);
  * Si el key especificado ya ha sido creado, devuelve la zona,
  * y si no la crea
  * 
- * @param size Tamaño en bytes de la zona deseada
+ * @param size Tamano en bytes de la zona deseada
  * @param key Key creada por ftok
  * @return Identificador de la zona de memoria compartida
  */
@@ -66,8 +81,6 @@ int reservashm(int size, int key);
  * Esta función engloba las acciones de los procesos hijos. Estas son
  * preguntar por terminal el nombre y guardarlo en memoria compartida
  * 
- * @param size Tamaño en bytes de la zona deseada
- * @param key Key creada por ftok
  * @return Identificador de la zona de memoria compartida
  */
 void ejecucionHijo();
@@ -80,7 +93,7 @@ void ejecucionHijo();
  * @brief Función principal del programa
  *
  * Este programa coordina la ejecución de procesos hijos,
- * solicitan y almacenan información de usuarios. Añade el
+ * solicitan y almacenan información de usuarios. Anade el
  * uso de semáfoross
  * 
  * @return 0 si todo se ejecuta correctamente, y -1 en cualquier

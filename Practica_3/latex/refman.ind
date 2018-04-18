@@ -1,0 +1,220 @@
+\begin{theindex}
+
+  \item {aleat\+\_\+num}
+    \subitem {aleat\+\_\+num.\+c}, \hyperpage{9}
+    \subitem {aleat\+\_\+num.\+h}, \hyperpage{10}
+  \item {aleat\+\_\+num.\+c}, \hyperpage{9}
+    \subitem {aleat\+\_\+num}, \hyperpage{9}
+  \item {aleat\+\_\+num.\+h}, \hyperpage{10}
+    \subitem {aleat\+\_\+num}, \hyperpage{10}
+
+  \indexspace
+
+  \item {cadena\+\_\+montaje.\+c}, \hyperpage{11}
+    \subitem {E\+R\+R\+OR}, \hyperpage{12}
+    \subitem {F\+I\+L\+E\+K\+EY}, \hyperpage{12}
+    \subitem {inicializa\+\_\+fichero\+\_\+entrada}, \hyperpage{13}
+    \subitem {K\+EY}, \hyperpage{13}
+    \subitem {main}, \hyperpage{14}
+    \subitem {manejador}, \hyperpage{14}
+    \subitem {numero\+\_\+mensajes\+\_\+pendientes}, \hyperpage{15}
+    \subitem {OK}, \hyperpage{13}
+    \subitem {proceso\+\_\+1\+\_\+terminado}, \hyperpage{16}
+    \subitem {proceso\+\_\+A}, \hyperpage{15}
+    \subitem {proceso\+\_\+B}, \hyperpage{15}
+    \subitem {proceso\+\_\+C}, \hyperpage{16}
+    \subitem {T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE}, 
+		\hyperpage{13}
+    \subitem {Tipo\+\_\+\+Mensaje}, \hyperpage{13}
+  \item {consumidor}
+    \subitem {ejercicio3.\+c}, \hyperpage{27}
+
+  \indexspace
+
+  \item {Datos\+\_\+\+Compartidos}, \hyperpage{5}
+
+  \indexspace
+
+  \item {E\+R\+R\+OR}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{12}
+  \item {E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}
+    \subitem {ejercicio3.\+c}, \hyperpage{26}
+  \item {E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}
+    \subitem {ejercicio3.\+c}, \hyperpage{26}
+  \item {ejecucion\+Hijo}
+    \subitem {ejercicio2.\+c}, \hyperpage{19}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{23}
+  \item {ejercicio2.\+c}, \hyperpage{17}
+    \subitem {ejecucion\+Hijo}, \hyperpage{19}
+    \subitem {F\+I\+L\+E\+K\+EY}, \hyperpage{18}
+    \subitem {K\+EY}, \hyperpage{18}
+    \subitem {M\+A\+X\+\_\+\+W\+A\+IT}, \hyperpage{18}
+    \subitem {M\+I\+N\+\_\+\+W\+A\+IT}, \hyperpage{18}
+    \subitem {main}, \hyperpage{20}
+    \subitem {manejador}, \hyperpage{20}
+    \subitem {reservashm}, \hyperpage{20}
+    \subitem {T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE}, 
+		\hyperpage{18}
+  \item {ejercicio2\+\_\+solved.\+c}, \hyperpage{21}
+    \subitem {ejecucion\+Hijo}, \hyperpage{23}
+    \subitem {F\+I\+L\+E\+K\+EY}, \hyperpage{22}
+    \subitem {K\+EY}, \hyperpage{22}
+    \subitem {M\+A\+X\+\_\+\+W\+A\+IT}, \hyperpage{22}
+    \subitem {M\+I\+N\+\_\+\+W\+A\+IT}, \hyperpage{23}
+    \subitem {main}, \hyperpage{23}
+    \subitem {manejador}, \hyperpage{24}
+    \subitem {reservashm}, \hyperpage{24}
+    \subitem {S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA}, 
+		\hyperpage{23}
+    \subitem {S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM}, \hyperpage{23}
+    \subitem {T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE}, 
+		\hyperpage{23}
+  \item {ejercicio3.\+c}, \hyperpage{25}
+    \subitem {consumidor}, \hyperpage{27}
+    \subitem {E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}, 
+		\hyperpage{26}
+    \subitem {E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}, 
+		\hyperpage{26}
+    \subitem {F\+I\+L\+E\+K\+EY}, \hyperpage{26}
+    \subitem {K\+EY}, \hyperpage{26}
+    \subitem {M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}, 
+		\hyperpage{26}
+    \subitem {M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}, 
+		\hyperpage{26}
+    \subitem {M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}, 
+		\hyperpage{27}
+    \subitem {M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}, 
+		\hyperpage{27}
+    \subitem {main}, \hyperpage{28}
+    \subitem {N}, \hyperpage{27}
+    \subitem {N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS}, 
+		\hyperpage{27}
+    \subitem {productor}, \hyperpage{28}
+    \subitem {reservashm}, \hyperpage{28}
+  \item {ejercicio4.\+c}, \hyperpage{29}
+    \subitem {F\+I\+L\+E\+N\+A\+ME}, \hyperpage{30}
+    \subitem {main}, \hyperpage{30}
+    \subitem {primer\+\_\+hilo}, \hyperpage{30}
+    \subitem {segundo\+\_\+hilo}, \hyperpage{30}
+
+  \indexspace
+
+  \item {F\+I\+L\+E\+K\+EY}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{12}
+    \subitem {ejercicio2.\+c}, \hyperpage{18}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{22}
+    \subitem {ejercicio3.\+c}, \hyperpage{26}
+  \item {F\+I\+L\+E\+N\+A\+ME}
+    \subitem {ejercicio4.\+c}, \hyperpage{30}
+
+  \indexspace
+
+  \item {id}
+    \subitem {info}, \hyperpage{6}
+  \item {info}, \hyperpage{5}
+    \subitem {id}, \hyperpage{6}
+    \subitem {nombre}, \hyperpage{6}
+  \item {inicializa\+\_\+fichero\+\_\+entrada}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{13}
+
+  \indexspace
+
+  \item {K\+EY}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{13}
+    \subitem {ejercicio2.\+c}, \hyperpage{18}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{22}
+    \subitem {ejercicio3.\+c}, \hyperpage{26}
+
+  \indexspace
+
+  \item {M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}
+    \subitem {ejercicio3.\+c}, \hyperpage{26}
+  \item {M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}
+    \subitem {ejercicio3.\+c}, \hyperpage{26}
+  \item {M\+A\+X\+\_\+\+W\+A\+IT}
+    \subitem {ejercicio2.\+c}, \hyperpage{18}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{22}
+  \item {M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}
+    \subitem {ejercicio3.\+c}, \hyperpage{27}
+  \item {M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}
+    \subitem {ejercicio3.\+c}, \hyperpage{27}
+  \item {M\+I\+N\+\_\+\+W\+A\+IT}
+    \subitem {ejercicio2.\+c}, \hyperpage{18}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{23}
+  \item {main}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{14}
+    \subitem {ejercicio2.\+c}, \hyperpage{20}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{23}
+    \subitem {ejercicio3.\+c}, \hyperpage{28}
+    \subitem {ejercicio4.\+c}, \hyperpage{30}
+  \item {manejador}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{14}
+    \subitem {ejercicio2.\+c}, \hyperpage{20}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{24}
+  \item {msgbuf}, \hyperpage{6}
+    \subitem {mtext}, \hyperpage{6}
+    \subitem {mtype}, \hyperpage{7}
+  \item {mtext}
+    \subitem {msgbuf}, \hyperpage{6}
+  \item {mtype}
+    \subitem {msgbuf}, \hyperpage{7}
+
+  \indexspace
+
+  \item {N}
+    \subitem {ejercicio3.\+c}, \hyperpage{27}
+  \item {N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS}
+    \subitem {ejercicio3.\+c}, \hyperpage{27}
+  \item {nombre}
+    \subitem {info}, \hyperpage{6}
+  \item {numero\+\_\+mensajes\+\_\+pendientes}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{15}
+
+  \indexspace
+
+  \item {OK}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{13}
+
+  \indexspace
+
+  \item {primer\+\_\+hilo}
+    \subitem {ejercicio4.\+c}, \hyperpage{30}
+  \item {proceso\+\_\+1\+\_\+terminado}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{16}
+  \item {proceso\+\_\+A}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{15}
+  \item {proceso\+\_\+B}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{15}
+  \item {proceso\+\_\+C}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{16}
+  \item {productor}
+    \subitem {ejercicio3.\+c}, \hyperpage{28}
+
+  \indexspace
+
+  \item {reservashm}
+    \subitem {ejercicio2.\+c}, \hyperpage{20}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{24}
+    \subitem {ejercicio3.\+c}, \hyperpage{28}
+
+  \indexspace
+
+  \item {S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{23}
+  \item {S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{23}
+  \item {segundo\+\_\+hilo}
+    \subitem {ejercicio4.\+c}, \hyperpage{30}
+  \item {semun}, \hyperpage{7}
+
+  \indexspace
+
+  \item {T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE}
+    \subitem {ejercicio2.\+c}, \hyperpage{18}
+    \subitem {ejercicio2\+\_\+solved.\+c}, \hyperpage{23}
+  \item {T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{13}
+  \item {Tipo\+\_\+\+Mensaje}
+    \subitem {cadena\+\_\+montaje.\+c}, \hyperpage{13}
+
+\end{theindex}

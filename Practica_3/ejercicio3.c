@@ -1,3 +1,17 @@
+/**
+ * @brief Ejercicio 3 de la Práctica
+ * 
+ * descripcion del fichero descripcion del fichero
+ * descripcion del fichero descripcion del fichero
+ * descripcion del fichero descripcion del fichero
+ * descripcion del fichero descripcion del fichero
+ * 
+ * @file ejercicio3.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 17-4-2018
+ */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -58,7 +72,7 @@ void consumidor(int key);
  * La llamamos en el Main cada vez que necesitamos memoria
  * compartida para la comunicación de procesos.
  * 
- * @param size tamaño de la memoria deseado
+ * @param size tamano de la memoria deseado
  * @param key clave de la memoria compartida
  * 
  * @return El identificador de la memoria compartida creada

@@ -1,3 +1,16 @@
+/**
+ * @brief Ejercicio 4 de la Práctica
+ * 
+ * descripcion del fichero descripcion del fichero
+ * descripcion del fichero descripcion del fichero
+ * descripcion del fichero descripcion del fichero
+ * descripcion del fichero descripcion del fichero
+ * 
+ * @file ejercicio4.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 17-4-2018
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <pthread.h>
@@ -25,6 +38,7 @@
  * @return void
  */
 void *primer_hilo();
+
 /**
  * @brief Ejecución del Segundo hilo, mapea la memoria del fichero escrito por el primer hilo y modifica el 
  * 

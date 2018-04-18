@@ -1,0 +1,194 @@
+\hypertarget{ejercicio2solved_8c}{}\section{ejercicio2solved.\+c File Reference}
+\label{ejercicio2solved_8c}\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+
+
+Ejercicio 2\+\_\+solved de la Práctica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$sys/shm.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}semaforos.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}aleat\+\_\+num.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structinfo}{info}}
+\begin{DoxyCompactList}\small\item\em Estructura que almacena la información de un usuario. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio2solved_8c_a41b0180f12af925ed6e81a3566c0e448}{M\+A\+X\+\_\+\+W\+A\+IT}}~10
+\item 
+\#define \mbox{\hyperlink{ejercicio2solved_8c_a216b4d0ad666e28fd731b4c0029d57e9}{M\+I\+N\+\_\+\+W\+A\+IT}}~1
+\item 
+\#define \mbox{\hyperlink{ejercicio2solved_8c_a8ae9d53f33f46cfcfcb9736e6351452a}{K\+EY}}~1300
+\item 
+\#define \mbox{\hyperlink{ejercicio2solved_8c_adc9a965ddfa49420375f71c462043e5a}{T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE}}~80
+\item 
+\#define \mbox{\hyperlink{ejercicio2solved_8c_af559fe58dbe5ec25e2fb239dd6552983}{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA}}~0
+\item 
+\#define \mbox{\hyperlink{ejercicio2solved_8c_a0fcbfc58c019006326b700c8f4a2eb93}{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM}}~1
+\item 
+\#define \mbox{\hyperlink{ejercicio2solved_8c_a68c15c5fb7f7c6f707903e6a46ab0557}{F\+I\+L\+E\+K\+EY}}~\char`\"{}/bin/bash\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ejercicio2solved_8c_a956fb41d1afdcb20ab642b7e379faaef}\label{ejercicio2solved_8c_a956fb41d1afdcb20ab642b7e379faaef}} 
+typedef struct \mbox{\hyperlink{structinfo}{info}} \mbox{\hyperlink{ejercicio2solved_8c_a956fb41d1afdcb20ab642b7e379faaef}{Informacion}}
+\begin{DoxyCompactList}\small\item\em Estructura que almacena la información de un usuario. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ejercicio2solved_8c_aa619f3cfea8c787a7896463b46616822}{manejador}} (int senal)
+\begin{DoxyCompactList}\small\item\em Manejador de la senal. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio2solved_8c_a373fd351505d979be067c952cf38f2bc}{reservashm}} (int size, int key)
+\begin{DoxyCompactList}\small\item\em Función que solicita memoria compartida. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ejercicio2solved_8c_a4cc883e16d9246f590e2563e27d768af}{ejecucion\+Hijo}} ()
+\begin{DoxyCompactList}\small\item\em Función que ejecuta el hijo. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio2solved_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{ejercicio2solved_8c_a4ba6fc40a858d9e9db819552ca6294ee}\label{ejercicio2solved_8c_a4ba6fc40a858d9e9db819552ca6294ee}} 
+void {\bfseries ejecucion\+Hijo} (int key)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 2\+\_\+solved de la Práctica. 
+
+En este ejercicio creamos una serie de procesos que, mediante memoria compartida y la terminal preguntan al usuario una serie de nombres, y guardan la informacion de los usuarios. Anadimos el uso de semáforos para regular y sincronizar los procesos
+
+\begin{DoxyAuthor}{Author}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ejercicio2solved_8c_a68c15c5fb7f7c6f707903e6a46ab0557}\label{ejercicio2solved_8c_a68c15c5fb7f7c6f707903e6a46ab0557}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!F\+I\+L\+E\+K\+EY@{F\+I\+L\+E\+K\+EY}}
+\index{F\+I\+L\+E\+K\+EY@{F\+I\+L\+E\+K\+EY}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{F\+I\+L\+E\+K\+EY}{FILEKEY}}
+{\footnotesize\ttfamily \#define F\+I\+L\+E\+K\+EY~\char`\"{}/bin/bash\char`\"{}}
+
+Filekey para ftok \mbox{\Hypertarget{ejercicio2solved_8c_a8ae9d53f33f46cfcfcb9736e6351452a}\label{ejercicio2solved_8c_a8ae9d53f33f46cfcfcb9736e6351452a}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!K\+EY@{K\+EY}}
+\index{K\+EY@{K\+EY}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{K\+EY}{KEY}}
+{\footnotesize\ttfamily \#define K\+EY~1300}
+
+Key para ftok \mbox{\Hypertarget{ejercicio2solved_8c_a41b0180f12af925ed6e81a3566c0e448}\label{ejercicio2solved_8c_a41b0180f12af925ed6e81a3566c0e448}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!M\+A\+X\+\_\+\+W\+A\+IT@{M\+A\+X\+\_\+\+W\+A\+IT}}
+\index{M\+A\+X\+\_\+\+W\+A\+IT@{M\+A\+X\+\_\+\+W\+A\+IT}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+W\+A\+IT}{MAX\_WAIT}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+W\+A\+IT~10}
+
+Máxima espera de los procesos (en segundos) \mbox{\Hypertarget{ejercicio2solved_8c_a216b4d0ad666e28fd731b4c0029d57e9}\label{ejercicio2solved_8c_a216b4d0ad666e28fd731b4c0029d57e9}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!M\+I\+N\+\_\+\+W\+A\+IT@{M\+I\+N\+\_\+\+W\+A\+IT}}
+\index{M\+I\+N\+\_\+\+W\+A\+IT@{M\+I\+N\+\_\+\+W\+A\+IT}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{M\+I\+N\+\_\+\+W\+A\+IT}{MIN\_WAIT}}
+{\footnotesize\ttfamily \#define M\+I\+N\+\_\+\+W\+A\+IT~1}
+
+Mínima espera de los procesos (en segundos) \mbox{\Hypertarget{ejercicio2solved_8c_af559fe58dbe5ec25e2fb239dd6552983}\label{ejercicio2solved_8c_af559fe58dbe5ec25e2fb239dd6552983}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA@{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA}}
+\index{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA@{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA}{SEMAFORO\_ENTRADA}}
+{\footnotesize\ttfamily \#define S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA~0}
+
+Identificador del semaforo de la entrada por pantalla \mbox{\Hypertarget{ejercicio2solved_8c_a0fcbfc58c019006326b700c8f4a2eb93}\label{ejercicio2solved_8c_a0fcbfc58c019006326b700c8f4a2eb93}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM@{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM}}
+\index{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM@{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM}{SEMAFORO\_SHM}}
+{\footnotesize\ttfamily \#define S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+HM~1}
+
+Identificador del semaforo de memoria compartida \mbox{\Hypertarget{ejercicio2solved_8c_adc9a965ddfa49420375f71c462043e5a}\label{ejercicio2solved_8c_adc9a965ddfa49420375f71c462043e5a}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE@{T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE}}
+\index{T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE@{T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE}{TAMANIO\_NOMBRE}}
+{\footnotesize\ttfamily \#define T\+A\+M\+A\+N\+I\+O\+\_\+\+N\+O\+M\+B\+RE~80}
+
+Tamano del campo del nombre en memoria compartida 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ejercicio2solved_8c_a4cc883e16d9246f590e2563e27d768af}\label{ejercicio2solved_8c_a4cc883e16d9246f590e2563e27d768af}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!ejecucion\+Hijo@{ejecucion\+Hijo}}
+\index{ejecucion\+Hijo@{ejecucion\+Hijo}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{ejecucion\+Hijo()}{ejecucionHijo()}}
+{\footnotesize\ttfamily void ejecucion\+Hijo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Función que ejecuta el hijo. 
+
+Esta función engloba las acciones de los procesos hijos. Estas son preguntar por terminal el nombre y guardarlo en memoria compartida
+
+\begin{DoxyReturn}{Returns}
+Identificador de la zona de memoria compartida 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio2solved_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{ejercicio2solved_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!main@{main}}
+\index{main@{main}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa coordina la ejecución de procesos hijos, solicitan y almacenan información de usuarios. Anade el uso de semáfoross
+
+\begin{DoxyReturn}{Returns}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio2solved_8c_aa619f3cfea8c787a7896463b46616822}\label{ejercicio2solved_8c_aa619f3cfea8c787a7896463b46616822}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!manejador@{manejador}}
+\index{manejador@{manejador}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{manejador()}{manejador()}}
+{\footnotesize\ttfamily void manejador (\begin{DoxyParamCaption}\item[{int}]{senal }\end{DoxyParamCaption})}
+
+
+
+Manejador de la senal. 
+
+Esta función es llamada cuando se recibe la senal S\+I\+G\+U\+S\+R1, y simplemente permite, mediante la llamada a pause(), esperar a que reciba la senal, puesto que está vacía
+
+
+\begin{DoxyParams}{Parameters}
+{\em senal} & Senal recibida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio2solved_8c_a373fd351505d979be067c952cf38f2bc}\label{ejercicio2solved_8c_a373fd351505d979be067c952cf38f2bc}} 
+\index{ejercicio2solved.\+c@{ejercicio2solved.\+c}!reservashm@{reservashm}}
+\index{reservashm@{reservashm}!ejercicio2solved.\+c@{ejercicio2solved.\+c}}
+\subsubsection{\texorpdfstring{reservashm()}{reservashm()}}
+{\footnotesize\ttfamily int reservashm (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+Función que solicita memoria compartida. 
+
+Esta función es llamada para solicitar memoria compartida. Si el key especificado ya ha sido creado, devuelve la zona, y si no la crea
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & Tamano en bytes de la zona deseada \\
+\hline
+{\em key} & Key creada por ftok \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Identificador de la zona de memoria compartida 
+\end{DoxyReturn}
