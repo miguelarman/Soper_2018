@@ -8,18 +8,20 @@
 #include "semaforos.h"
 #include "aleat_num.h"
 
-#define KEY 1300
-#define FILEKEY "/bin/bash"
-#define N 10 /* Numero maximo de elementos que pueden estar listos para consumir a la vez*/
-#define NUMERO_SEMAFOROS 4
-#define MIN_SLEEP_PRODUCTOR 1
-#define MAX_SLEEP_PRODUCTOR 5
-#define MIN_SLEEP_CONSUMIDOR 1
-#define MAX_SLEEP_CONSUMIDOR 5
-#define ESPERA_INICIAL_CONSUMIDOR 10
-#define ESPERA_INICIAL_PRODUCTOR 0
+#define KEY 1300 /*!< KEY necesaria para el ftok */
+#define FILEKEY "/bin/bash" /*!< FILEKEY necesario para ftok */
+#define N 10 /*!< Numero maximo de elementos que pueden estar listos para consumir a la vez*/
+#define NUMERO_SEMAFOROS 4 /*!< Numero de semaforos usados en el ejercicio*/
+#define MIN_SLEEP_PRODUCTOR 1 /*!< Espera mínima del productor */
+#define MAX_SLEEP_PRODUCTOR 5 /*!< Espera máxima del productor*/
+#define MIN_SLEEP_CONSUMIDOR 1 /*!< Espera mínima del consumidor*/
+#define MAX_SLEEP_CONSUMIDOR 5 /*!< Espera máxima del consumidor*/
+#define ESPERA_INICIAL_CONSUMIDOR 10 /*!< Espera inicial realizada por el consumidor*/
+#define ESPERA_INICIAL_PRODUCTOR 0 /*!< Espera inicial realizada por el productor*/
 
-/* Estructura donde guardamos los valores para compartir entre procesos */
+/**
+ * @brief Estructura donde guardamos los valores para compartir entre procesos 
+ */
 typedef struct {
     int contador; /* contador del numero de elementos disponibles*/
     char lista[N]; /* array circular*/
@@ -27,16 +29,52 @@ typedef struct {
     int salida; /* numero de la lista del primer elemento ocupado */
 } Datos_Compartidos;
 
-/* Enumeracion con los distintos semaforos que utilizamos */
+/**
+ * @brief Enumeracion con los distintos semaforos que utilizamos
+ */
 enum semaforos {SEMAFORO_LISTA, SEMAFORO_ENTRADA, SEMAFORO_SALIDA, SEMAFORO_CONTADOR};
 
-
 /* Funciones privadas */
+
+/**
+ * @brief Funcion privada conteniendo la ejecución del productor
+ * 
+ * @param key KEY para la memoria compartida
+ * @return void
+ */
 void productor(int key);
+
+/**
+ * @brief Funcion privada conteniendo la ejecución del consumidor
+ * 
+ * @param key KEY para la memoria compartida
+ * @return void
+ */
 void consumidor(int key);
+
+/**
+ * @brief Funcion privada para reservar memoria compartida
+ * 
+ * La llamamos en el Main cada vez que necesitamos memoria
+ * compartida para la comunicación de procesos.
+ * 
+ * @param size tamaño de la memoria deseado
+ * @param key clave de la memoria compartida
+ * 
+ * @return El identificador de la memoria compartida creada
+ */
 int reservashm(int size, int key);
 
-
+/**
+ * @brief Funcion Principal del ejercicio
+ * 
+ * Crea los procesos hijos necesarios para
+ * implementar el productor-consumidor pedido
+ * en la documentación de la práctica
+ * 
+ * @return 0 si todo se ejecuta correctamente, y -1 en cualquier
+ * otro caso
+ */
 
 int main() {
     

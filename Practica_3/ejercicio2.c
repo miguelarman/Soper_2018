@@ -1,3 +1,16 @@
+/**
+ * @brief Ejercicio 2 de la Práctica
+ * 
+ * En este ejercicio creamos una serie de procesos que, 
+ * mediante memoria compartida y la terminal preguntan
+ * al usuario una serie de nombres, y guardan la informacion
+ * de los usuarios
+ * 
+ * @file ejercicio2.c
+ * @author José Manuel Chacón Aguilera y Miguel Arconada Manteca
+ * @date 17-4-2018
+ */
+ 
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/ipc.h>
@@ -13,32 +26,76 @@
 #include "semaforos.h"
 #include "aleat_num.h"
 
-#define SEGUNDOS(X) (X) * 1000000 /*!< Macro para tranformar segundos a microsegundos*/
-#define MAX_WAIT 10
-#define MIN_WAIT 1
-#define KEY 1300
-#define TAMANIO_NOMBRE 80
-#define SEMAFORO_ENTRADA 0
-#define SEMAFORO_SHM 1
-#define FILEKEY "/bin/bash"
+#define MAX_WAIT 10 /*!< Máxima espera de los procesos (en segundos) */
+#define MIN_WAIT 1 /*!< Míima espera de los procesos (en segundos) */
+#define KEY 1300 /*!< Key para ftok */
+#define TAMANIO_NOMBRE 80 /*!< Tamaño del campo del nombre en memoria compartida */
+#define FILEKEY "/bin/bash" /*!< Filekey para ftok */
 
 
 /* Estructuras */
+
+/**
+ * @brief Estructura que almacena la información de un usuario
+ */
 typedef struct info{
-    char nombre[TAMANIO_NOMBRE];
-    int id;
+    char nombre[TAMANIO_NOMBRE]; /*!< Nombre del usuario */
+    int id; /*!< Identificador del usuario */
 } Informacion;
 
+
 /* Funciones privadas*/
+
+/**
+ * @brief Manejador de la señal
+ *
+ * Esta función es llamada cuando se recibe la señal 
+ * SIGUSR1, y simplemente permite, mediante la llamada a pause(),
+ * esperar a que reciba la señal, puesto que está vacía
+ * 
+ * @param senal Señal recibida
+ * @return void
+ */
 void manejador(int senal);
+
+/**
+ * @brief Función que solicita memoria compartida.
+ *
+ * Esta función es llamada para solicitar memoria compartida.
+ * Si el key especificado ya ha sido creado, devuelve la zona,
+ * y si no la crea
+ * 
+ * @param size Tamaño en bytes de la zona deseada
+ * @param key Key creada por ftok
+ * @return Identificador de la zona de memoria compartida
+ */
 int reservashm(int size, int key);
+
+/**
+ * @brief Función que ejecuta el hijo
+ *
+ * Esta función engloba las acciones de los procesos hijos. Estas son
+ * preguntar por terminal el nombre y guardarlo en memoria compartida
+ * 
+ * @param size Tamaño en bytes de la zona deseada
+ * @param key Key creada por ftok
+ * @return Identificador de la zona de memoria compartida
+ */
 void ejecucionHijo();
-
-/* Variables globales */
-
 
 /*FUNCION MAIN*/
 
+
+
+/**
+ * @brief Función principal del programa
+ *
+ * Este programa coordina la ejecución de procesos hijos,
+ * solicitan y almacenan información de usuarios
+ * 
+ * @return 0 si todo se ejecuta correctamente, y -1 en cualquier
+ * otro caso
+ */
 int main(int argc, char **argv){
     int n_proc;
     int i, j;
