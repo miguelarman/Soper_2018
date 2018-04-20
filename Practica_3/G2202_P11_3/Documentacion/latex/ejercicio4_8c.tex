@@ -1,0 +1,99 @@
+\hypertarget{ejercicio4_8c}{}\section{ejercicio4.\+c File Reference}
+\label{ejercicio4_8c}\index{ejercicio4.\+c@{ejercicio4.\+c}}
+
+
+Ejercicio 4 de la Práctica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/shm.\+h$>$}\newline
+{\ttfamily \#include $<$sys/mman.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+{\ttfamily \#include $<$fcntl.\+h$>$}\newline
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}aleat\+\_\+num.\+h\char`\"{}}\newline
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio4_8c_a8de29f7c8bbf1a81cc6e71ac602032d3}{F\+I\+L\+E\+N\+A\+ME}}~\char`\"{}files/ej4/fichero\+\_\+ej4\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void $\ast$ \mbox{\hyperlink{ejercicio4_8c_ac8dc39538fc482d04bf4cc17f5bdbf4d}{primer\+\_\+hilo}} ()
+\begin{DoxyCompactList}\small\item\em Ejecución del primer hilo, escribe números aleatorios en un fichero de texto. \end{DoxyCompactList}\item 
+void $\ast$ \mbox{\hyperlink{ejercicio4_8c_a42f826f05aaa285f380192dba0145058}{segundo\+\_\+hilo}} ()
+\begin{DoxyCompactList}\small\item\em Ejecución del Segundo hilo, mapea la memoria del fichero escrito por el primer hilo y modifica el. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio4_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Función Main del ejercicio, invoca a dos hilos y posteriormente los ejecuta con las funciones descritas en este mismo archivo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 4 de la Práctica. 
+
+En este ejercicio se nos pide trabajar con la funcion de C mmap que es útil para mapear memoria y acceder desde otros procesos a la misma. Un hilo se comunica en este ejercicio con otro hilo mediante el uso de dicha función.
+
+\begin{DoxyAuthor}{Author}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ejercicio4_8c_a8de29f7c8bbf1a81cc6e71ac602032d3}\label{ejercicio4_8c_a8de29f7c8bbf1a81cc6e71ac602032d3}} 
+\index{ejercicio4.\+c@{ejercicio4.\+c}!F\+I\+L\+E\+N\+A\+ME@{F\+I\+L\+E\+N\+A\+ME}}
+\index{F\+I\+L\+E\+N\+A\+ME@{F\+I\+L\+E\+N\+A\+ME}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection{\texorpdfstring{F\+I\+L\+E\+N\+A\+ME}{FILENAME}}
+{\footnotesize\ttfamily \#define F\+I\+L\+E\+N\+A\+ME~\char`\"{}files/ej4/fichero\+\_\+ej4\char`\"{}}
+
+Nombre del Fichero donde se genera 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ejercicio4_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{ejercicio4_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{ejercicio4.\+c@{ejercicio4.\+c}!main@{main}}
+\index{main@{main}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Función Main del ejercicio, invoca a dos hilos y posteriormente los ejecuta con las funciones descritas en este mismo archivo. 
+
+\begin{DoxyReturn}{Returns}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio4_8c_ac8dc39538fc482d04bf4cc17f5bdbf4d}\label{ejercicio4_8c_ac8dc39538fc482d04bf4cc17f5bdbf4d}} 
+\index{ejercicio4.\+c@{ejercicio4.\+c}!primer\+\_\+hilo@{primer\+\_\+hilo}}
+\index{primer\+\_\+hilo@{primer\+\_\+hilo}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection{\texorpdfstring{primer\+\_\+hilo()}{primer\_hilo()}}
+{\footnotesize\ttfamily void $\ast$ primer\+\_\+hilo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ejecución del primer hilo, escribe números aleatorios en un fichero de texto. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio4_8c_a42f826f05aaa285f380192dba0145058}\label{ejercicio4_8c_a42f826f05aaa285f380192dba0145058}} 
+\index{ejercicio4.\+c@{ejercicio4.\+c}!segundo\+\_\+hilo@{segundo\+\_\+hilo}}
+\index{segundo\+\_\+hilo@{segundo\+\_\+hilo}!ejercicio4.\+c@{ejercicio4.\+c}}
+\subsubsection{\texorpdfstring{segundo\+\_\+hilo()}{segundo\_hilo()}}
+{\footnotesize\ttfamily void $\ast$ segundo\+\_\+hilo (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Ejecución del Segundo hilo, mapea la memoria del fichero escrito por el primer hilo y modifica el. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

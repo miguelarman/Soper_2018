@@ -1,0 +1,216 @@
+\hypertarget{ejercicio3_8c}{}\section{ejercicio3.\+c File Reference}
+\label{ejercicio3_8c}\index{ejercicio3.\+c@{ejercicio3.\+c}}
+
+
+Ejercicio 3 de la Práctica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/shm.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}semaforos.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}aleat\+\_\+num.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structDatos__Compartidos}{Datos\+\_\+\+Compartidos}}
+\begin{DoxyCompactList}\small\item\em Estructura donde guardamos los valores para compartir entre procesos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_a8ae9d53f33f46cfcfcb9736e6351452a}{K\+EY}}~1300
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_a68c15c5fb7f7c6f707903e6a46ab0557}{F\+I\+L\+E\+K\+EY}}~\char`\"{}/bin/bash\char`\"{}
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_a0240ac851181b84ac374872dc5434ee4}{N}}~10
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_a6b238cd10197e5a8509e14e3708ad9e5}{N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS}}~4
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_a9a2f1076818c57a2ae3738d7a6d7e0ef}{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}}~1
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_ac256970a7e11e83f28ed41b6f1d810fe}{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}}~5
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_aa328bf304d78d9986f86b81979e994e8}{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}}~1
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_ab94525ce2092a129a40a9d69631e2b70}{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}}~5
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_ab7520e4159af0149d26b42a152c08e30}{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}}~10
+\item 
+\#define \mbox{\hyperlink{ejercicio3_8c_aebd19d522c2226cba1461a4dd180487b}{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}}~0
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{ejercicio3_8c_a4d3eb0a66099756bbd8486888d803bc3}\label{ejercicio3_8c_a4d3eb0a66099756bbd8486888d803bc3}} 
+enum \mbox{\hyperlink{ejercicio3_8c_a4d3eb0a66099756bbd8486888d803bc3}{semaforos}} \{ {\bfseries S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+L\+I\+S\+TA}, 
+{\bfseries S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+E\+N\+T\+R\+A\+DA}, 
+{\bfseries S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+S\+A\+L\+I\+DA}, 
+{\bfseries S\+E\+M\+A\+F\+O\+R\+O\+\_\+\+C\+O\+N\+T\+A\+D\+OR}
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeracion con los distintos semaforos que utilizamos. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{ejercicio3_8c_a5dde5b29615225bf33cdcc98322940aa}{productor}} (int key)
+\begin{DoxyCompactList}\small\item\em Funcion privada conteniendo la ejecución del productor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{ejercicio3_8c_ac688a1cedc285f13cbfa495414e26c20}{consumidor}} (int key)
+\begin{DoxyCompactList}\small\item\em Funcion privada conteniendo la ejecución del consumidor. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio3_8c_a373fd351505d979be067c952cf38f2bc}{reservashm}} (int size, int key)
+\begin{DoxyCompactList}\small\item\em Funcion privada para reservar memoria compartida. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{ejercicio3_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em Funcion Principal del ejercicio. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 3 de la Práctica. 
+
+En este ejercicio se nos pide implementar el algoritmo de sincronización de procesos \char`\"{}\+Productor-\/\+Consumidor\char`\"{} Un proceso es el encargado de producir cierto recurso mientras el otro proceso lo consume, todo esto de forma correctamente sincronizada para aseguranrnos de que se respeta la exclusión mutua en las zonas cŕiticas y asegurandones tambien de que no se produce ningun tipo de interbloqueo.
+
+\begin{DoxyAuthor}{Author}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{ejercicio3_8c_ab7520e4159af0149d26b42a152c08e30}\label{ejercicio3_8c_ab7520e4159af0149d26b42a152c08e30}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR@{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}}
+\index{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR@{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}{ESPERA\_INICIAL\_CONSUMIDOR}}
+{\footnotesize\ttfamily \#define E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR~10}
+
+Espera inicial realizada por el consumidor \mbox{\Hypertarget{ejercicio3_8c_aebd19d522c2226cba1461a4dd180487b}\label{ejercicio3_8c_aebd19d522c2226cba1461a4dd180487b}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR@{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}}
+\index{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR@{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}{ESPERA\_INICIAL\_PRODUCTOR}}
+{\footnotesize\ttfamily \#define E\+S\+P\+E\+R\+A\+\_\+\+I\+N\+I\+C\+I\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR~0}
+
+Espera inicial realizada por el productor \mbox{\Hypertarget{ejercicio3_8c_a68c15c5fb7f7c6f707903e6a46ab0557}\label{ejercicio3_8c_a68c15c5fb7f7c6f707903e6a46ab0557}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!F\+I\+L\+E\+K\+EY@{F\+I\+L\+E\+K\+EY}}
+\index{F\+I\+L\+E\+K\+EY@{F\+I\+L\+E\+K\+EY}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{F\+I\+L\+E\+K\+EY}{FILEKEY}}
+{\footnotesize\ttfamily \#define F\+I\+L\+E\+K\+EY~\char`\"{}/bin/bash\char`\"{}}
+
+F\+I\+L\+E\+K\+EY necesario para ftok \mbox{\Hypertarget{ejercicio3_8c_a8ae9d53f33f46cfcfcb9736e6351452a}\label{ejercicio3_8c_a8ae9d53f33f46cfcfcb9736e6351452a}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!K\+EY@{K\+EY}}
+\index{K\+EY@{K\+EY}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{K\+EY}{KEY}}
+{\footnotesize\ttfamily \#define K\+EY~1300}
+
+K\+EY necesaria para el ftok \mbox{\Hypertarget{ejercicio3_8c_ab94525ce2092a129a40a9d69631e2b70}\label{ejercicio3_8c_ab94525ce2092a129a40a9d69631e2b70}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR@{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}}
+\index{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR@{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}{MAX\_SLEEP\_CONSUMIDOR}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR~5}
+
+Espera máxima del consumidor \mbox{\Hypertarget{ejercicio3_8c_ac256970a7e11e83f28ed41b6f1d810fe}\label{ejercicio3_8c_ac256970a7e11e83f28ed41b6f1d810fe}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR@{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}}
+\index{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR@{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}{MAX\_SLEEP\_PRODUCTOR}}
+{\footnotesize\ttfamily \#define M\+A\+X\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR~5}
+
+Espera máxima del productor \mbox{\Hypertarget{ejercicio3_8c_aa328bf304d78d9986f86b81979e994e8}\label{ejercicio3_8c_aa328bf304d78d9986f86b81979e994e8}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR@{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}}
+\index{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR@{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR}{MIN\_SLEEP\_CONSUMIDOR}}
+{\footnotesize\ttfamily \#define M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+C\+O\+N\+S\+U\+M\+I\+D\+OR~1}
+
+Espera mínima del consumidor \mbox{\Hypertarget{ejercicio3_8c_a9a2f1076818c57a2ae3738d7a6d7e0ef}\label{ejercicio3_8c_a9a2f1076818c57a2ae3738d7a6d7e0ef}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR@{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}}
+\index{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR@{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR}{MIN\_SLEEP\_PRODUCTOR}}
+{\footnotesize\ttfamily \#define M\+I\+N\+\_\+\+S\+L\+E\+E\+P\+\_\+\+P\+R\+O\+D\+U\+C\+T\+OR~1}
+
+Espera mínima del productor \mbox{\Hypertarget{ejercicio3_8c_a0240ac851181b84ac374872dc5434ee4}\label{ejercicio3_8c_a0240ac851181b84ac374872dc5434ee4}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!N@{N}}
+\index{N@{N}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{N}{N}}
+{\footnotesize\ttfamily \#define N~10}
+
+Numero maximo de elementos que pueden estar listos para consumir a la vez \mbox{\Hypertarget{ejercicio3_8c_a6b238cd10197e5a8509e14e3708ad9e5}\label{ejercicio3_8c_a6b238cd10197e5a8509e14e3708ad9e5}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS@{N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS}}
+\index{N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS@{N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS}{NUMERO\_SEMAFOROS}}
+{\footnotesize\ttfamily \#define N\+U\+M\+E\+R\+O\+\_\+\+S\+E\+M\+A\+F\+O\+R\+OS~4}
+
+Numero de semaforos usados en el ejercicio 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{ejercicio3_8c_ac688a1cedc285f13cbfa495414e26c20}\label{ejercicio3_8c_ac688a1cedc285f13cbfa495414e26c20}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!consumidor@{consumidor}}
+\index{consumidor@{consumidor}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{consumidor()}{consumidor()}}
+{\footnotesize\ttfamily void consumidor (\begin{DoxyParamCaption}\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+Funcion privada conteniendo la ejecución del consumidor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & K\+EY para la memoria compartida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio3_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{ejercicio3_8c_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!main@{main}}
+\index{main@{main}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Funcion Principal del ejercicio. 
+
+Crea los procesos hijos necesarios para implementar el productor-\/consumidor pedido en la documentación de la práctica
+
+\begin{DoxyReturn}{Returns}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio3_8c_a5dde5b29615225bf33cdcc98322940aa}\label{ejercicio3_8c_a5dde5b29615225bf33cdcc98322940aa}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!productor@{productor}}
+\index{productor@{productor}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{productor()}{productor()}}
+{\footnotesize\ttfamily void productor (\begin{DoxyParamCaption}\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+Funcion privada conteniendo la ejecución del productor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & K\+EY para la memoria compartida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{ejercicio3_8c_a373fd351505d979be067c952cf38f2bc}\label{ejercicio3_8c_a373fd351505d979be067c952cf38f2bc}} 
+\index{ejercicio3.\+c@{ejercicio3.\+c}!reservashm@{reservashm}}
+\index{reservashm@{reservashm}!ejercicio3.\+c@{ejercicio3.\+c}}
+\subsubsection{\texorpdfstring{reservashm()}{reservashm()}}
+{\footnotesize\ttfamily int reservashm (\begin{DoxyParamCaption}\item[{int}]{size,  }\item[{int}]{key }\end{DoxyParamCaption})}
+
+
+
+Funcion privada para reservar memoria compartida. 
+
+La llamamos en el Main cada vez que necesitamos memoria compartida para la comunicación de procesos.
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & tamano de la memoria deseado \\
+\hline
+{\em key} & clave de la memoria compartida\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+El identificador de la memoria compartida creada 
+\end{DoxyReturn}

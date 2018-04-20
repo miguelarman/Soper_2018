@@ -1,0 +1,298 @@
+\hypertarget{cadena__montaje_8c}{}\section{cadena\+\_\+montaje.\+c File Reference}
+\label{cadena__montaje_8c}\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+
+
+Ejercicio 5 de la Práctica.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$sys/types.\+h$>$}\newline
+{\ttfamily \#include $<$sys/wait.\+h$>$}\newline
+{\ttfamily \#include $<$sys/ipc.\+h$>$}\newline
+{\ttfamily \#include $<$sys/msg.\+h$>$}\newline
+{\ttfamily \#include $<$sys/shm.\+h$>$}\newline
+{\ttfamily \#include $<$sys/stat.\+h$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$pthread.\+h$>$}\newline
+{\ttfamily \#include $<$errno.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}aleat\+\_\+num.\+h\char`\"{}}\newline
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structmsgbuf}{msgbuf}}
+\begin{DoxyCompactList}\small\item\em Estructura que almacena los datos de los mensajes que van a ser enviados a la cola. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{cadena__montaje_8c_a4487334865d4091453c8cdb57316f37b}{T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE}}~2048
+\item 
+\#define \mbox{\hyperlink{cadena__montaje_8c_aba51915c87d64af47fb1cc59348961c9}{OK}}~0
+\item 
+\#define \mbox{\hyperlink{cadena__montaje_8c_a8fe83ac76edc595f6b98cd4a4127aed5}{E\+R\+R\+OR}}~1
+\item 
+\#define \mbox{\hyperlink{cadena__montaje_8c_a8ae9d53f33f46cfcfcb9736e6351452a}{K\+EY}}~1300
+\item 
+\#define \mbox{\hyperlink{cadena__montaje_8c_a68c15c5fb7f7c6f707903e6a46ab0557}{F\+I\+L\+E\+K\+EY}}~\char`\"{}/bin/bash\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{cadena__montaje_8c_a5fcaf6a8b8da2932626e56d0a73eca51}\label{cadena__montaje_8c_a5fcaf6a8b8da2932626e56d0a73eca51}} 
+typedef struct \mbox{\hyperlink{structmsgbuf}{msgbuf}} \mbox{\hyperlink{cadena__montaje_8c_a5fcaf6a8b8da2932626e56d0a73eca51}{Mensaje}}
+\begin{DoxyCompactList}\small\item\em Estructura que almacena los datos de los mensajes que van a ser enviados a la cola. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165}{Tipo\+\_\+\+Mensaje}} \{ \mbox{\hyperlink{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165ad2f30f6abc941c53b5b3e75737fc49e4}{P\+R\+O\+C\+E\+S\+O\+\_\+\+AB}} = 1, 
+\mbox{\hyperlink{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165a4b6aefbbd41b405e727ee1ee44a3279b}{P\+R\+O\+C\+E\+S\+O\+\_\+\+BC}} = 2
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeracion utilizada para diferenciar los tipos de mensajes en la cola. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{cadena__montaje_8c_ad8de574186cfad91faa91da1cc5676ed}{inicializa\+\_\+fichero\+\_\+entrada}} (char $\ast$fichero\+\_\+entrada)
+\begin{DoxyCompactList}\small\item\em Función que inicializa el fichero que contiene los datos a ser modificados por los procesos. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{cadena__montaje_8c_aad82e5401fadde42522ed35be4cd3d8d}{numero\+\_\+mensajes\+\_\+pendientes}} (int msqid, int $\ast$cantidad)
+\begin{DoxyCompactList}\small\item\em Función que lee el numero de mensajes pendientes en la cola. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cadena__montaje_8c_a85365405c5f9e686cfa05f27ef946069}{proceso\+\_\+A}} (char $\ast$fichero\+\_\+entrada, int msqid, int child\+\_\+pid\+\_\+2)
+\begin{DoxyCompactList}\small\item\em Función de la ejecución del proceso A. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cadena__montaje_8c_a89018cf13e42b790215c6b3214d8b765}{proceso\+\_\+B}} (int msqid)
+\begin{DoxyCompactList}\small\item\em Función de la ejecución del proceso b. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cadena__montaje_8c_a6ee7c8ef3dd28d4a0e71fe19a5ef8fac}{proceso\+\_\+C}} (char $\ast$fichero\+\_\+salida, int msqid)
+\begin{DoxyCompactList}\small\item\em Función de la ejecución del proceso C. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{cadena__montaje_8c_aa619f3cfea8c787a7896463b46616822}{manejador}} (int senal)
+\begin{DoxyCompactList}\small\item\em Manejador de la senal para el proceso B. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{cadena__montaje_8c_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Función principal del programa. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{cadena__montaje_8c_a220a49942f39dd4ffc34cdac41286428}{proceso\+\_\+1\+\_\+terminado}}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Ejercicio 5 de la Práctica. 
+
+En este ejercicio creamos una serie de procesos hijos, que realizan la labor de diferentes partes de una cadena de montajes, en la que reciben mensajes del anterior, lo modifican y mandan este resultado al siguiente
+
+\begin{DoxyAuthor}{Author}
+José Manuel Chacón Aguilera y Miguel Arconada Manteca 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+17-\/4-\/2018 
+\end{DoxyDate}
+
+
+\subsection{Macro Definition Documentation}
+\mbox{\Hypertarget{cadena__montaje_8c_a8fe83ac76edc595f6b98cd4a4127aed5}\label{cadena__montaje_8c_a8fe83ac76edc595f6b98cd4a4127aed5}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!E\+R\+R\+OR@{E\+R\+R\+OR}}
+\index{E\+R\+R\+OR@{E\+R\+R\+OR}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{E\+R\+R\+OR}{ERROR}}
+{\footnotesize\ttfamily \#define E\+R\+R\+OR~1}
+
+Macro devuelta si se encuentra algún error \mbox{\Hypertarget{cadena__montaje_8c_a68c15c5fb7f7c6f707903e6a46ab0557}\label{cadena__montaje_8c_a68c15c5fb7f7c6f707903e6a46ab0557}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!F\+I\+L\+E\+K\+EY@{F\+I\+L\+E\+K\+EY}}
+\index{F\+I\+L\+E\+K\+EY@{F\+I\+L\+E\+K\+EY}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{F\+I\+L\+E\+K\+EY}{FILEKEY}}
+{\footnotesize\ttfamily \#define F\+I\+L\+E\+K\+EY~\char`\"{}/bin/bash\char`\"{}}
+
+Filekey utilizada por ftok \mbox{\Hypertarget{cadena__montaje_8c_a8ae9d53f33f46cfcfcb9736e6351452a}\label{cadena__montaje_8c_a8ae9d53f33f46cfcfcb9736e6351452a}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!K\+EY@{K\+EY}}
+\index{K\+EY@{K\+EY}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{K\+EY}{KEY}}
+{\footnotesize\ttfamily \#define K\+EY~1300}
+
+Key utilizada por ftok \mbox{\Hypertarget{cadena__montaje_8c_aba51915c87d64af47fb1cc59348961c9}\label{cadena__montaje_8c_aba51915c87d64af47fb1cc59348961c9}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!OK@{OK}}
+\index{OK@{OK}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{OK}{OK}}
+{\footnotesize\ttfamily \#define OK~0}
+
+Macro para representar ningún fallo \mbox{\Hypertarget{cadena__montaje_8c_a4487334865d4091453c8cdb57316f37b}\label{cadena__montaje_8c_a4487334865d4091453c8cdb57316f37b}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE@{T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE}}
+\index{T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE@{T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE}{TAMANO\_MENSAJE}}
+{\footnotesize\ttfamily \#define T\+A\+M\+A\+N\+O\+\_\+\+M\+E\+N\+S\+A\+JE~2048}
+
+Tamanoo del mensaje 
+
+\subsection{Enumeration Type Documentation}
+\mbox{\Hypertarget{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165}\label{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!Tipo\+\_\+\+Mensaje@{Tipo\+\_\+\+Mensaje}}
+\index{Tipo\+\_\+\+Mensaje@{Tipo\+\_\+\+Mensaje}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{Tipo\+\_\+\+Mensaje}{Tipo\_Mensaje}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165}{Tipo\+\_\+\+Mensaje}}}
+
+
+
+Enumeracion utilizada para diferenciar los tipos de mensajes en la cola. 
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+R\+O\+C\+E\+S\+O\+\_\+\+AB@{P\+R\+O\+C\+E\+S\+O\+\_\+\+AB}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!P\+R\+O\+C\+E\+S\+O\+\_\+\+AB@{P\+R\+O\+C\+E\+S\+O\+\_\+\+AB}}}\mbox{\Hypertarget{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165ad2f30f6abc941c53b5b3e75737fc49e4}\label{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165ad2f30f6abc941c53b5b3e75737fc49e4}} 
+P\+R\+O\+C\+E\+S\+O\+\_\+\+AB&Mensajes enviados por el proceso A al B \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{P\+R\+O\+C\+E\+S\+O\+\_\+\+BC@{P\+R\+O\+C\+E\+S\+O\+\_\+\+BC}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!P\+R\+O\+C\+E\+S\+O\+\_\+\+BC@{P\+R\+O\+C\+E\+S\+O\+\_\+\+BC}}}\mbox{\Hypertarget{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165a4b6aefbbd41b405e727ee1ee44a3279b}\label{cadena__montaje_8c_a0e486f8855adca8df35ba293f5272165a4b6aefbbd41b405e727ee1ee44a3279b}} 
+P\+R\+O\+C\+E\+S\+O\+\_\+\+BC&Mensajes enviados por el proceso B al C \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{cadena__montaje_8c_ad8de574186cfad91faa91da1cc5676ed}\label{cadena__montaje_8c_ad8de574186cfad91faa91da1cc5676ed}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!inicializa\+\_\+fichero\+\_\+entrada@{inicializa\+\_\+fichero\+\_\+entrada}}
+\index{inicializa\+\_\+fichero\+\_\+entrada@{inicializa\+\_\+fichero\+\_\+entrada}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{inicializa\+\_\+fichero\+\_\+entrada()}{inicializa\_fichero\_entrada()}}
+{\footnotesize\ttfamily void inicializa\+\_\+fichero\+\_\+entrada (\begin{DoxyParamCaption}\item[{char $\ast$}]{fichero\+\_\+entrada }\end{DoxyParamCaption})}
+
+
+
+Función que inicializa el fichero que contiene los datos a ser modificados por los procesos. 
+
+Esta función es llamada al principio de la ejecucion, y prepara un fichero de datos con una cadena prolongada de caracteres, que van a ser leidos por los procesos en bloques de 2 kilobytes
+
+
+\begin{DoxyParams}{Parameters}
+{\em fichero\+\_\+entrada} & Path del fichero \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{cadena__montaje_8c_a3c04138a5bfe5d72780bb7e82a18e627}\label{cadena__montaje_8c_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!main@{main}}
+\index{main@{main}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Función principal del programa. 
+
+Este programa coordina la ejecución de tres procesos hijos que ejecutan partes consecutivas de una cadena de montaje
+
+\begin{DoxyReturn}{Returns}
+0 si todo se ejecuta correctamente, y -\/1 en cualquier otro caso 
+\end{DoxyReturn}
+\mbox{\Hypertarget{cadena__montaje_8c_aa619f3cfea8c787a7896463b46616822}\label{cadena__montaje_8c_aa619f3cfea8c787a7896463b46616822}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!manejador@{manejador}}
+\index{manejador@{manejador}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{manejador()}{manejador()}}
+{\footnotesize\ttfamily void manejador (\begin{DoxyParamCaption}\item[{int}]{senal }\end{DoxyParamCaption})}
+
+
+
+Manejador de la senal para el proceso B. 
+
+Esta función se ejecuta cuando el proceso A manda la senal de que ha acabado al proceso B. Después, se modifica una flag global
+
+
+\begin{DoxyParams}{Parameters}
+{\em senal} & Identificador de la senal recibida \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{cadena__montaje_8c_aad82e5401fadde42522ed35be4cd3d8d}\label{cadena__montaje_8c_aad82e5401fadde42522ed35be4cd3d8d}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!numero\+\_\+mensajes\+\_\+pendientes@{numero\+\_\+mensajes\+\_\+pendientes}}
+\index{numero\+\_\+mensajes\+\_\+pendientes@{numero\+\_\+mensajes\+\_\+pendientes}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{numero\+\_\+mensajes\+\_\+pendientes()}{numero\_mensajes\_pendientes()}}
+{\footnotesize\ttfamily int numero\+\_\+mensajes\+\_\+pendientes (\begin{DoxyParamCaption}\item[{int}]{msqid,  }\item[{int $\ast$}]{cantidad }\end{DoxyParamCaption})}
+
+
+
+Función que lee el numero de mensajes pendientes en la cola. 
+
+Esta función llama a las funcion msgctl, que devuelve mucha mucha informacion de la cola de mensajes, y devuelve simplemetne el numero de mensajes pendientes
+
+
+\begin{DoxyParams}{Parameters}
+{\em msqid} & Identificador de la cola de mensajes \\
+\hline
+{\em cantidad} & Entero donde guardar la cantidad \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+OK si la función se ejecuta de forma satisfactoria y E\+R\+R\+OR si no 
+\end{DoxyReturn}
+\mbox{\Hypertarget{cadena__montaje_8c_a85365405c5f9e686cfa05f27ef946069}\label{cadena__montaje_8c_a85365405c5f9e686cfa05f27ef946069}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!proceso\+\_\+A@{proceso\+\_\+A}}
+\index{proceso\+\_\+A@{proceso\+\_\+A}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{proceso\+\_\+\+A()}{proceso\_A()}}
+{\footnotesize\ttfamily void proceso\+\_\+A (\begin{DoxyParamCaption}\item[{char $\ast$}]{fichero\+\_\+entrada,  }\item[{int}]{msqid,  }\item[{int}]{child\+\_\+pid\+\_\+2 }\end{DoxyParamCaption})}
+
+
+
+Función de la ejecución del proceso A. 
+
+Esta función engloba toda la ejecución del proceso A. Este lee de un fichero bloques de 2 kilobytes de caracteres, y los manda mediante mensajes al proceso B
+
+
+\begin{DoxyParams}{Parameters}
+{\em fichero\+\_\+entrada} & Path del fichero del que leer los datos \\
+\hline
+{\em msqid} & Identificador de la cola de mensajes \\
+\hline
+{\em child\+\_\+pid\+\_\+2} & P\+ID del proceso B, necesario para mandarle una senal cuando acaba \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{cadena__montaje_8c_a89018cf13e42b790215c6b3214d8b765}\label{cadena__montaje_8c_a89018cf13e42b790215c6b3214d8b765}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!proceso\+\_\+B@{proceso\+\_\+B}}
+\index{proceso\+\_\+B@{proceso\+\_\+B}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{proceso\+\_\+\+B()}{proceso\_B()}}
+{\footnotesize\ttfamily void proceso\+\_\+B (\begin{DoxyParamCaption}\item[{int}]{msqid }\end{DoxyParamCaption})}
+
+
+
+Función de la ejecución del proceso b. 
+
+Esta función engloba toda la ejecución del proceso B. Este lee los mensajes que le manda el proceso A, modificada cada caracter por el siguiente en el alfabeto, y manda este texto al proceso C
+
+
+\begin{DoxyParams}{Parameters}
+{\em msqid} & Identificador de la cola de mensajes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\mbox{\Hypertarget{cadena__montaje_8c_a6ee7c8ef3dd28d4a0e71fe19a5ef8fac}\label{cadena__montaje_8c_a6ee7c8ef3dd28d4a0e71fe19a5ef8fac}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!proceso\+\_\+C@{proceso\+\_\+C}}
+\index{proceso\+\_\+C@{proceso\+\_\+C}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{proceso\+\_\+\+C()}{proceso\_C()}}
+{\footnotesize\ttfamily void proceso\+\_\+C (\begin{DoxyParamCaption}\item[{char $\ast$}]{fichero\+\_\+salida,  }\item[{int}]{msqid }\end{DoxyParamCaption})}
+
+
+
+Función de la ejecución del proceso C. 
+
+Esta función engloba toda la ejecución del proceso C. Este recibe mensajes del proceso B con bloques de texto, y los vuelva a un fichero de texto
+
+
+\begin{DoxyParams}{Parameters}
+{\em fichero\+\_\+salida} & Path del fichero al que escribir los datos \\
+\hline
+{\em msqid} & Identificador de la cola de mensajes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\mbox{\Hypertarget{cadena__montaje_8c_a220a49942f39dd4ffc34cdac41286428}\label{cadena__montaje_8c_a220a49942f39dd4ffc34cdac41286428}} 
+\index{cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}!proceso\+\_\+1\+\_\+terminado@{proceso\+\_\+1\+\_\+terminado}}
+\index{proceso\+\_\+1\+\_\+terminado@{proceso\+\_\+1\+\_\+terminado}!cadena\+\_\+montaje.\+c@{cadena\+\_\+montaje.\+c}}
+\subsubsection{\texorpdfstring{proceso\+\_\+1\+\_\+terminado}{proceso\_1\_terminado}}
+{\footnotesize\ttfamily int proceso\+\_\+1\+\_\+terminado}
+
+Flag global que indica si el proceso A ha terminado 

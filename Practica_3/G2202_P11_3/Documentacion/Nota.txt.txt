@@ -1,0 +1,3 @@
+A la hora de generar la documentación mediante la herramienta Doxygen nos encontramos con ciertos problemas. Esto es que a la hora de querer compilar la documentación, modificamos en el Doxyfile el apartado idioma para generar la documentación en español. Esto causó, por algún motivo que no hemos podido solucionar, que se generara el código html y latex necesario, pero a la hora de compilar el código latex para generar el pdf fallara la compilación.
+
+Por lo tanto, y le pedimos disculpas por ello, nuestra documentación Doxygen está generada en inglés
