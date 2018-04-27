@@ -1,0 +1,13 @@
+caballo
+
+
+/* prepara las senales*/
+while(1) {
+pause();
+/*lee de la pipe*/
+
+calcula la tirada
+
+manda el mensaje al padre
+
+}

@@ -191,7 +191,7 @@ int main () {
             
             sprintf(argv_hijos_id, "%d", i);
             
-            /*Inicilaiza el numero de operaciones de cada hijo*/
+            /*Inicializa el numero de operaciones de cada hijo*/
             argv_hijos_num_operaciones = (char *)malloc(TAMANIO_ARGV_HIJOS * sizeof(char));
             if (argv_hijos_num_operaciones == NULL) {
                 perror ("Error al crear los argumentos para los hijos");
