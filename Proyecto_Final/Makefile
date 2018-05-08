@@ -7,8 +7,10 @@ CC = gcc
 CFLAGS = -g -Wall -pedantic
 FILES = proceso_principal proceso_monitor proceso_gestor_apuestas proceso_apostador
 ########################################################
-OBJECTSPROCESOPRINCIPAL = aleat_num.o semaforos.o proceso_principal.o
-OBJECTSPROCESOAPOSTADOR = aleat_num.o semaforos.o proceso_apostador.o
+OBJECTSPROCESOPRINCIPAL = aleat_num.o semaforos.o memoria_compartida.o proceso_principal.o
+OBJECTSPROCESOAPOSTADOR = aleat_num.o semaforos.o memoria_compartida.o proceso_apostador.o
+OBJECTSPROCESOGESTORAPUESTAS = aleat_num.o semaforos.o memoria_compartida.o proceso_gestor_apuestas.o
+OBJECTSPROCESOMONITOR = aleat_num.o semaforos.o memoria_compartida.o proceso_monitor.o
 ########################################################
 
 all: $(FILES) clear
@@ -16,7 +18,7 @@ all: $(FILES) clear
 proceso_principal: $(OBJECTSPROCESOPRINCIPAL)
 	$(CC) $(CFLAGS) -o proceso_principal $(OBJECTSPROCESOPRINCIPAL) -lpthread
 
-proceso_principal.o: aleat_num.h semaforos.h proceso_principal.c
+proceso_principal.o: aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_principal.c
 	$(CC) $(CFLAGS) -c proceso_principal.c
 
 
@@ -24,8 +26,24 @@ proceso_principal.o: aleat_num.h semaforos.h proceso_principal.c
 proceso_apostador: $(OBJECTSPROCESOAPOSTADOR)
 	$(CC) $(CFLAGS) -o proceso_apostador $(OBJECTSPROCESOAPOSTADOR) -lpthread
 
-proceso_apostador.o: aleat_num.h semaforos.h proceso_apostador.c
+proceso_apostador.o: aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_apostador.c
 	$(CC) $(CFLAGS) -c proceso_apostador.c
+
+
+
+proceso_gestor_apuestas: $(OBJECTSPROCESOGESTORAPUESTAS)
+	$(CC) $(CFLAGS) -o proceso_gestor_apuestas $(OBJECTSPROCESOGESTORAPUESTAS) -lpthread
+
+proceso_gestor_apuestas.o: aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_gestor_apuestas.c
+	$(CC) $(CFLAGS) -c proceso_apostador.c
+
+
+
+proceso_monitor: $(OBJECTSPROCESOMONITOR)
+	$(CC) $(CFLAGS) -o proceso_monitor $(OBJECTSPROCESOMONITOR) -lpthread
+
+proceso_monitor.o: aleat_num.h semaforos.h estructuras.h  memoria_compartida.h proceso_monitor.c
+	$(CC) $(CFLAGS) -c proceso_monitor.c
 	
 	
 
@@ -35,6 +53,9 @@ semaforos.o: semaforos.c semaforos.h
 
 aleat_num.o: aleat_num.c aleat_num.h
 	$(CC) $(CFLAGS) -c aleat_num.c
+
+memoria_compartida.o: memoria_compartida.c memoria_compartida.h
+	$(CC) $(CFLAGS) -c memoria_compartida.c
 
 
 
