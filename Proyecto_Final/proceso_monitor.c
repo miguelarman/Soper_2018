@@ -40,59 +40,48 @@ int main (int argc, char **argv) {
     /* Prepara los manejadores de las senales */  
     if (signal(SENALESTADOCARRERACAMBIA, manejador_estado_carrera_cambia) == SIG_ERR){
         perror("Error en el manejador SENALESTADOCARRERACAMBIA");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (signal(SENALINTERRUPCIONUSUARIO, manejador_interrupcion_usuario) == SIG_ERR){
         perror("Error en el manejador SENALINTERRUPCIONUSUARIO");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (signal(SENALTIEMPORESTANTE, manejador_vacio) == SIG_ERR){
         perror("Error en el manejador SENALTIEMPORESTANTE");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (signal(SENALDATOSCARRERAACTUALIZADOS, manejador_vacio) == SIG_ERR){
         perror("Error en el manejador SENALDATOSCARRERAACTUALIZADOS");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
     /* Bloquea todas las senales menos las tres anteriores */
     if (sigfillset(&set) == -1) {
         perror("Error con sigfillset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigdelset(&set, SENALESTADOCARRERACAMBIA) == -1) {
         perror("Error con sigdelset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigdelset(&set, SENALTIEMPORESTANTE) == -1) {
         perror("Error con sigdelset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigdelset(&set, SENALDATOSCARRERAACTUALIZADOS) == -1) {
         perror("Error con sigdelset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigdelset(&set, SENALINTERRUPCIONUSUARIO) == -1) {
         perror("Error con sigdelset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigdelset(&set, SIGTERM) == -1) {
         perror("Error con sigdelset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigprocmask (SIG_BLOCK, &set, &oset) == -1) {
         perror("Error con sigprocmask");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -101,7 +90,6 @@ int main (int argc, char **argv) {
     shmid = reservashm(sizeof(Memoria_Compartida), key);
     if (shmid == -1) {
         perror("Error al crear la memoria compartida");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -109,7 +97,6 @@ int main (int argc, char **argv) {
     memoria_compartida = shmat (shmid, (char *)0, 0);
     if (memoria_compartida == (void *) -1) {
         perror("Error al conseguir la memoria compartida en el proceso principal");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -117,7 +104,6 @@ int main (int argc, char **argv) {
     retorno_semaforo = Crear_Semaforo(key, NUM_SEMAFOROS, &semid);
     if (retorno_semaforo == ERROR) {
         perror("Error al conseguir los semaforos en el monitor");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -140,7 +126,6 @@ int main (int argc, char **argv) {
                 retorno_down = Down_Semaforo(semid, MUTEX_GUARDAR_OFERTA, SEM_UNDO);
                 if (retorno_down == ERROR) {
                     perror("Error al hacer down en el monitor");
-                    /** liberamos memoria y mas cosas ***************************************/
                     exit(EXIT_FAILURE);
                 }
                 
@@ -154,7 +139,6 @@ int main (int argc, char **argv) {
                 retorno_up = Up_Semaforo(semid, MUTEX_GUARDAR_OFERTA, SEM_UNDO);
                 if (retorno_up == ERROR) {
                     perror("Error al hacer up en el monitor");
-                    /** liberamos memoria y mas cosas ***************************************/
                     exit(EXIT_FAILURE);
                 }
             }
@@ -178,7 +162,6 @@ int main (int argc, char **argv) {
             retorno_down = Down_Semaforo(semid, MUTEX_BENEFICIOS_CALCULADOS, SEM_UNDO);
             if (retorno_down == ERROR) {
                 perror("Error al hacer down en el monitor");
-                /** liberamos memoria y mas cosas ***************************************/
                 exit(EXIT_FAILURE);
             }
             

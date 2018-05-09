@@ -1,9 +1,0 @@
-mutex para guardar una apuesta (acceder al numero, anadir una, e incrementar el indice)
-
-mutex para los segundos restantes
-
-mutex para cada caballo cuando hay una oferta para leer la cotizacion, incrementar el total apostado y calcular la nueva cotizacion
-
-mutex para acceder a los datos de un apostador, y recalcular el dinero restante y los beneficios
-
-mutex para que el gestor le diga al monitor que ya puede acceder a los datos finales calculados

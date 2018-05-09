@@ -49,18 +49,18 @@ int n_caballos;
 
 int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Segundo Parametro, nº ventanillas*/
     int k;
-    int j;
-    int i;
+    /*int j;
+    int i;*/
     int n_pthreads;
-    Datos_Apostador swap;
+    /*Datos_Apostador swap;*/
     pthread_t pthread_array[MAX_VENTANILLAS];
     sigset_t set, oset;
     int n_ventanilla;
     int *arg;
     int retorno_up, retorno_semaforo;
     int semid, shmid;
-    double cantidad_a_pagar;
-    int id_apostador;
+    /*double cantidad_a_pagar;
+    int id_apostador;*/
     Memoria_Compartida *memoria_compartida;
 
     if(argc<3){
@@ -112,7 +112,6 @@ int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Se
     key = ftok(FILEKEY, KEY);
     if (key == -1) {
         perror("Error al usar ftok");
-        /*liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
         
@@ -120,7 +119,6 @@ int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Se
     msqid = msgget (key, IPC_EXCL | 0660);
     if (msqid == -1) {
         perror("Error al obtener identificador para cola mensajes en el gestor");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -128,7 +126,6 @@ int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Se
     retorno_semaforo = Crear_Semaforo(key, NUM_SEMAFOROS, &semid);
     if (retorno_semaforo == ERROR) {
         perror("Error al obtener semid");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -168,7 +165,14 @@ int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Se
     /* Espera a la siguiente senal */
     pause();
     
-    printf("\nHe recibido la segunda senal");fflush(stdout);
+    /* El codigo comentado a continuacion es una implementacion de
+     * bubblesort, cuya funcion era calcular cuales eran los diez apostadores con mayor beneficio
+     * No podemos descomentarlo puesto que no nos funciona y causa un bloqueo, por
+     * una razón que no nos ha dado tiempo a averiguar. Esta es la razon por la
+     * que al final de la ejecucion se imprime que los apostadores mas beneficiados
+     * son todos el Apostador_1
+     */
+    
     
     /* Calcula los beneficios de todos los apostadores */
     /*for (i = 0; i < memoria_compartida->n_apuestas; i++){
@@ -205,7 +209,6 @@ int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Se
     retorno_up = Up_Semaforo(semid, MUTEX_BENEFICIOS_CALCULADOS, SEM_UNDO);
     if (retorno_up == ERROR) {
         perror("Error al hacer up en el gestor de apuestas");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
 
@@ -244,14 +247,12 @@ void *ventanilla(void* n_ventanilla){
     retorno_semaforo = Crear_Semaforo(key, NUM_SEMAFOROS, &semid);
     if (retorno_semaforo == ERROR) {
         perror("Error al conseguir los semaforos en el gestor");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
     mensaje = (Mensaje_Apostador*)malloc(sizeof(Mensaje_Apostador*));
     if (mensaje == NULL) {
         perror("Error al reservar para el mensaje en el gestor");
-        /***********************************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -273,7 +274,6 @@ void *ventanilla(void* n_ventanilla){
         retorno_down = Down_Semaforo(semid, MUTEX_GUARDAR_OFERTA, SEM_UNDO);
         if (retorno_down == ERROR) {
             perror("Error al hacer down en el gestor");
-            /** liberamos memoria y mas cosas ***************************************/
             exit(EXIT_FAILURE);
         }
         
@@ -299,7 +299,6 @@ void *ventanilla(void* n_ventanilla){
         retorno_up = Up_Semaforo(semid, MUTEX_GUARDAR_OFERTA, SEM_UNDO);
         if (retorno_up == ERROR) {
             perror("Error al hacer down en el gestor");
-            /** liberamos memoria y mas cosas ***************************************/
             exit(EXIT_FAILURE);
         }
     }

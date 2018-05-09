@@ -112,7 +112,6 @@ int main(int argc, char ** argv) {
     key = ftok(FILEKEY, KEY);
     if (key == -1) {
         perror("Error al usar ftok");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
 
@@ -172,7 +171,6 @@ int main(int argc, char ** argv) {
     msqid = msgget (key, IPC_CREAT | IPC_EXCL | 0660);
     if (msqid == -1) {
         perror("Error al obtener identificador para cola mensajes en el principal");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -181,7 +179,6 @@ int main(int argc, char ** argv) {
     retorno_semaforo = Crear_Semaforo(key, NUM_SEMAFOROS, &semid);
     if (retorno_semaforo == ERROR) {
         perror("Error al obtener semid");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -193,7 +190,6 @@ int main(int argc, char ** argv) {
     retorno_semaforo = Inicializar_Semaforo(semid, valores_iniciales_semaforos);
     if (retorno_semaforo == ERROR) {
         perror("Error al inicializar los semaforos");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -213,7 +209,6 @@ int main(int argc, char ** argv) {
     numero_apostadores_arg = (char *)malloc(TAMANIO_ARGUMENTOS_EXEC * sizeof(char));
     if (numero_apostadores_arg == NULL) {
         perror("Error al reservar el argumento numero_apostadores_arg");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     sprintf(numero_apostadores_arg, "%d", n_apostadores);
@@ -221,7 +216,6 @@ int main(int argc, char ** argv) {
     numero_caballos_arg = (char *)malloc(TAMANIO_ARGUMENTOS_EXEC * sizeof(char));
     if (numero_caballos_arg == NULL) {
         perror("Error al reservar el argumento numero_caballos_arg");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     sprintf(numero_caballos_arg, "%d", n_caballos);
@@ -229,7 +223,6 @@ int main(int argc, char ** argv) {
     numero_ventanillas_arg = (char *)malloc(TAMANIO_ARGUMENTOS_EXEC * sizeof(char));
     if (numero_ventanillas_arg == NULL) {
         perror("Error al reservar el argumento numero_ventanillas_arg");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     sprintf(numero_ventanillas_arg, "%d", n_ventanillas);
@@ -237,7 +230,6 @@ int main(int argc, char ** argv) {
     key_arg = (char *)malloc(TAMANIO_ARGUMENTOS_EXEC * sizeof(char));
     if (key_arg == NULL) {
         perror("Error al reservar el argumento key_arg");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     sprintf(key_arg, "%d", key);
@@ -249,13 +241,11 @@ int main(int argc, char ** argv) {
 
     pid_monitor = fork();
     if (pid_monitor == -1) {
-        /** liberamos memoria y mas cosas ***************************************/
         perror("Error al crear el proceso monitor");
         exit(EXIT_FAILURE);
     } else if (pid_monitor == 0) {
         execlp("./proceso_monitor", "proceso_monitor", key_arg, NULL);
         perror("Error en el execlp del proceso monitor");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -263,13 +253,11 @@ int main(int argc, char ** argv) {
     
     pid_gestor_apuestas = fork();
     if (pid_gestor_apuestas == -1) {
-        /** liberamos memoria y mas cosas ***************************************/
         perror("Error al crear el proceso gestor de apuestas");
         exit(EXIT_FAILURE);
     } else if (pid_gestor_apuestas == 0) {
         execlp("./proceso_gestor_apuestas", "proceso_gestor_apuestas", numero_caballos_arg, numero_ventanillas_arg, NULL);
         perror("Error en el execlp del proceso gestor de apuestas");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -277,13 +265,11 @@ int main(int argc, char ** argv) {
     
     pid_apostador = fork();
     if (pid_apostador == -1) {
-        /** liberamos memoria y mas cosas ***************************************/
         perror("Error al crear el proceso apostador");
         exit(EXIT_FAILURE);
     } else if (pid_apostador == 0) {
         execlp("./proceso_apostador", "proceso_apostador", numero_apostadores_arg, numero_caballos_arg, NULL);
         perror("Error en el execlp del proceso apostador");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
@@ -294,7 +280,6 @@ int main(int argc, char ** argv) {
         pipe_status = pipe(pipes_caballos[i]);
         if (pipe_status == -1) {
             perror("error creando las pipes\n");
-            /** liberamos memoria y mas cosas ***************************************/
             exit(EXIT_FAILURE);
         }
     
@@ -304,7 +289,6 @@ int main(int argc, char ** argv) {
         pids_caballos[i] = fork();
         
         if (pids_caballos[i] == -1) {
-            /** liberamos memoria y mas cosas ***************************************/
             perror("Error al crear caballos");
             exit(EXIT_FAILURE);
         } else if (pids_caballos[i] == 0) {
@@ -319,36 +303,30 @@ int main(int argc, char ** argv) {
             /* Prepara el manejador */
             if (signal(SENALCABALLOLEEPOSICION, manejador_vacio) == SIG_ERR){
                 perror("Error en el manejador SENALCABALLOLEEPOSICION");
-                /** liberamos memoria y mas cosas ***************************************/
                 exit(EXIT_FAILURE);
             }
             
             /* Bloquea todas las senales menos SENALCABALLOLEEPOSICION (y SIGTERM) */
             if (sigfillset(&set) == -1) {
                 perror("Error con sigfillset");
-                /** liberamos memoria y mas cosas ***************************************/
                 exit(EXIT_FAILURE);
             }
             if (sigdelset(&set, SIGTERM) == -1) {
                 /* No bloqueamos la senal SIGTERM para poder matar el proceso desde la terminal si es necesario*/
                 perror("Error con sigdelset");
-                /** liberamos memoria y mas cosas ***************************************/
                 exit(EXIT_FAILURE);
             }
             if (sigdelset(&set, SIGINT) == -1) {
                 /* No bloqueamos la senal SIGINT para poder matar el proceso desde la terminal si es necesario*/
                 perror("Error con sigdelset");
-                /** liberamos memoria y mas cosas ***************************************/
                 exit(EXIT_FAILURE);
             }
             if (sigdelset(&set, SENALCABALLOLEEPOSICION) == -1) {
                 perror("Error con sigdelset para SENALCABALLOLEEPOSICION");
-                /** liberamos memoria y mas cosas ***************************************/
                 exit(EXIT_FAILURE);
             }
             if (sigprocmask (SIG_BLOCK, &set, &oset) == -1) {
                 perror("Error con sigprocmask");
-                /** liberamos memoria y mas cosas ***************************************/
                 exit(EXIT_FAILURE);
             }
             
@@ -385,12 +363,10 @@ int main(int argc, char ** argv) {
                     mensaje_caballo->info.tirada = aleat_num(1, 6);
                     
                 } else if (posicion == CARRERAYATERMINADA) {
-                    /** liberamos memoria y mas cosas ***************************************/
                     exit(EXIT_SUCCESS);
                     
                 } else {
                     perror("Error en la comunicación por las pipes");
-                    /** liberamos memoria y mas cosas ***************************************/
                     exit(EXIT_FAILURE);
                 }
             
@@ -399,7 +375,6 @@ int main(int argc, char ** argv) {
                 if (retorno_envio == -1) {
                     perror("Error al mandar el mensaje en el caballo");
                     
-                    /** liberamos memoria y mas cosas ***************************************/
                     /* Libera la estructura del mensaje*/
                     free(mensaje_caballo);
                     
@@ -420,31 +395,26 @@ int main(int argc, char ** argv) {
     /* Prepara el manejador de la senal si el usuario presiona ctrl+C */
     if (signal(SIGINT, manejador_sigint) == SIG_ERR){
         perror("Error en el manejador SIGINT");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
     /* Bloquea todas las senales menos SIGINT y SIGTERM */
     if (sigfillset(&set) == -1) {
         perror("Error con sigfillset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigdelset(&set, SIGINT) == -1) {
         /* No bloqueamos la senal SIGINT para poder matar el proceso desde la terminal si es necesario*/
         perror("Error con sigdelset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigdelset(&set, SIGTERM) == -1) {
         /* No bloqueamos la senal SIGTERM para poder matar el proceso desde la terminal si es necesario*/
         perror("Error con sigdelset");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     if (sigprocmask (SIG_BLOCK, &set, &oset) == -1) {
         perror("Error con sigprocmask");
-        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
 
@@ -528,7 +498,6 @@ int main(int argc, char ** argv) {
             if (retorno_recepcion == -1) {
                 perror("Error al recibir el mensaje en el proceso principal");
                 
-                /** liberamos memoria y mas cosas ***************************************/
                 /* Libera la estructura del mensaje*/
                 free(mensaje_caballo_principal);
                 
