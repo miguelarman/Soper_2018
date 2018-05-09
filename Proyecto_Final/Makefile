@@ -18,7 +18,7 @@ all: $(FILES) clear
 proceso_principal: $(OBJECTSPROCESOPRINCIPAL)
 	$(CC) $(CFLAGS) -o proceso_principal $(OBJECTSPROCESOPRINCIPAL) -lpthread
 
-proceso_principal.o: aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_principal.c
+proceso_principal.o: defines.h aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_principal.c
 	$(CC) $(CFLAGS) -c proceso_principal.c
 
 
@@ -26,7 +26,7 @@ proceso_principal.o: aleat_num.h semaforos.h estructuras.h memoria_compartida.h 
 proceso_apostador: $(OBJECTSPROCESOAPOSTADOR)
 	$(CC) $(CFLAGS) -o proceso_apostador $(OBJECTSPROCESOAPOSTADOR) -lpthread
 
-proceso_apostador.o: aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_apostador.c
+proceso_apostador.o: defines.h aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_apostador.c
 	$(CC) $(CFLAGS) -c proceso_apostador.c
 
 
@@ -34,15 +34,15 @@ proceso_apostador.o: aleat_num.h semaforos.h estructuras.h memoria_compartida.h 
 proceso_gestor_apuestas: $(OBJECTSPROCESOGESTORAPUESTAS)
 	$(CC) $(CFLAGS) -o proceso_gestor_apuestas $(OBJECTSPROCESOGESTORAPUESTAS) -lpthread
 
-proceso_gestor_apuestas.o: aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_gestor_apuestas.c
-	$(CC) $(CFLAGS) -c proceso_apostador.c
+proceso_gestor_apuestas.o: defines.h aleat_num.h semaforos.h estructuras.h memoria_compartida.h proceso_gestor_apuestas.c
+	$(CC) $(CFLAGS) -c proceso_gestor_apuestas.c
 
 
 
 proceso_monitor: $(OBJECTSPROCESOMONITOR)
 	$(CC) $(CFLAGS) -o proceso_monitor $(OBJECTSPROCESOMONITOR) -lpthread
 
-proceso_monitor.o: aleat_num.h semaforos.h estructuras.h  memoria_compartida.h proceso_monitor.c
+proceso_monitor.o: defines.h aleat_num.h semaforos.h estructuras.h  memoria_compartida.h proceso_monitor.c
 	$(CC) $(CFLAGS) -c proceso_monitor.c
 	
 	

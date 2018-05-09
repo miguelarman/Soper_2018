@@ -40,6 +40,18 @@ los caballos> / <total dinero apostado al caballo>
 #include <string.h>
 #include <pthread.h>
 #include <stdlib.h>
+#include <signal.h>
+#include <sys/types.h>
+#include <sys/ipc.h>
+#include <sys/shm.h>
+#include <sys/msg.h>
+#include <time.h>
+#include <unistd.h>
+
+
+#include "estructuras.h"
+#include "memoria_compartida.h"
+#include "semaforos.h"
 
 #define KEY 1300 /*!< KEY necesaria para el ftok */
 #define FILEKEY "/bin/bash" /*!< FILEKEY necesario para ftok */
@@ -49,17 +61,29 @@ los caballos> / <total dinero apostado al caballo>
  * @return void
  * 
  */
-void *ventanilla();
+void *ventanilla(void *n_ventanilla);
+
+void manejador_interrupcion_usuario(int senal);
+void manejador_vacio(int senal);
+
+double *apostado;
+double *cotizacion;
+int msqid;
+int estado_carrera = SIN_EMPEZAR;
+int key;
 
 int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Segundo Parametro, nº ventanillas*/
     int i;
-    int j;
+    int k;
     int n_caballos;
     int n_pthreads;
-    double *apostado;
-    double *cotizacion;
-    pthread_t *pthread_array;
-    
+    pthread_t pthread_array[MAX_VENTANILLAS];
+    sigset_t set, oset;
+    int n_ventanilla;
+    int *arg;
+    int retorno_up, retorno_semaforo;
+    int semid;
+
     if(argc<3){
         perror("Not enough parameters");
         exit(EXIT_FAILURE);
@@ -82,6 +106,59 @@ int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Se
         free(apostado);
         exit(EXIT_FAILURE);
     }
+    
+    /* Consigue el array de semaforos */
+    retorno_semaforo = Crear_Semaforo(key, NUM_SEMAFOROS, &semid);
+    if (retorno_semaforo == ERROR) {
+        perror("Error al obtener semid");
+        /** liberamos memoria y mas cosas ***************************************/
+        exit(EXIT_FAILURE);
+    }
+    
+    /*Inicializa la máscara y crea el manejador*/
+    if (sigfillset(&set) == -1) {
+        perror("Error con sigfillset");
+        exit(EXIT_FAILURE);
+    }
+    if (sigdelset(&set, SENALESTADOCARRERACAMBIA) == -1) {
+        perror("Error con sigdelset");
+        exit(EXIT_FAILURE);
+    }
+    if (sigdelset(&set, SENALINTERRUPCIONUSUARIO) == -1) { 
+        perror("Error con sigdelset");    
+        exit(EXIT_FAILURE);               
+    }
+    if (sigprocmask (SIG_BLOCK, &set, &oset) == -1) {
+        perror("Error con sigprocmask");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(signal (SENALINTERRUPCIONUSUARIO, manejador_interrupcion_usuario) == SIG_ERR){
+        perror("Error en el manejador");
+        exit(EXIT_FAILURE);
+    }
+    
+    if(signal (SENALESTADOCARRERACAMBIA, manejador_vacio) == SIG_ERR){
+        perror("Error en el manejador");
+        exit(EXIT_FAILURE);
+    }
+    
+    
+    /* Calcula la key para la cola de mensajes*/
+    key = ftok(FILEKEY, KEY);
+    if (key == -1) {
+        perror("Error al usar ftok");
+        /*liberamos memoria y mas cosas ***************************************/
+        exit(EXIT_FAILURE);
+    }
+        
+     /* Crea la cola de mensajes */
+    msqid = msgget (key, IPC_CREAT | IPC_EXCL | 0660);
+    if (msqid == -1) {
+        perror("Error al obtener identificador para cola mensajes en el gestor");
+        /** liberamos memoria y mas cosas ***************************************/
+        exit(EXIT_FAILURE);
+    }
 
     /*************************El array de cotizacion y apostado va de 1 al numero de caballos*/
     apostado[0] = 0;
@@ -92,36 +169,122 @@ int main (int argc, char **argv){ /*Primer parámetro, número de caballos*//*Se
         cotizacion[1] = n_caballos;
     }
     
-    pthread_array = (pthread*)malloc(n_pthreads*sizeof(pthread));
-    if (pthread_array == NULL){
-        free(apostado);
-        free(cotizacion);
+    for (n_ventanilla = 0; n_ventanilla<n_pthreads; n_ventanilla++){
+        arg = (int*)malloc(sizeof(*arg));
+        if ( arg == NULL ) {
+            fprintf(stderr, "Couldn't allocate memory for thread arg.\n");
+            exit(EXIT_FAILURE);
+        }
+        *arg = n_ventanilla;
+        pthread_create(&pthread_array[n_ventanilla], NULL, ventanilla , arg); /*Numeradas a partir del 1*/
+        free(arg);
+    }
+    
+    pause();
+    
+    /*Cuando la carrera vaya a empezar*/
+    for (k =0; k< n_pthreads; k++){
+        /* pthread_join(pthread_array[k], NULL); */
+        pthread_cancel(pthread_array[k]);
+    }
+    
+    /* Espera a la siguiente senal */
+    pause();
+    
+    /* Calcula los beneficios de todos los apostadores */
+    
+    /* Calcula los 10 apostadores con mas beneficios */
+    
+    
+    
+    /* Hace up del semaforo en el que esta esperando el proceso monitor */
+    retorno_up = Up_Semaforo(semid, MUTEX_BENEFICIOS_CALCULADOS, SEM_UNDO);
+    if (retorno_up == ERROR) {
+        perror("Error al hacer up en el gestor de apuestas");
+        /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
     
-    for (j = 0; j< n_pthreads; j++){
-        pthread_create(&pthread_array[j], NULL, ventanilla, NULL);
-        pthread_join(&pthread_array[j], NULL);
-    }
-    
-    /*Cuando la carrera acabe */
-    for (k =0; k< n_pthreads; k++){
-        pthread_cancel(pthread_array[k]);
-    }
-    free(pthread_array);
-    free(apostado); /*????????????????*/
-    free(cotizacion); /*????????????????*/
+    exit(EXIT_SUCCESS);
 }
 
-void *ventanilla(){
+void *ventanilla(void* n_ventanilla){
     int caballo;
-    int apostador;
+    char nombre_apostador[MAX_NAME];
+    int shmid;
+    int retorno_recepcion;
+    double cotizacion_posterior;
+    double cotizacion_previa;
+    double cantidad;
+    double total;
+    Memoria_Compartida *memoria_compartida;
+    Mensaje_Apostador *mensaje;
+    int ventanilla = *((int *) n_ventanilla);
     
-    while (1){
-        /*Recibir Mensaje*/
-        /*Leer Datos del Mensaje y guardarlos en las variables propias de la funcion ventanilla*/
-        
+    /* Crea la memoria compartida */
+    shmid = reservashm(sizeof(Memoria_Compartida), key);
+    if (shmid == -1) {
+        perror("Error al crear la memoria compartida");
+        exit(EXIT_FAILURE);
     }
     
+    /* Consigue la memoria compartida*/
+    memoria_compartida = shmat (shmid, (char *)0, 0);
+    if (memoria_compartida == (void *) -1) {
+        perror("Error al conseguir la memoria compartida en el proceso principal");
+        exit(EXIT_FAILURE);
+    }
+
+    
+    while (1){
+        
+        mensaje = (Mensaje_Apostador*)malloc(sizeof(Mensaje_Apostador*));
+        if (mensaje == NULL) {
+            /***********************************************************/
+        }
+        
+        retorno_recepcion = msgrcv (msqid, (Mensaje_Apostador*) mensaje, sizeof(Mensaje_Apostador) - sizeof(long), MENSAJE_APOSTADOR_A_GESTOR, 0);
+        
+        if (retorno_recepcion == -1) {
+            perror("Error al recibir el mensaje en el proceso B");
+            
+            /* Libera la estructura del mensaje*/
+            free(mensaje);
+            
+            exit(EXIT_FAILURE);
+        }
+        
+        printf("Proceso Gestor -----> Mensaje Recibido: N_Caballo-> %d, Cantidad-> %f, Nombre-> %s\n ", mensaje->numero_caballo, mensaje->cuantia, mensaje->nombre);
+        
+        caballo = mensaje->numero_caballo;
+        cotizacion_previa = cotizacion[caballo];
+        cantidad = mensaje->cuantia;
+        total = cotizacion_previa * apostado[caballo];
+        cotizacion_posterior = (total + cantidad)/(apostado[caballo] + cantidad);
+        apostado[caballo] = apostado[caballo] + cantidad;
+        strcpy(nombre_apostador, mensaje->nombre);
+         
+         
+         
+        /*Guardamos datos en Memoria Compartida*/
+        memoria_compartida->n_apuestas ++;
+        memoria_compartida->caballos[caballo].total_apostado = apostado[caballo];
+        memoria_compartida->caballos[caballo].cotizacion = cotizacion_posterior;
+        strcpy(memoria_compartida->historial_apuestas->nombre, nombre_apostador);
+        memoria_compartida->historial_apuestas->numero_caballo = caballo;
+        memoria_compartida->historial_apuestas->cuantia = cantidad;
+        memoria_compartida->historial_apuestas->ventanilla = ventanilla;
+        
+        
+        /* Liberamos la estructura del mensaje */
+        free(mensaje);
+    }
+    
+    
+}
+
+void manejador_vacio(int senal){}
+
+void manejador_interrupcion_usuario(int senal) {
     
 }
