@@ -50,7 +50,6 @@ int main(int argc, char ** argv) {
     sigset_t set, oset;
     unsigned short valores_iniciales_semaforos[NUM_SEMAFOROS];
     
-    
     /* Lee los argumentos de entrada */
     
     if (argc != 11) {
@@ -147,8 +146,8 @@ int main(int argc, char ** argv) {
     for (i = 0; i < MAX_CABALLOS; i++) {
         memoria_compartida->caballos[i].posicion = 0;
         memoria_compartida->caballos[i].ultima_tirada = 0;
-        memoria_compartida->caballos[i].total_apostado = 0;
-        memoria_compartida->caballos[i].cotizacion = 1;
+        memoria_compartida->caballos[i].total_apostado = 1;
+        memoria_compartida->caballos[i].cotizacion = 0;
     }
     
     for (i = 0; i < MAX_APUESTAS; i++) {
@@ -157,6 +156,15 @@ int main(int argc, char ** argv) {
         memoria_compartida->historial_apuestas[i].ventanilla = 0;
         memoria_compartida->historial_apuestas[i].cotizacion_previa = 0;
         sprintf(memoria_compartida->historial_apuestas[i].nombre, "Apostador %d", 0);
+    }
+    
+    for (i = 0; i < 10; i++) {
+        memoria_compartida->top_apostadores[i] = 0;
+    }
+    
+    memoria_compartida->n_caballos_ganadores = 0;
+    for (i = 0; i < MAX_CABALLOS; i++) {
+        memoria_compartida->caballos_ganadores[i] = -1;
     }
     
 
@@ -179,9 +187,9 @@ int main(int argc, char ** argv) {
     
     /* Inicializa el array de semaforos a los valores deseados (todos a 0 menos el de beneficios calculados) */
     for (i = 0; i < NUM_SEMAFOROS; i++) {
-        valores_iniciales_semaforos[i] = 0;
+        valores_iniciales_semaforos[i] = 1;
     }
-    valores_iniciales_semaforos[MUTEX_BENEFICIOS_CALCULADOS] = 1;
+    valores_iniciales_semaforos[MUTEX_BENEFICIOS_CALCULADOS] = 0;
     retorno_semaforo = Inicializar_Semaforo(semid, valores_iniciales_semaforos);
     if (retorno_semaforo == ERROR) {
         perror("Error al inicializar los semaforos");
@@ -200,6 +208,7 @@ int main(int argc, char ** argv) {
 
 
     /* Crea los parametros que van a ser usados en los exec */
+    
     
     numero_apostadores_arg = (char *)malloc(TAMANIO_ARGUMENTOS_EXEC * sizeof(char));
     if (numero_apostadores_arg == NULL) {
@@ -247,6 +256,7 @@ int main(int argc, char ** argv) {
         execlp("./proceso_monitor", "proceso_monitor", key_arg, NULL);
         perror("Error en el execlp del proceso monitor");
         /** liberamos memoria y mas cosas ***************************************/
+        exit(EXIT_FAILURE);
     }
     
     /* 2- El gestor de apuestas */
@@ -260,6 +270,7 @@ int main(int argc, char ** argv) {
         execlp("./proceso_gestor_apuestas", "proceso_gestor_apuestas", numero_caballos_arg, numero_ventanillas_arg, NULL);
         perror("Error en el execlp del proceso gestor de apuestas");
         /** liberamos memoria y mas cosas ***************************************/
+        exit(EXIT_FAILURE);
     }
     
     /* 3- El proceso apostador */
@@ -273,6 +284,7 @@ int main(int argc, char ** argv) {
         execlp("./proceso_apostador", "proceso_apostador", numero_apostadores_arg, numero_caballos_arg, NULL);
         perror("Error en el execlp del proceso apostador");
         /** liberamos memoria y mas cosas ***************************************/
+        exit(EXIT_FAILURE);
     }
     
     /* 4- Los caballos */
@@ -355,23 +367,25 @@ int main(int argc, char ** argv) {
                     exit(EXIT_FAILURE);
                 }
                 mensaje_caballo->mtype = MENSAJE_CABALLO_A_PRINCIPAL;
+                mensaje_caballo->info.id_caballo = i;
                 
                 /* Lee de la pipe su posición en la carrera */
                 read((pipes_caballos[i])[LECTURA], &posicion, sizeof(int));
             
                 if (posicion == PRIMERO) {
                     /* Tirada por ir en primer lugar */
-                    mensaje_caballo->tirada = aleat_num(1, 7);
+                    mensaje_caballo->info.tirada = aleat_num(1, 7);
                     
                 } else if (posicion == ULTIMO) {
                     /* Tirada de remontada */
-                    mensaje_caballo->tirada = aleat_num(1, 6) + aleat_num(1, 6);
+                    mensaje_caballo->info.tirada = aleat_num(1, 6) + aleat_num(1, 6);
                     
                 } else if (posicion == MEDIO) {
                     /* Tirada normal */
-                    mensaje_caballo->tirada = aleat_num(1, 6);
+                    mensaje_caballo->info.tirada = aleat_num(1, 6);
                     
                 } else if (posicion == CARRERAYATERMINADA) {
+                    /** liberamos memoria y mas cosas ***************************************/
                     exit(EXIT_SUCCESS);
                     
                 } else {
@@ -509,7 +523,8 @@ int main(int argc, char ** argv) {
         /* Lee n_caballos mensajes de la cola de mensajes */
         carrera_terminada = FALSE;
         for (i = 0; i < n_caballos; i++) {
-            retorno_recepcion = msgrcv(msqid,  (struct Mensaje_Tirada_Caballo *)mensaje_caballo_principal, sizeof(Mensaje_Tirada_Caballo) - sizeof(long), MENSAJE_CABALLO_A_PRINCIPAL, 0);
+            retorno_recepcion = msgrcv(msqid,  (Mensaje_Tirada_Caballo*)mensaje_caballo_principal, sizeof(Mensaje_Tirada_Caballo) - sizeof(long), MENSAJE_CABALLO_A_PRINCIPAL, 0);
+            
             if (retorno_recepcion == -1) {
                 perror("Error al recibir el mensaje en el proceso principal");
                 
@@ -521,8 +536,8 @@ int main(int argc, char ** argv) {
             }
             
             /* Extrae los datos recibidos en el mensaje */
-            id_caballo_mensaje = mensaje_caballo_principal->id_caballo;
-            tirada_mensaje = mensaje_caballo_principal->tirada;
+            id_caballo_mensaje = mensaje_caballo_principal->info.id_caballo;
+            tirada_mensaje = mensaje_caballo_principal->info.tirada;
             
             /* Calcula las nuevas posiciones */
             memoria_compartida->caballos[id_caballo_mensaje].posicion += tirada_mensaje;
@@ -554,6 +569,14 @@ int main(int argc, char ** argv) {
             
             /* Se sale del bucle */
             break;
+        }
+    }
+    
+    /* Guarda en memoria compartida los caballos ganadores */
+    for (i = 0; i < n_caballos; i++) {
+        if (memoria_compartida->caballos[i].posicion >= longitud_carrera) {
+            memoria_compartida->caballos_ganadores[memoria_compartida->n_caballos_ganadores] = i;
+            memoria_compartida->n_caballos_ganadores++;
         }
     }
     

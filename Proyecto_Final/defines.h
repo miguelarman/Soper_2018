@@ -47,9 +47,7 @@ enum {
 #define MAX_APUESTAS 10000 /*!< Apuestas Máximas que el proceso gestor puede admitir */
 
 /* Defines para los semaforos */
-#define NUM_SEMAFOROS (3 + MAX_CABALLOS + MAX_APOSTADORES)
+#define NUM_SEMAFOROS 2
 
 #define MUTEX_GUARDAR_OFERTA 0
 #define MUTEX_BENEFICIOS_CALCULADOS 1
-#define MUTEX_CABALLO(X) (2 + X)
-#define MUTEX_APOSTADOR(X) (3 + MAX_CABALLOS + X)

@@ -24,7 +24,7 @@ int main (int argc, char **argv) {
     Memoria_Compartida *memoria_compartida;
     sigset_t set, oset;
     int shmid, semid;
-    int retorno_semaforo, retorno_down;
+    int retorno_semaforo, retorno_down, retorno_up;
     key_t key;
     int i;
     char nombre_apostador[MAX_NAME];
@@ -85,6 +85,11 @@ int main (int argc, char **argv) {
         /** liberamos memoria y mas cosas ***************************************/
         exit(EXIT_FAILURE);
     }
+    if (sigdelset(&set, SIGTERM) == -1) {
+        perror("Error con sigdelset");
+        /** liberamos memoria y mas cosas ***************************************/
+        exit(EXIT_FAILURE);
+    }
     if (sigprocmask (SIG_BLOCK, &set, &oset) == -1) {
         perror("Error con sigprocmask");
         /** liberamos memoria y mas cosas ***************************************/
@@ -119,7 +124,7 @@ int main (int argc, char **argv) {
     while(1) {
         
         pause();
-        
+
         if (estado_carrera == SIN_EMPEZAR) {
             
             printf("\n\n");
@@ -131,11 +136,27 @@ int main (int argc, char **argv) {
             
             for (i = 0; i < memoria_compartida->n_caballos; i++) {
                 
-                /* Leemos de memoria compartida la cotización y el total apostado del caballo */
-                cotizacion_caballo = memoria_compartida->caballos[i].total_apostado;
-                total_apostado_caballo = memoria_compartida->caballos[i].cotizacion;
+                /* Hace down del semaforo para leer de memoria */
+                retorno_down = Down_Semaforo(semid, MUTEX_GUARDAR_OFERTA, SEM_UNDO);
+                if (retorno_down == ERROR) {
+                    perror("Error al hacer down en el monitor");
+                    /** liberamos memoria y mas cosas ***************************************/
+                    exit(EXIT_FAILURE);
+                }
                 
-                printf("\n\tEl caballo %d se cotiza a %f con un total apostado de %f", i, cotizacion_caballo, total_apostado_caballo);
+                /* Leemos de memoria compartida la cotización y el total apostado del caballo */
+                cotizacion_caballo = memoria_compartida->caballos[i].cotizacion;
+                total_apostado_caballo = memoria_compartida->caballos[i].total_apostado;
+                
+                printf("\n\tEl caballo %d se cotiza a %f con un total apostado de %f", i + 1, cotizacion_caballo, total_apostado_caballo);
+                
+                /* Hace up del semaforo para leer de memoria */
+                retorno_up = Up_Semaforo(semid, MUTEX_GUARDAR_OFERTA, SEM_UNDO);
+                if (retorno_up == ERROR) {
+                    perror("Error al hacer up en el monitor");
+                    /** liberamos memoria y mas cosas ***************************************/
+                    exit(EXIT_FAILURE);
+                }
             }
             fflush(stdout);
             
@@ -147,7 +168,7 @@ int main (int argc, char **argv) {
                 posicion_caballo = memoria_compartida->caballos[i].posicion;
                 ultima_tirada_caballo = memoria_compartida->caballos[i].ultima_tirada;
                 
-                printf("\nEl caballo %d va en la posicion %d, y su ultima tirada ha sido de %d", i, posicion_caballo, ultima_tirada_caballo);
+                printf("\nEl caballo %d va en la posicion %d, y su ultima tirada ha sido de %d", i + 1, posicion_caballo, ultima_tirada_caballo);
             }
             fflush(stdout);
             
@@ -168,21 +189,18 @@ int main (int argc, char **argv) {
             for (i = 0; i < memoria_compartida->n_caballos; i++) {
                 posicion_caballo = memoria_compartida->caballos[i].posicion;
                 printf("\n\tEl caballo %d ha finalizado en la posicion %d", i, posicion_caballo);
+                fflush(stdout);
             }
             
-            /* Imprimimos el resultado de las apuestas */
-            printf("\n\nLos apostadores con más beneficios son:");
-            for (i = 0; i < 10; i++) {
-                indice_apostador = memoria_compartida->top_apostadores[i] - 1;
-                
-                strcpy(nombre_apostador, memoria_compartida->apostadores[indice_apostador].nombre);
-                beneficios = memoria_compartida->apostadores[indice_apostador].beneficios;
-                printf("\n\tEl apostador en la posicion %d de mayores beneficios es el %s, con unos beneficios de %f", i + 1, nombre_apostador, beneficios);
+            printf("\nPor lo tanto los caballos ganadores son: ");
+            for (i = 0; i < memoria_compartida->n_caballos_ganadores; i++) {
+                printf("%d ", memoria_compartida->caballos_ganadores[i] + 1);
             }
-            
+            fflush(stdout);
             
             /* Listado de apuestas realizadas */
             printf("\n\nListado de apuestas realizadas:");
+            fflush(stdout);
             for (i = 0; i < memoria_compartida->n_apuestas; i++) {
                 
                 strcpy(nombre_apostador, memoria_compartida->historial_apuestas[i].nombre);
@@ -193,16 +211,33 @@ int main (int argc, char **argv) {
                 
                 
                 printf("\n\tLa apuesta %d fue realizada por %s, procesada por la ventanilla %d, y aposto al caballo %d, con una cotizacion de %f un total de %f", i + 1, nombre_apostador, num_ventanilla, num_caballo, cotizacion_previa, cantidad_apostada);
+                fflush(stdout);
+            }
+            
+            /* Imprimimos el resultado de las apuestas */
+            printf("\n\nLos apostadores con más beneficios son:");
+            fflush(stdout);
+            for (i = 0; i < 10; i++) {
+                indice_apostador = memoria_compartida->top_apostadores[i];
+                
+                strcpy(nombre_apostador, memoria_compartida->apostadores[indice_apostador].nombre);
+                beneficios = memoria_compartida->apostadores[indice_apostador].beneficios;
+                printf("\n\tEl apostador en la posicion %d de mayores beneficios es el %s, con unos beneficios de %f", i + 1, nombre_apostador, beneficios);
+                fflush(stdout);
             }
             
             /* Imprimimos el resultado de la carrera */
+            printf("\n\nResultado de la carrera:");
+            fflush(stdout);
             for (i = 0; i < memoria_compartida->n_caballos; i++) {
                 posicion_caballo = memoria_compartida->caballos[i].posicion;
                 printf("\n\tEl caballo %d ha finalizado en la posicion %d", i, posicion_caballo);
+                fflush(stdout);
             }
             
             /* Imprimimos el estado final de cada apostador */
             printf("\n\nEstado final de los apostadores:");
+            fflush(stdout);
             for (i = 0; i < memoria_compartida->n_apostadores; i++) {
                 strcpy(nombre_apostador, memoria_compartida->apostadores[i].nombre);
                 total_apostado = memoria_compartida->apostadores[i].cantidad_apostada;
@@ -210,7 +245,12 @@ int main (int argc, char **argv) {
                 dinero_restante = memoria_compartida->apostadores[i].dinero_restante;
                 
                 printf("\n\tEl apostador %s ha apostado un total de %f, obteniendo unos beneficios de %f, y con un dinero restante de %f", nombre_apostador, total_apostado, beneficios, dinero_restante);
+                fflush(stdout);
             }
+            
+            
+            printf("\n\nSIMULACION COMPLETADA");
+            fflush(stdout);
             
             exit(EXIT_SUCCESS);
         }
@@ -227,10 +267,10 @@ int main (int argc, char **argv) {
 void manejador_estado_carrera_cambia(int senal) {
     
     if (estado_carrera == SIN_EMPEZAR) {
-        printf("\n\nLA CARRERA HA EMPEZADO\n\n");
+        printf("\n\nLA CARRERA HA EMPEZADO");
         estado_carrera = EMPEZADA;
     } else {
-        printf("\n\nLA CARRERA HA TERMINADO\n\n");
+        printf("\n\nLA CARRERA HA TERMINADO");
         estado_carrera = TERMINADA;
     }
 }
